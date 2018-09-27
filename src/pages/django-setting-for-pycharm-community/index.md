@@ -1,6 +1,7 @@
 ---
 title: '[django] pycharm(파이참) community 버전으로 django(장고) 프로젝트 설정'
 date: 2016-02-02 22:15:06
+category: python
 tags:
   - python
   - django

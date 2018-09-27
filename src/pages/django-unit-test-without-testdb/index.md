@@ -1,6 +1,7 @@
 ---
 title: '[django] 테스트DB 없이 유닛테스트(unit test)하기'
 date: 2016-03-06 23:33:43
+category: python
 tags:
   - django
   - python

@@ -3,8 +3,8 @@ module.exports = {
     title: "bono's blog",
     author: 'bono',
     description: 'about javascript, react, css',
+    siteUrl: 'https://blueshw.github.io',
   },
-  pathPrefix: '/gatsby-starter-blog',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
@@ -64,5 +64,6 @@ module.exports = {
         pathToConfigModule: 'src/utils/typography',
       },
     },
+    `gatsby-plugin-sitemap`,
   ],
 }

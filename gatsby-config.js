@@ -4,7 +4,6 @@ module.exports = {
     author: 'bono',
     description: 'about javascript, react, css',
   },
-  pathPrefix: '/gatsby-starter-blog',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,

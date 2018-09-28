@@ -34,7 +34,6 @@ class Template extends React.Component {
       header = (
         <h3
           style={{
-            fontFamily: 'Montserrat, sans-serif',
             marginTop: 0,
             marginBottom: rhythm(-1),
           }}
@@ -47,7 +46,7 @@ class Template extends React.Component {
             }}
             to={'/'}
           >
-            Gatsby Starter Blog
+            Home
           </Link>
         </h3>
       )
@@ -55,6 +54,8 @@ class Template extends React.Component {
     return (
       <div
         style={{
+          fontFamily:
+            '"Noto Sans Light","Malgun Gothic",NanumGothic,sans-serif',
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: rhythm(24),

@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.0.0"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="shortcut icon" href="/icons/icon-48x48.png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><title data-react-helmet="true">[CSS] styled-jsx 버그 보고 경험기 (사실은 stylis js 버그) | bono&#x27;s blog</title><meta data-react-helmet="true" name="description" content="CSS 는 일련의 가중치에 따라서 어떤 속성을 우선적으로 적용할 것인지 결정합니다. 우선순위에 대한 정보는 조금만 검색해보면 나오므로 간단히  링크 로 대체합니다. 현재 회사에서는  nextjs (( https://github.com/zeit/next…"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><link as="script" rel="preload" href="/0-8bf3a8bc80e5222607e7.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"/><link as="script" rel="preload" href="/app-351efcfeb4f54983a1ef.js"/><link as="script" rel="preload" href="/webpack-runtime-808f04f9a6727a1a19c9.js"/><link rel="preload" href="/static/d/417/path---2018-03-25-priority-css-selector-229-03b-eazgANkPgahuYoIYHoBuwS9Nspw.json" as="fetch" crossOrigin="use-credentials"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><div style="margin-left:auto;margin-right:auto;max-width:42rem;padding:2.625rem 1.3125rem"><h3 style="font-family:Montserrat, sans-serif;margin-top:0;margin-bottom:-1.75rem"><a style="box-shadow:none;text-decoration:none;color:inherit" href="/">Gatsby Starter Blog</a></h3><h1>[CSS] styled-jsx 버그 보고 경험기 (사실은 stylis js 버그)</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem;margin-top:-1.75rem">March 25, 2018</p><div><p>CSS 는 일련의 가중치에 따라서 어떤 속성을 우선적으로 적용할 것인지 결정합니다. 우선순위에 대한 정보는 조금만 검색해보면 나오므로 간단히 <a href="https://gist.github.com/mjj2000/5873872">링크</a>로 대체합니다.</p>
+<p>현재 회사에서는 [nextjs]((<a href="https://github.com/zeit/next.js/">https://github.com/zeit/next.js/</a>)를 사용한 프로젝트를 진행하고 있습니다. nextjs 는 서버사이드렌더링(SSR)을 지원하는 리액트 전용 프레임워크입니다. <a href="https://github.com/facebook/create-react-app">create-react-app</a>처럼 <code class="language-text">non-configuration</code>을 지향하며 create-react-app 과는 다르게 일부 설정을 수정할 수 있습니다. nextjs 는 내부적으로 다양한 라이브러리들이 사용되고 있는데, react 컴포넌트(jsx)에서 CSS 코드를 작성하기 위해서 <a href="https://github.com/zeit/styled-jsx">styled-jsx</a>를 사용합니다.</p>
+<p>styled-jsx 는 서버와 클라이언트에서 모두 사용가능하고, 컴포넌트별 scope 를 지원합니다. 컴포넌트 scope 를 지원하기 위한 방법으로 <code class="language-text">.jsx-xxxxxxxx</code>과 같은 클래스를 css 정의 요소에 붙여주는데요. 덕분에 대체로 아주 편리하게 사용하고 있었지만, 최근 한 가지 문제점을 발견했습니다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&lt;div&gt;
+  &lt;div&gt;
+    &lt;span className=&quot;title&quot;&gt;빨간색으로 나와야 할텐데..&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;style jsx&gt;{`
+  div &gt; div &gt; span {
+    color: blue;
+  }
+  .title {
+    color: red;
+  }
+`}&lt;/style&gt;</code></pre></div>
+<p><code class="language-text">&lt;span&gt;</code>의 텍스트에 색상을 입히는 스타일이 두가지가 있습니다. 위쪽은 <code class="language-text">div &gt; div &gt; span</code>처럼 element 의 cascade 형태로 정의하고, 아래쪽은 class 이름으로 정의합니다. class 가 10 점이라고 하면 element 는 개당 1 점이므로 <code class="language-text">.title</code>의 가중치가 높아 <code class="language-text">red</code> 색상의 텍스트가 출력되어야 합니다. 하지만, 결과는 아래와 같았습니다.</p>
+<p><span style="color:blue">빨간색으로 나와야 할텐데..</span></p>
+<p>우리가 익히 알고 있는 css 선택자는 <code class="language-text">class</code>가 <code class="language-text">element</code> 보다 명시도(가중치 또는 우선순위)가 높습니다. 위에서 언급한것처럼 element 가 1 점이라면 class 는 10 점으로 평가되기 때문입니다. 위의 CSS 코드에 점수를 매겨보면, 첫번째 스타일은 3 점이고 두번째 스타일은 10 점이 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">css</th>
+<th align="center">specificity(명시도)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">div>div>span</td>
+<td align="center">0 0 0 3</td>
+</tr>
+<tr>
+<td align="center">.title</td>
+<td align="center">0 0 1 0</td>
+</tr>
+</tbody>
+</table>
+<p>그런데 styled-jsx(<code class="language-text">v2.2.x</code> 사용)를 통해서 컴파일이 완료되면 실제 명시도는 아래처럼 변경됩니다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">css</th>
+<th align="center">specificity(명시도)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">div.jsx-1234>div.jsx-1234>span.jsx-1234</td>
+<td align="center">0 0 3 3</td>
+</tr>
+<tr>
+<td align="center">.title.jsx-1234</td>
+<td align="center">0 0 2 0</td>
+</tr>
+</tbody>
+</table>
+<p>첫번째 스타일이 두번째 스타일보다 명시도가 높게 변했습니다. 원래 기대했던 것과는 전혀 다른 결과가 나왔네요. 사용법에 문제가 있었던 것인지, 아니면 이미 보고된 버그인지 확인하기 위해 styled-jsx github 페이지의 이슈를 검색해보았지만, 마땅한 버그를 찾을 수 없었습니다. 그래서 제가 <a href="https://github.com/zeit/styled-jsx/issues/424">버그</a> 보고했습니다.</p>
+<p>하루가 지나니 짜잔!!
+<code class="language-text">bug</code>로 등록되었습니다!!!</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/bug-d4e3eac6221aaeadf7e575630b53c238-4e9af.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 371px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 15.09433962264151%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsSAAALEgHS3X78AAAAmUlEQVQI142OvQ6CMACEeV8HX83BwTgjz4AChfKjaMJSoKVF+CzuJl5yl0u+Gy5Y15XJOv7VOhkfv3mgjUVUL8q6JopC0iQjvqbE8Y0sEwiRk6WCput4XkKm/Y7ueCCpGtp7iywkpe+5KFCqJ1iWxT98o3qFlAXDMDKO+guVUhhjMNpgt93jjj2fsGWBdg7nvXHt3fcD8zzzAe9T46pjT7TZAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="bug"
+        title=""
+        src="/static/bug-d4e3eac6221aaeadf7e575630b53c238-4e9af.png"
+        srcset="/static/bug-d4e3eac6221aaeadf7e575630b53c238-a902c.png 148w,
+/static/bug-d4e3eac6221aaeadf7e575630b53c238-e87e8.png 295w,
+/static/bug-d4e3eac6221aaeadf7e575630b53c238-4e9af.png 371w"
+        sizes="(max-width: 371px) 100vw, 371px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>쓰레드에 달린 글을 보니 styled-jsx 에서 사용하는 <code class="language-text">stylis</code>가 문제였습니다. stylis 는 컴포넌트별 scope 를 만들기 위해 id, class, element 에 특정 해시(styled-jsx 의 경우 <code class="language-text">jsx-1234</code>)class 를 붙여주는데, 가중치에 상관없이 모든 요소(id, class, element)에 class 를 붙여주다보니 결과적으로 원하지 않는 결과가 나온 것입니다. 이 문제에 대해서 곰곰히 생각해보았더니, 지금처럼 모든 요소에 해시 class 를 붙여줄것이 아니라 각 CSS 선택자마다 하나의 class 만 붙여주면 해결될것 같은 느낌이 들었습니다.</p>
+<p>첫 element 에만 class 를 붙이거나,</p>
+<table>
+<thead>
+<tr>
+<th align="center">css</th>
+<th align="center">specificity(명시도)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">div.jsx-1234>div>span</td>
+<td align="center">0 0 1 3</td>
+</tr>
+<tr>
+<td align="center">.title.jsx-1234</td>
+<td align="center">0 0 2 0</td>
+</tr>
+</tbody>
+</table>
+<p>마지막 element 에 class 를 붙이는식으로 처리하는 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">css</th>
+<th align="center">specificity(명시도)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">div>div>span.jsx-1234</td>
+<td align="center">0 0 1 3</td>
+</tr>
+<tr>
+<td align="center">.title.jsx-1234</td>
+<td align="center">0 0 2 0</td>
+</tr>
+</tbody>
+</table>
+<p>모든 케이스를 고려해 보지 않았지만, 이런 방식으로 처리하면 문제가 해결될 것이라고 생각되어, 제가 보고했던 버그 스레드에 <a href="https://github.com/zeit/styled-jsx/issues/424#issuecomment-375518440">댓글</a>을 달았습니다. 그랬더니, 와!!</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/answer-740aab954b6686ffd971cc5e8e72ce9d-833fe.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 25.39912917271408%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsSAAALEgHS3X78AAAAxElEQVQY05WQyXLEIAxE+f+PTHKIDRKbnRomHrN0JGY7h6qufkKCgjbLsuLj8wt2XfEtbJ0DMSOEgJSyKCHGCCKedc4Z3nvpx9lT+ckZvQ+Ybdtl4H5YOYqXckUfA611Geri7c2zfviTtS+sZ0y5HrAU4DhgsYzVMWLecZH98nv7l46zwpy1IcnLpvKGn0vBWTtqG6L+YPH29qdqH6+541ahd5lt38HMrzzI0cyEiGZuGgezh3P3WrNVjjHBWjtZ+/ptXX9auYA6zlDylQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="answer"
+        title=""
+        src="/static/answer-740aab954b6686ffd971cc5e8e72ce9d-fb8a0.png"
+        srcset="/static/answer-740aab954b6686ffd971cc5e8e72ce9d-1a291.png 148w,
+/static/answer-740aab954b6686ffd971cc5e8e72ce9d-2bc4a.png 295w,
+/static/answer-740aab954b6686ffd971cc5e8e72ce9d-fb8a0.png 590w,
+/static/answer-740aab954b6686ffd971cc5e8e72ce9d-833fe.png 689w"
+        sizes="(max-width: 590px) 100vw, 590px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>이후로 <code class="language-text">stylis</code> <a href="https://github.com/thysultan/stylis.js/issues/101">이슈</a> 에서 해결방안이 활발히 논의되고 있습니다(맨 앞 요소와 맨 뒤 요소에 `jsx-1234 를 붙여주는걸로 가닥을 잡은 것 같습니다). 제가 직접 코드를 기여하지 않았습니다만, 제 의견이 반영되니 묘한 기분이 들더군요. 지금껏 오픈소스에 기여한적이 없었기 때문에 그랬는지도 모르겠습니다. 다들 이 맛에 오픈소스 하는구나라는 생각이 드는 경험이었습니다.</p>
+<h4>참고자료</h4>
+<ul>
+<li><a href="https://gist.github.com/mjj2000/5873872">https://gist.github.com/mjj2000/5873872</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/Specificity">https://developer.mozilla.org/ko/docs/Web/CSS/Specificity</a></li>
+</ul></div><hr style="margin-bottom:1.75rem"/><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2018/03/21/function-test-with-jest/">← <!-- -->[Jest] mock 함수를 이용하여 함수 호출 테스트 하기</a></li><li><a rel="next" href="/2018/04/05/react-v16-3-0/">[react] v16.3.0, 무엇이 바뀌었나?<!-- --> →</a></li></ul></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-50048807-2', 'auto', {});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-templates-blog-post-js","jsonName":"2018-03-25-priority-css-selector-229","path":"/2018/03/25/priority-css-selector/"};window.dataPath="417/path---2018-03-25-priority-css-selector-229-03b-eazgANkPgahuYoIYHoBuwS9Nspw";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-351efcfeb4f54983a1ef.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-31ee4b698d609e346331.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bd47a77552aee32af5f8.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7c4638696cb877443516.js"]};/*]]>*/</script><script src="/webpack-runtime-808f04f9a6727a1a19c9.js" async=""></script><script src="/app-351efcfeb4f54983a1ef.js" async=""></script><script src="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js" async=""></script><script src="/0-8bf3a8bc80e5222607e7.js" async=""></script></body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.0.0"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="shortcut icon" href="/icons/icon-48x48.png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><title data-react-helmet="true">[coursera] AngularJS week 3-1 | bono&#x27;s blog</title><meta data-react-helmet="true" name="description" content="Single Page Applications Angular Factory, Service and Dependency Injection Dependency Injection Dependency Injection(DI…"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><link as="script" rel="preload" href="/0-8bf3a8bc80e5222607e7.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"/><link as="script" rel="preload" href="/app-351efcfeb4f54983a1ef.js"/><link as="script" rel="preload" href="/webpack-runtime-808f04f9a6727a1a19c9.js"/><link rel="preload" href="/static/d/254/path---2016-09-02-frontend-javascript-framework-angularjs-week-3-1-0-d-2-c4f-LMRwnbwiSwvNsKF7UNhq334H68.json" as="fetch" crossOrigin="use-credentials"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><div style="margin-left:auto;margin-right:auto;max-width:42rem;padding:2.625rem 1.3125rem"><h3 style="font-family:Montserrat, sans-serif;margin-top:0;margin-bottom:-1.75rem"><a style="box-shadow:none;text-decoration:none;color:inherit" href="/">Gatsby Starter Blog</a></h3><h1>[coursera] AngularJS week 3-1</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem;margin-top:-1.75rem">September 02, 2016</p><div><h2>Single Page Applications</h2>
+<h3>Angular Factory, Service and Dependency Injection</h3>
+<h4>Dependency Injection</h4>
+<p>Dependency Injection(DI)이란 의존성을 해결하기 위한 Inversino of Control(IoC)을 구현한 소프트웨어 디자인 패턴이다. IoC(제어의 역전)와 DI(의존성 주입)는 여전히 영어로든, 한글로 번역해서든 이해하기 힘든건 마찬가지다. 우선, Ioc 라는건 내가 짜놓은 것을 무언가 대신 해주는 개념으로 받아들이면 되겠다. 스프링 같은 프레임웍에서는 컨테이너라는 녀석이 바로 IoC 에 해당한다. IoC 개념을 이해하고 다시 DI 를 살펴보자. DI 는 구성 요소간의 의존관계를 무언가 대신 처리해주는(IoC, 설정 or 객체 or 무엇이든) 디자인 패턴이라 말할 수 있다. 여전히 조금 모호하다.</p>
+<p>마틴 파울러가 말한 DI 를 구현하는 세가지 방법은 다음과 같다.</p>
+<ul>
+<li>Create dependency using new operator</li>
+<li>Look up dependency using a global variable</li>
+<li>Have dependency passed to it where needed</li>
+</ul>
+<p>위의 두가지에 비해서 세번째는 필요할때만 의존성을 주입하면 되므로 가장 유연하다.</p>
+<h4>Angular and DI</h4>
+<p>AngularJS 에서는 DI 를 구현하기 위해 비지니스 로직을 별도로 구현해 놓는다. 그리고 필요할 때마다 주입시켜서 사용한다.</p>
+<p>services, directives, filters and animations 등의 컴포넌트에서 DI 가 사용된다. 주입 가능한 factory method 나 생성자를 정의한 다음 Controller 와 같은 곳에 주입시켜 호출한다.</p>
+<p>또한 config 와 run method 역시 어떤 컴포넌트를 주입하여 사용 가능한다.
+몇가지 예를 들어보자.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// 첫번째 방법은 array에 명시
+module.controller(&#39;MenuController&#39;, [&#39;$scope&#39;, &#39;menuFactory&#39;, function($scope, menuFactory) {
+
+}]);
+
+// 두번째 방법은 property 추가
+var MenuController = funciton($scope, menuFactory) {
+
+};
+MenuController.$Inject = [&#39;$scope&#39;, &#39;menuFactory&#39;];
+module.controller(&#39;MenuController&#39;, MenuController);
+
+// 세번째 방법은 Implicit annotation
+module.controller(&#39;MenuController&#39;, function($scope, menuFactory) {
+
+});</code></pre></div>
+<h4>Angular Factory and Service</h4>
+<p>factory 와 service 는 controller 에 데이터를 제공하기 위한 객체(?)이다. 그리고 아마 백엔드에서 데이터를 주고 받을때 factory 와 service 를 사용하지 않을까 싶다. 해당 내용은 추후 나오니 일단은 factory 와 service 에 집중하자.</p>
+<h4>Angular Services</h4>
+<p>service 는 여러개의 app 에 공통으로 사용되는 데이터 or 메서드를 담고 있다. 그렇기 때문에 DI 를 이용하여 필요한 곳에 주입되어야 하고 Lazily instantiated(필요할 때만 인스턴스화 되어야 함) 되어야 하며 singlton 객체여야한다.</p>
+<p>$http, $scope, $rootScope, $location, $parse, $templateCache, $animate $injector 와 같은 built-in 서비스들이 존재한다. 이외에 개발자가 직접 서비스를 등록할 수도 있는데, service(), factory(), provider(), constant(), value() 등의 메서드를 이용하면 가능하다.</p>
+<h4>Angular Factory</h4>
+<p>factory 는 보통 컨트롤러에 데이터를 제공하는 역할을 한다. factory 에서 미리 데이터와 메서드 셋을 만들어 둔 다음 필요한 컨트롤러에 의존적으로 주입해서 사용한다. 이렇게 보면 service 와 factory 의 차이가 별로 안 느껴지는데, 결정적으로 service 는 초기화 과정이 있기 때문에 prototype 상속이 가능한다. 그래서 보통 상속이 필요한 데이터 or 모델링은 서비스를 이용하고 정적인 메서드나 데이터 같은 경우에는 factory 를 많이 이용한다.</p>
+<p>우선 factory 사용 예를 보자</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// factory code
+angular.module(&#39;confusionApp&#39;)
+    .factory(&#39;menuFactory&#39;, function() {
+    	var menufac = {};
+    	var dishes = [ ... ];
+
+    	menufac.getDishes = function() {
+    		return dishes;
+    	};
+
+    	menufac.getDish = function (index) {
+    		return dishes[index];
+    	};
+    	// 객체를 리턴한다.
+    	return menufac;
+    });
+
+// usage
+angular.module(&#39;confusionApp&#39;)
+    .controller(&#39;MenuController&#39;, [&#39;$scope&#39;, &#39;menuFactory&#39;, function($scope, menuFactory) {
+    	$scope.dishes = menuFactory.getDishes();
+    }]);</code></pre></div>
+<p>service 사용과 비교해보자</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// service code
+angular.module(&#39;confusionApp&#39;)
+    .service(&#39;menuFactory&#39;, function() {
+    	// 객체선언, 리턴이 필요없다.
+    	var dishes = [ ... ];
+
+    	this.getDishes = function() {
+    		return dishes;
+    	};
+
+    	this.getDish = function (index) {
+    		return dishes[index];
+    	};
+    });
+
+// usage
+angular.module(&#39;confusionApp&#39;)
+    .controller(&#39;MenuController&#39;, [&#39;$scope&#39;, &#39;menuFactory&#39;, function($scope, menuFactory) {
+    	$scope.dishes = menuFactory.getDishes();
+    }]);</code></pre></div>
+<p>service 와 factory 의 사용법은 완전히 같다. 하지만 차이가 있는데, factory 는 객체를 생성해서 리턴을 한다. 하지만 service 의 경우에는 service() 함수가 호출되면서 기본 생성자가 만들어진다. 그래서 service 코드 내에서 this 로 바로 접근이 가능하기 때문에 별도로 객체를 만들어 리턴해줄 필요가 없다.</p>
+<h4>exercise</h4>
+<p>app.js</p>
+<p>모든 컨트롤러 코드는 controllers.js 로 이동한다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&#39;use strict&#39;;
+
+angular.module(&#39;confusionApp&#39;, [])
+
+;</code></pre></div>
+<p>controllers.js</p>
+<p>controller 코드는 모두 controllers.js 로 이동하였고, 데이터를 가져오는 부분은 services.js 로 이동</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&#39;use strict&#39;;
+
+angular.module(&#39;confusionApp&#39;)
+    .controller(&#39;MenuController&#39;, [&#39;$scope&#39;, &#39;menuFactory&#39;, function($scope, menuFactory){
+
+        $scope.tab = 1;
+        $scope.filtText = &#39;&#39;;
+        $scope.showDetails = false;
+
+        $scope.dishes = menuFactory.getDishes();
+
+        ...
+
+    }])
+
+    ...
+
+    .controller(&#39;DishDetailController&#39;, [&#39;$scope&#39;, &#39;menuFactory&#39;, function($scope, menuFactory) {
+        var dish = menuFactory.getDish(3);
+        $scope.dish = dish;
+
+    }])
+
+    ...
+
+    ;</code></pre></div>
+<p>services.js</p>
+<p>데이터 관련 파일은 모두 이쪽으로 이동 (factory / service 메서드 이용)
+아래는 service 를 사용한 예제임.
+그리고 dishdetail.html 에서 사용하던 comment 를 dishes 에 합쳐서 사용
+각 dish 의 comment 속성에 리스트로 선언</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&#39;use strict&#39;;
+
+angular.module(&#39;confusionApp&#39;)
+		.service(&#39;menuFactory&#39;, function() {
+	        var dishes = [
+				{
+					name: &#39;Uthapizza&#39;,
+					image: &#39;images/uthapizza.png&#39;,
+					category: &#39;mains&#39;,
+					label: &#39;Hot&#39;,
+					price: &#39;4.99&#39;,
+					description:&#39;A unique combination of Indizan Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer&#39;,
+					comment: &#39;aaaaaaa&#39;
+				},
+
+				...
+			];
+
+			this.getDishes = function() {
+				return dishes;
+			};
+
+			this.getDish = function(index) {
+				return dishes[index];
+			};
+
+		});</code></pre></div>
+<h3>Angular Templates</h3>
+<p>Angular Tmeplate 은 HTML 과 함께 쓰여진다. 동적 뷰(Dynamic View)를 만들기 위해서는 Angular Template 의 역할이 반드시 필요하다.</p>
+<p>Angular Template 은 Angular JS 의 여러 요소에 사용되었는데, Directives, Markup:{{expression}}, Filter, Form controls 등이 대표적이다.</p>
+<h4>ng-include directive</h4>
+<p>external HTML 조각을 HTML 내에 포함하기 위해 directive 다.
+사용방법은 간단하다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&lt;div ng-include=&quot;&#39;menu.html&#39;&quot;&gt;&lt;/div&gt;
+&lt;ng-include src=&quot;&#39;menu.html&#39;&quot;&gt;&lt;/ng-include&gt;</code></pre></div>
+<p>두가지 방법이 있다. 태그의 속성으로 사용하거나 ng-include 태그를 사용하는 것이다.</p>
+<p>그리고 한가지 알아두어야 할 점이 있다. ng-include directive 를 사용하면 ng-controller 를 사용할 때처럼 새로운 scope 가 생성된다는 점이다.</p>
+<h4>exercise</h4>
+<p>index.html</p>
+<p>header, footer, js, css 등을 import 하는 부분을 모두 index.html 에 둔다. 그리고 필요한 부분에 menu.html, dishdetail.html, contactus.html 등의 파일을 ng-include 를 이용하여 포함시킨다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; ng-app=&quot;confusionApp&quot;&gt;
+&lt;head&gt;
+
+...
+
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;header class=&quot;jumbotron&quot;&gt;
+
+    	...
+
+    &lt;/header&gt;
+
+    &lt;ng-include src=&quot;&#39;menu.html&#39;&quot;&gt;&lt;/ng-include&gt;
+
+    &lt;footer class=&quot;row-footer&quot;&gt;
+
+    	...
+
+    &lt;/footer&gt;
+
+    ...
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<p>single page application 을 구현하기 위해서는 데이터가 변함에 따라서 ng-include 를 이용하여 동적으로 뷰를 전환할 필요가 있다. 다음 강의를 통해서 각 html 페이지끼리 이동하는 방법에 대해서 배워보도록 하자.</p></div><hr style="margin-bottom:1.75rem"/><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2016/08/28/frontend-javascript-framework-angularjs-week2-2/">← <!-- -->[coursera] AngularJS week 2-2</a></li><li><a rel="next" href="/2016/09/05/frontend-javascript-framework-angularjs-week3-2/">[coursera] AngularJS week 3-2<!-- --> →</a></li></ul></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-50048807-2', 'auto', {});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-templates-blog-post-js","jsonName":"2016-09-02-frontend-javascript-framework-angularjs-week-3-1-0d2","path":"/2016/09/02/frontend-javascript-framework-angularjs-week3-1/"};window.dataPath="254/path---2016-09-02-frontend-javascript-framework-angularjs-week-3-1-0-d-2-c4f-LMRwnbwiSwvNsKF7UNhq334H68";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-351efcfeb4f54983a1ef.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-31ee4b698d609e346331.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bd47a77552aee32af5f8.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7c4638696cb877443516.js"]};/*]]>*/</script><script src="/webpack-runtime-808f04f9a6727a1a19c9.js" async=""></script><script src="/app-351efcfeb4f54983a1ef.js" async=""></script><script src="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js" async=""></script><script src="/0-8bf3a8bc80e5222607e7.js" async=""></script></body></html>

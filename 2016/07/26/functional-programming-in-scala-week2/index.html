@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.0.0"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="shortcut icon" href="/icons/icon-48x48.png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><title data-react-helmet="true">Functional Programming in Scala week 2 | bono&#x27;s blog</title><meta data-react-helmet="true" name="description" content="2.1 Higher-Order Functions 함수형 언어에서는 function 이 first-class value 이다. 이 말은 특정 함수가 다른 함수의 파라미터나 결과로써 return 될 수 있다는 것이다(higher order…"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><link as="script" rel="preload" href="/0-8bf3a8bc80e5222607e7.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"/><link as="script" rel="preload" href="/app-351efcfeb4f54983a1ef.js"/><link as="script" rel="preload" href="/webpack-runtime-808f04f9a6727a1a19c9.js"/><link rel="preload" href="/static/d/253/path---2016-07-26-functional-programming-in-scala-week-2-246-eee-S8uwhSVDZPE3NnaVKcr7Bxw70OA.json" as="fetch" crossOrigin="use-credentials"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><div style="margin-left:auto;margin-right:auto;max-width:42rem;padding:2.625rem 1.3125rem"><h3 style="font-family:Montserrat, sans-serif;margin-top:0;margin-bottom:-1.75rem"><a style="box-shadow:none;text-decoration:none;color:inherit" href="/">Gatsby Starter Blog</a></h3><h1>Functional Programming in Scala week 2</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem;margin-top:-1.75rem">July 26, 2016</p><div><h2>2.1 Higher-Order Functions</h2>
+<p>함수형 언어에서는 function 이 first-class value 이다. 이 말은 특정 함수가 다른 함수의 파라미터나 결과로써 return 될 수 있다는 것이다(higher order functions).</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sum(f: Int =&gt; Int, a: Int, b: Int): Int =
+  if (a &gt; b) 0
+  else f(a) + sum(f, a+1, b)
+
+def sumInts(a: Int, b: Int)       = sum(id, a, b)
+def sumCubes(a: Int, b: Int)      = sum(cube, a, b)
+def sumFactorials(a: Int, b: Int) = sum(fact, a, b)
+
+def id(x: Int): Int = x
+def cube(x: Int): Int = x * x * x
+def fact(x: Int): Int = if (x == 0) 1 else x * fact(x -1)</code></pre></div>
+<p>sum() 함수의 첫번째 파라미터로 f 라는 임의의 함수가 들어가 있다.
+이는 Int 파라미터를 받아서 Int 타입을 리턴하는 함수라면 이 파라미터 위치에 적합하다라는 뜻이다. 즉, 어떠한 함수가 됐든간에 저 유형만 유지하면 된다. 재사용 가능하다는 말이다. 실제로 sumInts(), sumCubes(), sumFactorials() 함수는 모두 sum()함수를 호출한다. sum()함수의 첫번째 파라미터는 각각 id(), cube(), fact()함수를 호출하게 되는데 세 함수 모두 파라미터와 리턴 타입이 Int 이므로 sum()함수의 파라미터로 적합하다.</p>
+<h3>익명함수</h3>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(x: Int, y:Int) =&gt; x + y</code></pre></div>
+<p>익명함수는 보통 함수를 선언하는 방식과는 달리 이름이 없다.
+대신 파라미터 타입과 body 만 존재한다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sumCubes(a: Int, b: Int) = sum(x =&gt; x * x * x, a, b)</code></pre></div>
+<p>위에서 보았던 sumCubes 의 익명함수 버전이다.
+cube() 함수가 재사용되지 않는다고 가정한다면 매우 심플하기 때문에 따로 함수를 선언하기 보다는 sum() 파라미터에 익명함수로 직접 선언할수 있다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// linear recursion, a와 b의 차이가 커지면 stackOverFlow 익셉션이 발생할 수 있다.
+def sum(f: Int =&gt; Int, a: Int, b: Int): Int =
+  if (a &gt; b) 0
+  else f(a) + sum(f, a+1, b)
+
+// tail-recursive version
+def sum(f: Int =&gt; Int, a: Int, b: Int): Int = {
+  def loop(a: Int, acc: Int): Int = {
+    if(a &gt; b) acc
+    else loop(a+1, f(a)+acc)
+  }
+  loop(a, 0)
+}</code></pre></div>
+<h2>2.2 Currying</h2>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sumInts(a: Int, b: Int)       = sum(x =&gt; x, a, b)
+def sumCubes(a: Int, b: Int)      = sum(x =&gt; x*x*x, a, b)
+def sumFactorials(a: Int, b: Int) = sum(fact, a, b)</code></pre></div>
+<p>위의 함수들에서 a, b 파라미터는 sumInts(), sum()에서 반복된다. 이를 제거하여 함수를 더 간소하게 만드는 방법은 무엇일까?
+우선 아래의 함수를 살펴보자.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sum(f: Int =&gt; Int): (Int, Int) =&gt; Int = {
+  def sumF(a: Int, b: Int): Int = {
+    if (a &gt; b) 0
+    else f(a) + sumF(a+1, b)
+  }
+  sumF
+}</code></pre></div>
+<p>기존에 봤던 sum() 함수와 조금 다르게 생겼다. 우선 sum() 함수의 파라미터가 f() 하나로 줄었고, sum() 함수는 (Int, Int) => Int 와 같은 타입의 익명함수를 리턴하고 있다.
+sumF 를 호출하는 부분이 조금 이해하기 어려운데, 위의 내부함수 sumF()를 자세히 보면 익명함수를 설명했을 때의 형태와 같다는 것을 알 수 있다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(x: Int, y: Int): Int =&gt; x * y
+// 이 익명함수는 아래와 같이 표현가능하다.
+def f(x: Int): Int = x * y; f</code></pre></div>
+<p>위에서 썼던 sumInts(), sumCubes(), sumFactorials() 함수들을 가져오자. 조금 다르다. sum() 함수의 파라미터가 f 하나로 줄면서 아래의 각 함수들도 sum() 호출부의 인자가 익명함수 하나만 남았다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sumInts(a: Int, b: Int) = sum(x =&gt; x)
+def sumCubes(a: Int, b: Int) = sum(x =&gt; x*x*x)
+def sumFactorials(a: Int, b: Int) = sum(fact)</code></pre></div>
+<p>이제 sum() 함수는 함수를 리턴하고 있으므로, sumCubes(1, 10)를 호출하면</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sumCubes(1, 10)
+// res0: (Int, Int) =&gt; Int = &lt;function2&gt;</code></pre></div>
+<p>이는 또한 이렇게 바꿔 쓸수 있다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sum (cube) (1, 10) // multiple parameters
+(sum (cube)) (1, 10)</code></pre></div>
+<p>위의 multiple parameters 를 적용하면 sum() 함수를 더 짧게 작성할 수 있다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def sum(f: Int =&gt; Int)(a: Int, b: Int): Int =
+  if (a &gt; b) 0 else f(a) + sum(f)(a+1, b)</code></pre></div>
+<p>여러개의 파라미터 list 를 가진 함수 f 에서 파라미터 list 의 개수가 1 보다 큰 경우 마지막 파라미터 list 를 f 함수에서 제거하면 이 마지막 파라미터 list 를 파라미터로 가지는 또다른 함수 g 를 만들 수 있다. 물론 이 g 함수는 f 함수의 리턴함수가 된다. 식으로 나타내면 다음과 같다. 참고로 각각의 식은 모두 동일하다</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def f(arg1)(arg2)(arg3)(arg4) = E
+def f(arg1)(arg2)(arg3) = {def g(arg4) = E;g} // arg4를 이용해 g함수 생성
+def f(arg1)(arg2)(arg3) = (arg4 =&gt; E) // g를 익명함수로 변경
+def f = (arg1 =&gt; (arg2 =&gt; (arg3 =&gt; (arg4 =&gt; E)))) // 파라미터를 하나씩 우측으로 전달함</code></pre></div>
+<p>이와같은 형태의 함수정의를 curring 이라 부른다.</p>
+<h3>Excercise</h3>
+<p><em>Write a product function that calculates the product of the values of a function for the points on a given interval</em></p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def product(f: Int =&gt; Int)(a: Int, b: Int): Int = {
+  if (a &gt; b) 1 else f(a) * product (f)(a+1, b)
+}
+product(x =&gt; x*x)(3,4)</code></pre></div>
+<p><em>Write factorial in terms of product.</em></p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def fact(n: Int): Int = product(x =&gt; x)(1, n)
+fact(4)</code></pre></div>
+<p><em>Can you write a more general funciton, which generalizes both sum and product?</em></p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def mapReduce(f: Int =&gt; Int, combine: (Int, Int) =&gt; Int, zero: Int)(a: Int, b: Int): Int = {
+  if (a &gt; b) zero
+  else combine(f(a), mapReduce(f, combine, zero)(a+1, b))
+}
+
+def productForMapReduce(f: Int =&gt; Int)(a: Int, b: Int): Int = mapReduce(f, (x, y) =&gt; x*y, 1)(a, b)
+productForMapReduce(x =&gt; x*x)(3, 4)</code></pre></div>
+<h2>2.3 Example: Finding Fixed Point</h2>
+<p>부동점 구하기, Fixed Point 라 함은 어떤 함수에서 고정적인 값을 갖는 point 를 말한다. 다음의 함수에서 2 는 부동점(고정점)이다.
+기하학적으로(?) 함수 f 의 부동점은 y = x 와 주어진 함수와의 교점이다. 즉, x 와 f(x) 값이 동일한 값을 뜻한다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">f(x) = x^2 -3x + 4
+// 2 = 4 - 6 + 4
+// 2 = 2, 부동점</code></pre></div>
+<p>어떤 함수에 대해서 부동점을 구하는 함수 fixedPoint 는 아래와 같다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">object ex {
+  val tolerance = 0.0001
+  def isCloseEnough(x: Double, y: Double) =
+    abs((x - y) / x) / x &lt; tolerance
+
+  def fixedPoint(f: Double =&gt; Double)(firstGuess: Double) = {
+    def iterate(guess: Double): Double = {
+      println(&quot;guess = &quot; + guess)
+      val next = f(guess)
+      if (isCloseEnough(guess, next)) next
+      else iterate(next)
+    }
+    iterate(firstGuess)
+  }
+  fixedPoint(x =&gt; 1 + x/2)(1)
+
+  def sqrt(x: Double) = fixedPoint(y =&gt; x / y)(1)
+  sqrt(2)
+}</code></pre></div>
+<p>fixedPoint 를 응용해보면, 첫번째 인자인 f 함수에 어떤 수식을 넣어 반복적으로 적용하면서 고정값을 찾아 가는 과정에 맞게 넣을 수 있겠다.
+마지막에 있는 것은 sqrt 를 구하는 함수는 바로 위에서 말한 반복을 통한 고정값 추론에 적합하다.
+sqrt y 를 구하려면 y * y = x 가 되기 때문에 함수 y = x / y 를 fixedPoint 함수에 반복적으로 적용하다보면 고정값 sqrt 의 근사치를 구할 수 있다.
+하지만, 실제로 위와같이 y => x / y 를 fixedPoint 의 함수 인자로 넣게 되면, 원하는 값을 얻지 못한다.
+왜냐하면, guess 값이 너무 심하게 변하기 때문에 발생하는 문제다. fixedPoint 의 내부함수 iterate 는 guess 와 next 가 교차하는 구조인데, 처음 sqrt(2)에서 2 는 x 이다.
+그리고 y 는 firstGuess 인 1 이되는데, 이 두 값이 f(x) = x / y 에 대입되면, f(x)는 2 가 된다. 다시 y 가 2 가 되고 x 가 2 이므로 iterate 함수를 한번 돌면 y 는 1 이된다.
+즉, 1,2,1,2 반복하기 때문에 무한루프에 빠지게 된다.
+이를 해결하기 위해서는 연속하는 두개의 값 즉 1 과 2 의 평균값(1.5)를 구함으로써 해결할 수 있다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">y =&gt; x / y
+// 아래와 같이 바꿔 쓴다.
+y =&gt; (y + x/y) / 2
+
+// 코드에 적용해보면
+def sqrt(x: Double) = fixedPoint(y =&gt; (y + x / y) / 2)</code></pre></div>
+<p>위와 같이 평균을 내어서 안정화 시키는 기법을 AverageDamp 라고 한다.</p>
+<h2>2.4 Scala Syntax Summary</h2>
+<p>강의 참고</p>
+<h2>2.5 Functions and Data</h2>
+<p>유리수의 여러가지 연산을 바탕으로 함수를 만드는 방법과 데이터를 캡슐화하기 위해 클래스를 사용하는 방법을 알아 본다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">// class
+class Rational(x: Int, y: Int) {
+  def numer = x
+  def denom = y
+
+  def add(that: Rational) =
+    new Rational(
+      numer * that.denom + that.numer * denom,
+      denom * that.denom)
+}
+
+// object
+val x = new Rational(1, 2)
+x.numer  // 1
+y.denom  // 2</code></pre></div>
+<p>위에서 Rational 클래스를 정의하였다. 클래스를 정의하면 두가지 요소가 정의되는데, 첫번째는 Rational 이라는 type 이 만들어진다는 것이고, 두번째는 x 와 y 를 인자로 가지는 Rational 이라는 생성자가 만들어진다는 것이다.
+object 를 만드는 법은 Java 의 object 만드는 법과 동일하게 new 키워드를 사용해서 만들 수 있다.</p>
+<h3>Method</h3>
+<p>스칼라에서 함수(funciton)과 메소드(method)는 다른 의미로 사용되는데, 일반적으로 함수는 독립적인 객체로서 클래스처럼 인스턴스화 가능한 형태로 동작하는 반면, 메소드는 클래스내에 속하는 멤버로써 클래스 내의 데이터를 연산하는 역할을 한다. 실제 컴파일 해보면 차이를 알 수 있는데, 함수같은 경우에는 클래스로 변경되어 있지만(내부 함수인 경우에는 내부 클래스로 컴파일), 메소드는 컴파일 내에 멤버로만 존재하기 때문에 별도의 class 로 컴파일 되지 않는다.</p>
+<h3>Exerxise</h3>
+<ol>
+<li>
+<p>In your worksheet, add a method neg to class Rational that is used like this: x.neg</p>
+</li>
+<li>
+<p>Add a method sub to subtract two rational numbers.</p>
+</li>
+<li>
+<p>With the values of x, y, z as given in the previous slide, what is the result of x - y - z</p>
+</li>
+</ol>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class Rational(x: Int, y: Int) {
+  def numer = x
+  def denom = y
+
+  def add(that: Rational) =
+    new Rational(
+      numer * that.denom + denom * that.numer,
+      denom * that.denom)
+
+  def neg: Rational = new Rational(numer * -1, denom)
+  def sub(that: Rational): Rational = add(that.neg)
+  override def toString = numer + &quot;/&quot; + denom
+}
+
+val x = new Rational(1, 3)
+val y = new Rational(5, 7)
+val z = new Rational(3, 2)
+
+x.sub(y).sub(z) // res0: Rational = -79/42</code></pre></div>
+<h2>2.6 More Fun With Rationals</h2>
+<p>2.5 에서 구현한 Rational 클래스는 분모와 분자를 나누어진 형태로 출력하지 않는 문제가 있다. 그래서 이전에 사용했었던 최대 공약수를 구하는 함수인 gcd 를 메서드 형태로 Rational 클래스에 추가해준다.
+그리고 클래스의 인수인 x 와 y 에 두 변수의 gcd 값을 나누어준다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class Rational(x: Int, y: Int) {
+  private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
+  // ex 1) g를 재사용하는 방법
+  private val g = gcd(x, y)
+  def numer = x / g
+  def denom = y / g
+
+  // ex 2) numer와 denom이 자주 호출되지 않을때는 gcd를 직접 넣어줌
+  def numer = x / gcd(x, y)
+  def denom = y / gcd(x, y)
+
+  // ex3) 이 두 변수는 한번만 연산하도록 하기 위해 메서드를 value로 변경, numer와 denom이 자주 call 되는 경우에 적합
+  val numer = x / gcd(x, y)
+  val denom = y / gcd(x, y)
+
+  ...
+}</code></pre></div>
+<h3>this</h3>
+<p>this 키워드는 java 와 동일하게 사용된다. this 는 현재 메소드가 실행되고있는 object 를 말한다. second 생성자를 만들때에도</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def this(x: Int) = this(x, 1)</code></pre></div>
+<p>과 같이 사용한다.</p>
+<h3>require 키워드</h3>
+<p>require 키워드를 사용하면 클래스의 인자값 등에 대한 제약을 만들 수 있다. 아래의 클래스가 있는 상태에서 만약에 new Rational(1, 0)과 같은 instance 를 생성하게 되면 예외가 발생하게 된다. require 와 같이 객체가 생성될때 강제로 호출하는 역할을 하는 함수를 predefined funciton 이라고 한다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class Rational(x: Int, y: Int) {
+  require(y != 0, &quot; denominator must be positive&quot;)
+  ...
+}</code></pre></div>
+<h2>2.7 Evaluation and Operators</h2>
+<p>클래스와 메소드의 evalutaion 과정</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class C(x1, ..., xm) {... def f(y1, ..., yn) = b ...}
+new C(v1, ..., vm).f(w1, ..., wn)
+
+// substitution
+[w1/y1, ... wn/yn][v1/x1, ..., vm/xm][new C(v1, ..., vm)/this]b</code></pre></div>
+<p>과정을 간단히 요약하면</p>
+<ol>
+<li>f 메서드의 formal parameters(y1, …, yn)이 arguments(w1, …, wn)으로 치환</li>
+<li>클래스의 formal parameters(x1, …, xm)이 arguments(v1, …, vm)으로 치환</li>
+<li>self reference this 가 new C(v1, …, vm)으로 치환</li>
+</ol>
+<p>만약 f 함수 내부에서 this 가 사용된다고 가정한다면, 이 this 는 이미 new C(v1, …, vm)으로 치환된 value 이므로, 해당 object 자체를 참조하는 값이 된다.</p>
+<h3>Operators</h3>
+<p>일반적인 언어에서는 r.add(s)와 같은 함수가 호출될때 자연수인 경우에는 r + s 와 같이 바꿔 쓸 수 있지만, 유리수의 경우에는 불가하다.
+하지만 스칼라에서는 오퍼레이터 기호를 함수 이름으로 사용가능하다.</p>
+<ul>
+<li>step 1 : r.add(s) ==> r add s</li>
+<li>step 2 : def + (that: Rational) = { … }</li>
+</ul>
+<p>하지만 위와 같이 함수 이름을 오퍼레이터로 사용하게 되면, 우선순위 문제가 발생할 수 있다.
+그래서 스칼라에서는 precedence rules 을 별도로 만들어 두었다.
+우선순위는 아래가 제일 높고 위로 갈수록 낮아진다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(all letters)
+|
+^
+&amp;
+&lt; &gt;
+= !
+:
++ -
+* / %
+(all other special characters)</code></pre></div></div><hr style="margin-bottom:1.75rem"/><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2016/07/26/functional-programming-in-scala-week1/">← <!-- -->Functional Programming in Scala week 1</a></li><li><a rel="next" href="/2016/07/26/functional-programming-in-scala-week3/">Functional Programming in Scala week 3<!-- --> →</a></li></ul></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-50048807-2', 'auto', {});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-templates-blog-post-js","jsonName":"2016-07-26-functional-programming-in-scala-week-2-246","path":"/2016/07/26/functional-programming-in-scala-week2/"};window.dataPath="253/path---2016-07-26-functional-programming-in-scala-week-2-246-eee-S8uwhSVDZPE3NnaVKcr7Bxw70OA";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-351efcfeb4f54983a1ef.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-31ee4b698d609e346331.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bd47a77552aee32af5f8.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7c4638696cb877443516.js"]};/*]]>*/</script><script src="/webpack-runtime-808f04f9a6727a1a19c9.js" async=""></script><script src="/app-351efcfeb4f54983a1ef.js" async=""></script><script src="/component---src-templates-blog-post-js-fee95fd76061ab2b91a6.js" async=""></script><script src="/0-8bf3a8bc80e5222607e7.js" async=""></script></body></html>

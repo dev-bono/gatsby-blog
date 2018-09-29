@@ -1,7 +1,7 @@
 ---
 title: '내겐 읽기 힘든 책 <사피엔스>'
 date: 2018-08-22 23:43:19
-category: essay
+category: review
 tags:
   - 코스모스
   - 이기적 유전자

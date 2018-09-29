@@ -1,7 +1,7 @@
 ---
 title: '도대체 11문자가 뭐야? <11문자 살인사건 : 히가시노 게이고>'
 date: 2018-08-18 01:02:32
-category: essay
+category: review
 tags:
   - 추리소설
   - 히가시노 게이고

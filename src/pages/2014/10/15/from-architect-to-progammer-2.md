@@ -1,7 +1,7 @@
 ---
 title: '건축에서 프로그래머로(2) - 사업 한번 해볼까?'
 date: 2014-10-15 11:41:25
-category: javascript
+category: essay
 tags:
   - 개발자
   - 건축

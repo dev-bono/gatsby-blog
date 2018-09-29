@@ -1,7 +1,7 @@
 ---
 title: '건축에서 프로그래머로(1) - 건축에 뜻을 두다'
 date: 2014-10-06 12:02:23
-category: javascript
+category: essay
 tags:
   - arcitecture
   - programmer

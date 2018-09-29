@@ -1,7 +1,7 @@
 ---
 title: '취미로써의 책읽기 <백마산장 살인사건 : 히가시노 게이고>'
 date: 2018-08-15 23:04:29
-category: essay
+category: review
 tags:
   - 미야베 미유키
   - 추리소설

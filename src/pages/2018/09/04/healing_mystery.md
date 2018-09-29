@@ -1,7 +1,7 @@
 ---
 title: '추리소설 작가의 힐링 소설 <나미야 잡화점의 기적 : 히가시노 게이고>'
 date: 2018-09-04 01:38:09
-category: essay
+category: review
 tags:
   - 미스터리
   - 추리소설

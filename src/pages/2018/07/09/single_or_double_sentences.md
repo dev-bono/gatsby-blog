@@ -1,7 +1,7 @@
 ---
 title: '단문과 복문 <유시민의 글쓰기 특강>'
 date: 2018-07-09 00:10:37
-category: essay
+category: review
 tags:
   - 글쓰기
   - 유시민

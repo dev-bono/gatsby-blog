@@ -1,7 +1,7 @@
 ---
 title: '히가시노 게이고의 최신작 중 하나를 골라보았다 <눈보라 체이스 : 히가시노 게이고>'
 date: 2018-08-26 23:28:33
-category: essay
+category: review
 tags:
   - 추리소설
   - 추격전

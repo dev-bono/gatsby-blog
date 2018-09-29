@@ -1,7 +1,7 @@
 ---
 title: '역사서를 위한 패키지 여행 <역사의 역사>'
 date: 2018-07-16 01:06:16
-category: essay
+category: review
 tags:
   - 유시민
   - 역사란 무엇인가

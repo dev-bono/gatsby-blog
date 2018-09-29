@@ -1,6 +1,7 @@
 ---
 title: '[react] v16.3.0, 무엇이 바뀌었나?'
 date: 2018-04-05 01:22:35
+category: react
 tags:
   - react
   - v16.3.0

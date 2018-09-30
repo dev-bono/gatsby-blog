@@ -23,7 +23,7 @@ vector 가 이렇게 좋다는데, list 를 써야하는 이유는 무엇일까?
 
 list 의 concat 연산 (::)은 vector 에서 다음과 같이 쓰인다.
 
-```
+```scala
 x +: xs     // xs 앞에 x를 포함하는 새로운 벡터를 붙인다.
 xs :+ x     // xs 뒤에 x를 포함하는 새로운 벡터를 붙인다.
 ```
@@ -38,7 +38,7 @@ xs :+ x     // xs 뒤에 x를 포함하는 새로운 벡터를 붙인다.
 
 Array 와 String 는 점선으로 되어있는데, 이들도 Seq 로써 아래와 같이 똑같이 동작한다. 다만 자바에서 가져온 타입이기 때문에 앞으로 어떻게 될지(Scala.sequence.String 같은걸 누군가 만들지도 모르므로..) 몰라 점선으로 연결해놓은거 같다.
 
-```
+```scala
 // Array
 val xs = Array(1, 2, 3, 44)
 xs map (x => x * 2)
@@ -54,7 +54,7 @@ s filter (c => c.isUpper)
 
 Range 는 심플한 seq 타입이다. 사용법 또한 매우 간단하다.
 
-```
+```scala
 val r: Range = 1 until 5    // 1, 2, 3, 4
 val s: Range = 1 to 5     // 1, 2, 3, 4, 5
 1 to 10 by 3          // 1, 4, 7, 10
@@ -76,7 +76,7 @@ val s: Range = 1 to 5     // 1, 2, 3, 4, 5
 
 ### Scalar Product
 
-```
+```scala
 val a: Vector[Double] = Vector(1.0, 2.0, 3.0)
 val b: Vector[Double] = Vector(3.0, 4.0, 5.0)
 
@@ -93,7 +93,7 @@ scalarProduct2(a, b)
 
 두 벡터의 각 요소끼리 곱한다음 모든 값을 합하는 함수이다. 우선 xs 와 ys 를 zip 으로 묶은 다음 각 요소(xy: pair)의 첫번째와 두번째 요소를 곱한다음 모든값을 sum 해준다. map 안의 함수는 case 문으로 대체할 수 있다.
 
-```
+```scala
 {case p1 => e1 ... case pn => en}
 
 // 위와 동일
@@ -102,7 +102,7 @@ x => x match { case p1 => e1 ... case pn => en }
 
 ### isPrime
 
-```
+```scala
 def isPrime(n: Int): Boolean = (2 until n) forall (x => (n % x) != 0)
 ```
 
@@ -113,7 +113,7 @@ def isPrime(n: Int): Boolean = (2 until n) forall (x => (n % x) != 0)
 양수 n 이 있고, 또다른 양수 i 와 j 가 1 <= j < i < n 을 만족하고 i + j 가 소수라는 조건이 있다.
 코드로 나타내면 다음과 같다.
 
-```
+```scala
 val n = 7
 (1 until n) map (i => (1 until i) map (j => (i, j)))
 
@@ -126,7 +126,7 @@ Range 는 Seq 의 하위 타입이지만 사실 그 중간에 IndexedSeq 라는 
 
 원래 우리가 찾으려고 했던 결과는 Vector 의 Vector 가 아니라 pair 를 하나의 single list 에 담아져야 한다. 그래서 모든 sub-sequences 를 foldRight 와 ++를 이용해서 결합할 필요가 있다. (xss: seq of seq)
 
-```
+```scala
 (xss foldRight Seq[Int]())(_ ++ _)
 
 // equvalently
@@ -155,7 +155,7 @@ res0: scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((2,1), (3,2), (
 
 for loop 에 대해서 알아보자
 
-```
+```scala
 case class Person(name: String, age: Int)
 
 // 20살 이상인 사람만 가져오고 싶을때
@@ -167,7 +167,7 @@ persons filter (p => p.age > 20) map (p = > p.name)
 
 기본적인 for loop 동작은 비슷하지만 결정적인 차이가 하나 있다. 보통 절차적 언어의 for loop 는 어떤 요소가 변할 수 있는 side effect 가 존재하지만 스칼라에서는 yield 키워드를 이용해서 iterable 객체를 생성한다.
 
-```
+```scala
 for (s) yield e
 ```
 
@@ -186,7 +186,7 @@ for-expression 을 위와같이 단순화 시킬 수 있다.
 이전에 보았던 문제를 for loop 를 이용해 다시 만들어 보자.
 첫번째는 바로 전에 했던 두 수의 합이 prime 넘버인 것의 pair 를 구하는 함수
 
-```
+```scala
 for {
   i <- 1 until n
   j <- 1 until i
@@ -198,7 +198,7 @@ for {
 
 두번째는 scalarProduct
 
-```
+```scala
 def scalarProduct(xs: Vector[Double], ys: Vector[Double]): Double =
   (for ((x, y) <- xs zip ys) yield x * y).sum
 ```
@@ -229,7 +229,7 @@ Set 도 Seq 와 마찬가지로 Iterable 의 subclass 다. 그래서 Seq 에서 
 - 각 솔루션의 하나의 element 와 함께 set of lists 로 만들어진다.
 - kth 퀸을 놓아 가능한 모든 솔루션을 만들어낸다.
 
-```
+```scala
 def queens(n: Int): Set[List[Int]] = {
   def placeQueens(k: Int): Set[List[Int]] =
     if (k == 0) Set(List())
@@ -246,7 +246,7 @@ def queens(n: Int): Set[List[Int]] = {
 
 기본적인 뼈대는 위와 같다. placeQueens 함수를 재귀호출하여, 이전 단계의 퀸 리스트들을 이용해 다음 퀸들을 배치하는 형태다. 한 depth 씩 내려가다보면 마지막에는 빈 셋에 0 에서 n 까지 각각 배치될것이다. 그리고 1 개의 퀸이 배치된 list 들에다 하나씩 추가해가면 마지막에는 모든 퀸이 놓인 체스판이 완성될 것이다.
 
-```
+```scala
 def isSafe(col: Int, queens: List[Int]): Boolean = {
   val row = queens.length
   val queensWithRow = (row -1 to 0 by -1) zip queens
@@ -258,7 +258,7 @@ def isSafe(col: Int, queens: List[Int]): Boolean = {
 
 기존 퀸 리스트에 새로운 퀸을 추가할 때 안전한지 검사하는 isSafe 함수다. case 부분만 유심히 보면 되는데, 각은 column 에 속하지 않으면서 대각선에 위치하지 않으면 safe 하다고 판단하고 퀸을 추가한다. 대각선상에 있는지는 컬럼의 차이와 행의 차이로 판단한다.
 
-```
+```scala
 def show(queens: List[Int]) = {
   val lines =
     for (col <- queens)
@@ -308,7 +308,7 @@ Map 에 대해서 알아보자.
 Map 은 다른 언어에서와 동일하게 Map[Key, Value]의 쌍으로 이루어져있다. 이때 Key, Value 는 숫자나 문자 등 어떤 타입이든 가능하다.
 또한 Map[Key, Value]는 Key => Value 의 함수 타입으로 확장 가능하다. 즉, Key 파라미터를 이용하면 Value 를 구할 수 있다는 말과 같다.
 
-```
+```scala
 // key를 이용해 value를 가져올때
 capitalOfCountry("andorra")   // exception 발생
 
@@ -320,7 +320,7 @@ capitalOfCountry get "andorra"  // None
 
 Option 은 covariant 하기 때문에 Option[A] > Option[Nothing]이다. 즉 None
 
-```
+```scala
 trait Option[+A]
 case class Some[+A](value: A) extend Option[A]
 object None extend Option[Nothing]
@@ -328,7 +328,7 @@ object None extend Option[Nothing]
 
 패턴 매칭을 이용하면 아래와 같이 나타낼 수 있다.
 
-```
+```scala
 def showCapital(country: String) = capitalOfCountry.get(country) match {
   case Some(capital) => capital
   case None => "missing data"
@@ -339,7 +339,7 @@ def showCapital(country: String) = capitalOfCountry.get(country) match {
 
 sql 쿼리의 opertaion 을 사용해보자.
 
-```
+```scala
 // sorted
 val fruit = List("apple", "pear", "orange", "pineapple")
 fruit.sortWith (_.length < _.length)  // List("pear", "apple", "orange", "pineapple")
@@ -358,7 +358,7 @@ groubBy 명령은 식별 함수 f 에 따라 collection 의 map 을 만든다.
 
 from exponents to coefficient 방식으로 map 을 만든다.
 
-```
+```scala
 class Poly(val terms: Map[Int, Double]) {
   def + (other: Poly) = new Poly(terms ++ other.terms)
   override def toString =
@@ -373,7 +373,7 @@ p1 + p2
 두 다항식을 더하는 함수를 작성해보자. 양쪽 다항식에 exponents 가 같은 coefficient 끼리 더해주고 나머지 exponents 들을 합쳐주면 두 다항식의 합이 완성된다. 일단 말은 어렵지 않다.
 하지만 위의 식은 아래처럼 잘못된 결과가 도출된다.
 
-```
+```scala
 p1: Poly = 6.2x^5 + 4.0x^3 + 2.0x^1
 p2: Poly = 7.0x^3 + 3.0x^0
 res0: Poly = 6.2x^5 + 7.0x^3 + 2.0x^1 + 3.0x^0
@@ -383,7 +383,7 @@ res0: Poly = 6.2x^5 + 7.0x^3 + 2.0x^1 + 3.0x^0
 맵끼리 concatenating 할때는 아마 같은 키의 value 를 합치는게 아니라 뒤에 나오는 map 의 key 의 value 로 대체하기 때문에 이렇게 나오는 것이다.
 다음과 같이 바꿔보자.
 
-```
+```scala
 def + (other: Poly) = new Poly(terms ++ (other.terms map adjust))
 def adjust(term: (Int, Double)): (Int, Double) = {
   val (exp, coeff) = term
@@ -398,7 +398,7 @@ def adjust(term: (Int, Double)): (Int, Double) = {
 adjust 함수는 other 의 term 하나를 뽑아다가 terms 에 해당 exponent 가 있는지 확인하고 있으면 terms 와 other(term)의 coefficient 를 더해준다. 만약 없다면, othe 의 coeff 를 그대로 리턴한다.
 결과를 보자.
 
-```
+```scala
 p1: Poly = 6.2x^5 + 4.0x^3 + 2.0x^1
 p2: Poly = 7.0x^3 + 3.0x^0
 res0: Poly = 6.2x^5 + 11.0x^3 + 2.0x^1 + 3.0x^0
@@ -410,7 +410,7 @@ res0: Poly = 6.2x^5 + 11.0x^3 + 2.0x^1 + 3.0x^0
 withDefaultValue operation 을 이용하면 위의 함수를 좀더 간단하게 만들 수 있다.
 withDefaultValue 를 이용해 좀더 개선해보자.
 
-```
+```scala
 class Poly(terms0: Map[Int, Double]) {
   def this(bindings: (Int, Double)*) = this(bindings.toMap)
   val terms = terms0 withDefaultValue 0.0
@@ -438,7 +438,7 @@ p1.terms(8)
 
 위에서 보았던 '++' 연산과 foldLeft 를 이용한 연산중 어느것이 더 효율적일까?
 
-```
+```scala
 def + (other: Poly) =
   new Poly((other.terms foldLeft terms)(addTerm))
 
@@ -455,7 +455,7 @@ fold 를 이용하면 위에서처럼 Map 을 생성하여 각 exponent 를 비�
 전화번호를 문자로 바꾸는 예제를 살펴보자.
 참고로 해당 예제는 파이썬과 같은 스크립트 언어에서는 100 라인 정도, 그외에 일반적 목적의 프로그래밍 언어에서는 200~300 라인정도의 코드가 나왔다고 한다.
 
-```
+```scala
 val mnemonics = Map(
        '2' -> "ABC", '3' -> "DEF", '4' => "GHI", '5' -> "JKL",
        '6' -> "MNO", '7' -> "PQRS", '8' -> "TUV", '9' -> "WXYZ")
@@ -467,7 +467,7 @@ val mnemonics = Map(
 
 전체코드는 다음과 같다.
 
-```
+```scala
 val in = Source.fromURL("http://lamp.epfl.ch/files/content/sites/lamp/files/teaching/progfun/linuxwords.txt")
 val words = in.getLines.toList filter (word => word forall (chr => chr.isLetter))
 

@@ -38,7 +38,7 @@ tags:
 - call by value : 인자가 먼저 평가되는 방식
 - call by name : 인자가 나중에 평가 되는 방식
 
-```
+```scala
 sumOfSquares(3, 2+2)
 
 sumOfSquares(3, 4) // call by value
@@ -49,7 +49,7 @@ sumOfSquares(3, 2+2) // call by name
 
 다음의 예를 보면 이해가 간다.
 
-```
+```scala
 call by name
 test(3+4,2*4)
 // (3+4) * (3+4)
@@ -67,7 +67,7 @@ test(3+4,2*4)
 
 ## 1.3 Evaluation Strategies and Termination
 
-```
+```scala
 def first(x: Int, y: Int) = x
 first(1, loop)
 ```
@@ -79,7 +79,7 @@ first 함수를 호출하게 되면 CBN 같은 경우는 인자를 해석하지 
 
 ## 1.4 Conditionals and Value Definitions
 
-```
+```scala
 def loop: Boolean = loop
 def x = loop
 val x = loop // infinite loop
@@ -87,7 +87,7 @@ val x = loop // infinite loop
 
 def 는 우측의 loop 가 해석되지 않는다. 반면에 val(value)는 우측의 코드를 해석하기 때문에 위와 같은 코드의 경우 무한루프에 빠지게 된다.
 
-```
+```scala
 and(x,y) == x && y
 def and(x: Boolean, y: Boolean)
   if (x) y else false
@@ -104,7 +104,7 @@ def and(x: Boolean, y: => Boolean)
 
 > 한가지 주의할점은 스칼라에서 recursive(재귀) 함수인 경우에는 반드시 return 타입을 정해주어야 한다.
 
-```
+```scala
 def abs(x: Double) = if (x < 0) -x else x
 
 def sqrtIter(guess: Double, x: Double): Double =
@@ -126,7 +126,7 @@ sqrt(2) // res1: Double = 1.4142156862745097
 
 block 을 잘 이용하면 불필요한 인자값을 호출하는 메서드에 넘길 필요가 없다.
 
-```
+```scala
 def abs(x: Double) = if (x < 0) -x else x
 
 def sqrt(x: Double) = {
@@ -153,14 +153,14 @@ sqrt(2) // 동일한 결과값
 스칼라에서 세미콜론은 optional
 그래서 아래와 같은 코드가 작성되면 한 줄로 인식되어야 할 코드를 스칼라 인터프리터가 두줄로 인식해버리는 문제가 있다.
 
-```
+```scala
 someLongExpression
 + someOtherExpression
 ```
 
 해결 방법은 두가지가 있는데, 첫째는 괄호로 묶어주는 방법이고 두번째는 '+' 기호를 윗줄의 끝에 기입해주는 방법이다(아직 문장이 안끝났다는 표시).
 
-```
+```scala
 // solution 1
 (someLongExpression
 + someOtherExpression)
@@ -172,7 +172,7 @@ someOtherExpression
 
 ## 1.7 Tail Recursion
 
-```
+```scala
 def gcd(x: Int, y: Int): Int =
   if (y == 0) x else gcd(y, x % y)
 

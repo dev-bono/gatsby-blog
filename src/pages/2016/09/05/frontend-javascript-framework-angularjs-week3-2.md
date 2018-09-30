@@ -68,38 +68,37 @@ ngRoute 는 $location 서비스와 렌더된 뷰 사이의 관계를 관리한�
 
 다음과 괕이 angular module 에서 사용된다.
 
-```
+```javascript
 // 의존적으로 주입한다.
 angular.module('confusionApp', ['ngRoute'])
 ```
 
 ngRoute 에서는 Angular provider 를 사용할 수 있는데, provider 는 url 이 변경됨에 따라 그에 알맞는 적절한 template 과 url(handlers)로 매핑시켜준다.
 
-```
-angular.module('confusionApp', ['ngRoute'])
-	// 라우팅을 위해 config 함수를 사용한다.
-	// 파라미터로 $routeProvider가 들어간다.
-    .config(function($routeProvider) {
+```javascript
+angular
+  .module('confusionApp', ['ngRoute'])
+  // 라우팅을 위해 config 함수를 사용한다.
+  // 파라미터로 $routeProvider가 들어간다.
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/contactus', {
+        templateUrl: 'contactus.html',
+        controller: 'ContactController',
+      })
 
-      $routeProvider
-        .when('/contactus', {
-          templateUrl : 'contactus.html',
-          controller : 'ContactController'
-        })
+      .when('/menu', {
+        templateUrl: 'menu.html',
+        controller: 'MenuController',
+      })
 
-        .when('/menu', {
-          templateUrl : 'menu.html',
-          controller : 'MenuController'
-        })
-
-        .when('/menu/:id', {
-          templateUrl : 'dishDetail.html',
-          controller : 'DishDetailController'
-        })
-        // 디폴트, 아무것도 매치가 안되면 otherwise 실행
-        .otherwise('/contactus')
-    })
-;
+      .when('/menu/:id', {
+        templateUrl: 'dishDetail.html',
+        controller: 'DishDetailController',
+      })
+      // 디폴트, 아무것도 매치가 안되면 otherwise 실행
+      .otherwise('/contactus')
+  })
 ```
 
 url 이 변경되면 해당되는 url 을 $routeProvider.when 의 첫번째 파라미터에서 찾은 다음 각각 알맞는 template 과 contoller 를 지정해주어 view 를 렌더링한다.
@@ -107,7 +106,7 @@ url 이 변경되면 해당되는 url 을 $routeProvider.when 의 첫번째 파�
 $routeParams 를 이용하면 주어진 파라미터로 url 에 삽입할 수 있다.
 예를 보자
 
-```
+```javascript
 // menu.html
 <div class="media-left media-middle">
 	<a ng-href="#/menu/{{dish._id}}">
@@ -143,7 +142,7 @@ bower install angular-ui-router -S
 
 사용법은 이전과 비슷하다.
 
-```
+```javascript
 angular.module('confusionApp', ['ui.router'])
 	.config(function($stateProvider, $urlRouterProvider) {
 		$stateProvider
@@ -173,7 +172,7 @@ state 에 따라서 각각 url 을 지정해줄 수 있다. 그리고 views 속�
 위의 state 내 views 속성에 지정해둔 view name 은 html 코드에서 ui-view 로 매핑시켜준다.
 그리고 ui-sref 속성은 state 를 변경 시켜주는데 사용한다. href 가 url 을 이동하기 위한 속성이었다면 ui-sref 는 url 은 변경시켜주지 않고 속성만 바꾸는 link 역할을 한다.
 
-```
+```html
 <div ui-view="header"></div>
 <div ui-view="content"></div>
 <div ui-view="footer"></div>
@@ -186,7 +185,7 @@ state 에 따라서 각각 url 을 지정해줄 수 있다. 그리고 views 속�
 $routeParams 와 마찬가지로 $stateParams 를 사용할 수 있다.
 사용법은 기존과 거의 같다.
 
-```
+```javascript
 // menu.html
 <a ui-sref="app.dishdetails({id:dish._id})"> ... </a>
 

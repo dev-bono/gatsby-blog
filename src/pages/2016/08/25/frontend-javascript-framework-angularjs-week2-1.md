@@ -35,19 +35,17 @@ npm install -g grunt-cli
 Grunt 의 설정팔일은 Gruntfile.js 로 정의한다. 대략적인 구조를 살펴보면 아래와 같다.
 function 의 argument 에 grunt 객체가 들어가고 그 아래에 필요한 코드를 추가한다. 자세한 내용은 차차 알아보자.
 
-```
+```javascript
 module.exports = function(grunt) {
-	// do requires here
-	require('jit-grunt')(grunt);
+  // do requires here
+  require('jit-grunt')(grunt)
 
-	// do grunt task configurations here
-	grunt.initConfig({
+  // do grunt task configurations here
+  grunt.initConfig({})
 
-	});
-
-	// register tasks here
-	grunt.registerTask('build', ['jshint']);
-	grunt.registerTask('default', ['build']);
+  // register tasks here
+  grunt.registerTask('build', ['jshint'])
+  grunt.registerTask('default', ['build'])
 }
 ```
 
@@ -73,7 +71,7 @@ npm install jshint-stylish --save-dev
 그리고 Configuration 을 다음과 같이 작성하자.
 Configuration 파일은 프로젝트 root 폴더에서 Gruntfile.js 를 만들어 아래 내용을 저장한다.
 
-```
+```javascript
 jshint: {
 	options: {
 		jshintrc: '.jshintrc',
@@ -153,166 +151,162 @@ npm install grunt-contlib-connect --save-dev
 
 #### Gruntfile.js
 
-```
-'use strict';
+```javascript
+'use strict'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
+  require('time-grunt')(grunt)
+  require('jit-grunt')(grunt, {
+    useminPrepare: 'grunt-usemin',
+  })
 
-	require('time-grunt')(grunt);
-	require('jit-grunt')(grunt, {
-		useminPrepare: 'grunt-usemin'
-	});
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish'),
+      },
+      all: {
+        src: ['Gruntfile.js', 'app/scripts/{,*/}*.js'],
+      },
+    },
+    useminPrepare: {
+      html: 'app/menu.html',
+      options: {
+        dest: 'dist',
+      },
+    },
+    concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {},
+    },
+    uglify: {
+      dist: {},
+    },
+    cssmin: {
+      dist: {},
+    },
+    filerev: {
+      options: {
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 20,
+      },
+      release: {
+        files: [
+          {
+            src: ['dist/scripts/*js', 'dist/styles/*.css'],
+          },
+        ],
+      },
+    },
+    usemin: {
+      html: ['dist/*.html'],
+      css: ['dist/styles/*.css'],
+      options: {
+        assetsDirs: ['dist', 'dist/styles'],
+      },
+    },
 
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc',
-				reporter: require('jshint-stylish')
-			},
-			all: {
-				src: [
-					'Gruntfile.js',
-					'app/scripts/{,*/}*.js'
-				]
-			}
-		},
-		useminPrepare: {
-			html: 'app/menu.html',
-			options: {
-				dest: 'dist'
-			}
-		},
-		concat: {
-			options: {
-				separator: ';'
-			},
-			dist: {}
-		},
-		uglify: {
-			dist: {}
-		},
-		cssmin: {
-			dist: {}
-		},
-		filerev: {
-			options: {
-				encoding: 'utf8',
-				algorithm: 'md5',
-				length: 20
-			},
-			release: {
-				files: [{
-					src: [
-						'dist/scripts/*js',
-						'dist/styles/*.css'
-					]
-				}]
-			}
-		},
-		usemin: {
-			html: ['dist/*.html'],
-			css: ['dist/styles/*.css'],
-			options: {
-				assetsDirs: ['dist', 'dist/styles']
-			}
-		},
+    copy: {
+      dist: {
+        cwd: 'app',
+        src: ['**', '!styles/**/*.css', '!scripts/**/*.js'],
+        dest: 'dist',
+        expand: true,
+      },
+      fonts: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'bower_components/bootstrap/dist',
+            src: ['fonts/*.*'],
+            dest: 'dist',
+          },
+          {
+            expand: true,
+            dot: true,
+            cwd: 'bower_components/font-awesome',
+            src: ['fonts/*.*'],
+            dest: 'dist',
+          },
+        ],
+      },
+    },
+    watch: {
+      copy: {
+        files: ['app/**', '!app/**/*.css', '!app/**/*.js'],
+        tasks: ['build'],
+      },
+      scripts: {
+        files: ['app/scripts/app.js'],
+        tasks: ['build'],
+      },
+      styles: {
+        files: ['app/styles/mystyles.css'],
+        tasks: ['build'],
+      },
+      livereload: {
+        options: {
+          livereload: '<%= connect.options.livereload %>',
+        },
+        files: [
+          'app/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css',
+          'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+        ],
+      },
+    },
+    connect: {
+      options: {
+        port: 9000,
+        hostname: 'localhost',
+        livereload: 35729,
+      },
+      dist: {
+        options: {
+          open: true,
+          base: {
+            path: 'dist',
+            options: {
+              index: 'menu.html',
+              maxAge: 300000,
+            },
+          },
+        },
+      },
+    },
+    clean: {
+      build: {
+        src: ['dist/'],
+      },
+    },
+  })
 
-		copy: {
-			dist: {
-				cwd: 'app',
-				src: ['**', '!styles/**/*.css', '!scripts/**/*.js'],
-				dest: 'dist',
-				expand: true
-			},
-			fonts: {
-				files:[
-					{
-						expand: true,
-						dot: true,
-						cwd: 'bower_components/bootstrap/dist',
-						src: ['fonts/*.*'],
-						dest: 'dist'
-					}, {
-						expand: true,
-						dot: true,
-						cwd: 'bower_components/font-awesome',
-						src: ['fonts/*.*'],
-						dest: 'dist'
-					}
-				]
-			}
-		},
-		watch: {
-			copy: {
-				files: ['app/**', '!app/**/*.css', '!app/**/*.js'],
-				tasks: ['build']
-			},
-			scripts: {
-				files: ['app/scripts/app.js'],
-				tasks: ['build']
-			},
-			styles: {
-				files: ['app/styles/mystyles.css'],
-				tasks:['build']
-			},
-			livereload: {
-				options: {
-					livereload: '<%= connect.options.livereload %>'
-				},
-				files: [
-					'app/{,*/}*.html',
-					'.tmp/styles/{,*/}*.css',
-					'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-				]
-			}
-		},
-		connect: {
-			options: {
-				port: 9000,
-				hostname: 'localhost',
-				livereload: 35729
-			},
-			dist: {
-				options: {
-					open: true,
-					base: {
-						path: 'dist',
-						options: {
-							index: 'menu.html',
-							maxAge: 300000
-						}
-					}
-				}
-			}
-		},
-		clean: {
-			build: {
-				src: ['dist/']
-			}
-		}
-	});
+  // 태스크 등록
+  // 순서가 중요하다.
+  // jshint로 모든 .js 파일을 검사하게 된다.
+  grunt.registerTask('build', [
+    'clean',
+    'jshint',
+    'useminPrepare',
+    'concat',
+    'cssmin',
+    'uglify',
+    'copy',
+    'filerev',
+    'usemin',
+  ])
 
-	// 태스크 등록
-	// 순서가 중요하다.
-	// jshint로 모든 .js 파일을 검사하게 된다.
-	grunt.registerTask('build', [
-		'clean',
-		'jshint',
-		'useminPrepare',
-		'concat',
-		'cssmin',
-		'uglify',
-		'copy',
-		'filerev',
-		'usemin'
-	]);
-
-	// 순서가 중요하다. 먼저 build, 다음에는 브라우져 오픈, watch
-	// watch가 마지막에 실행되므로, 파일 변경을 감지하면 build, 브라우저 오픈, 다시 watch 와 같은 순서로 진행된다.
-	grunt.registerTask('serve', ['build','connect:dist','watch']);
-	grunt.registerTask('default', ['build']);
-};
+  // 순서가 중요하다. 먼저 build, 다음에는 브라우져 오픈, watch
+  // watch가 마지막에 실행되므로, 파일 변경을 감지하면 build, 브라우저 오픈, 다시 watch 와 같은 순서로 진행된다.
+  grunt.registerTask('serve', ['build', 'connect:dist', 'watch'])
+  grunt.registerTask('default', ['build'])
+}
 ```
 
 ### Gulp
@@ -339,7 +333,7 @@ npm install
 플러그인을 로드하는 방법은 다음과 같다.
 직접 각 플러그인을 로드해도 되지만, package.json 파일 형태로 저장할 수도 있다.
 
-```
+```javascript
 var gulp = require('gulp'),
   jshint = require('gulp-jshint')
   sylish = require('jshint-stylish')
@@ -351,33 +345,36 @@ var gulp = require('gulp'),
 
 Gulp Streams 는 nodeJS streams 를 사용하여 파이프라인을 구성하는데, 파이프 라인이란 하나의 function 의 결과가 다음 function 으로 그대로 전달되는 연쇄적인 명령셋을 말한다. 예제를 살펴보자
 
-```
+```javascript
 gulp.task('jshint', function() {
-	gulp.src('app/scripts/**/*.js')
-	.pipe(jshint())
-	.pipe(jshint.reporter(stylish));
-});
+  gulp
+    .src('app/scripts/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+})
 ```
 
 우선 걸프 태스크를 생성하고 그 안에서 소스를 선택하고 jshint 를 생성하고 스타일을 적용해주는 일련의 명령들을 pipe 라는 function 을 이용하여 연결하였다.
 
 Watch 태스크 예제를 살펴보자
 
-```
+```javascript
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch('{app/scripts/**/*.js, app/style/**/*.css, app/**/*.html}', ['usemin']);
-	gulp.watch('app/images/**/*', ['imagemin']);
-});
+  gulp.watch('{app/scripts/**/*.js, app/style/**/*.css, app/**/*.html}', [
+    'usemin',
+  ])
+  gulp.watch('app/images/**/*', ['imagemin'])
+})
 ```
 
 태스크의 두번째 인자를 보면, browser-sync 가 대괄호로 묶여져 있다. 이 의미는 browser-sync 는 watch 태스크에 종속적이라는 말이다. 즉, watch 태스크가 실행되면 자동으로 browser-sync 가 실행된다.
 
 #### Default Task
 
-```
+```javascript
 gulp.task('default', ['clean'], function() {
-	gulp.start('usemin', 'imagemin', 'copyfonts');
-});
+  gulp.start('usemin', 'imagemin', 'copyfonts')
+})
 ```
 
 default 태스크는 콘솔창에서 gulp 라고 입력하면 실행되는 태스크이다. clean 태스크가 연쇄적으로 발생하게 되고, 내부에서는 서로 dependency 가 없는 usemin, imagemin, copyfonts 가 동시에 실행된다.
@@ -386,81 +383,101 @@ default 태스크는 콘솔창에서 gulp 라고 입력하면 실행되는 태�
 
 콤마(,)와 띄어쓰기에 유의해야 한다.
 
-```
+```javascript
 var gulp = require('gulp'),
-	minifycss = require('gulp-minify-css'),
-	jshint = require('gulp-jshint'),
-	stylish = require('jshint-stylish'),
-	uglify = require('gulp-uglify'),
-	usemin = require('gulp-usemin'),
-	imagemin = require('gulp-imagemin'),
-	rename = require('gulp-rename'),
-	concat = require('gulp-concat'),
-	notify = require('gulp-notify'),
-	cache = require('gulp-cache'),
-	changed = require('gulp-changed'),
-	rev = require('gulp-rev'),
-	browserSync = require('browser-sync'),
-	del = require('del');
+  minifycss = require('gulp-minify-css'),
+  jshint = require('gulp-jshint'),
+  stylish = require('jshint-stylish'),
+  uglify = require('gulp-uglify'),
+  usemin = require('gulp-usemin'),
+  imagemin = require('gulp-imagemin'),
+  rename = require('gulp-rename'),
+  concat = require('gulp-concat'),
+  notify = require('gulp-notify'),
+  cache = require('gulp-cache'),
+  changed = require('gulp-changed'),
+  rev = require('gulp-rev'),
+  browserSync = require('browser-sync'),
+  del = require('del')
 
 gulp.task('jshint', function() {
-	return gulp.src('app/scripts/**/*.js')
-		.pipe(jshint())
-		.pipe(jshint.reporter(stylish));
-});
+  return gulp
+    .src('app/scripts/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+})
 
 gulp.task('usemin', ['jshint'], function() {
-	return gulp.src('./app/menu.html')
-		.pipe(usemin({
-			css:[minifycss(),rev()],
-			js: [uglify(),rev()]
-		}))
-		.pipe(gulp.dest('dist/'));
-});
+  return gulp
+    .src('./app/menu.html')
+    .pipe(
+      usemin({
+        css: [minifycss(), rev()],
+        js: [uglify(), rev()],
+      })
+    )
+    .pipe(gulp.dest('dist/'))
+})
 
 gulp.task('imagemin', function() {
-	return del(['dist/images']), gulp.src('app/images/**/*')
-		.pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-		.pipe(gulp.dest('dist/images'))
-		.pipe(notify({ message: 'Images task complete' }));
-});
+  return (
+    del(['dist/images']),
+    gulp
+      .src('app/images/**/*')
+      .pipe(
+        cache(
+          imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true,
+          })
+        )
+      )
+      .pipe(gulp.dest('dist/images'))
+      .pipe(notify({ message: 'Images task complete' }))
+  )
+})
 
 gulp.task('clean', function() {
-	return del(['dist'])
-});
+  return del(['dist'])
+})
 
 gulp.task('copyfonts', ['clean'], function() {
-	gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-		.pipe(gulp.dest('./dist/fonts'));
-	gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-		.pipe(gulp.dest('./dist/fonts'));
-});
+  gulp
+    .src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'))
+  gulp
+    .src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'))
+})
 
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
-	gulp.watch('app/images/**/*', ['imagemin']);
-});
+  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', [
+    'usemin',
+  ])
+  gulp.watch('app/images/**/*', ['imagemin'])
+})
 
 gulp.task('browser-sync', ['default'], function() {
-	var files = [
-		'app/**/*.html',
-		'app/styles/**/*.css',
-		'app/images/**/*.png',
-		'app/scripts/**/*.js',
-		'dist/**/*'
-	];
+  var files = [
+    'app/**/*.html',
+    'app/styles/**/*.css',
+    'app/images/**/*.png',
+    'app/scripts/**/*.js',
+    'dist/**/*',
+  ]
 
-	browserSync.init(files, {
-		server: {
-			baseDir: "dist",
-			index: "menu.html"
-		}
-	});
+  browserSync.init(files, {
+    server: {
+      baseDir: 'dist',
+      index: 'menu.html',
+    },
+  })
 
-	gulp.watch(['dist/**']).on('change', browserSync.reload);
-});
+  gulp.watch(['dist/**']).on('change', browserSync.reload)
+})
 
 gulp.task('default', ['clean'], function() {
-	gulp.start('usemin', 'imagemin', 'copyfonts');
-});
+  gulp.start('usemin', 'imagemin', 'copyfonts')
+})
 ```

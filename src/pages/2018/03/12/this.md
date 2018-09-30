@@ -18,118 +18,118 @@ this 를 어렴풋이 알고는 있지만, 누가 물어봤을때 제대로 대�
 
 `실행문맥`이란 말은 호출자가 누구냐는 것과 같습니다.
 
-```
-alert(this === window); // true, 호출자는 window
+```javascript
+alert(this === window) // true, 호출자는 window
 
 const caller = {
   f: function() {
-    alert(this === window);
-  }
+    alert(this === window)
+  },
 }
-caller.f(); // false, 호출자는 caller 객체
+caller.f() // false, 호출자는 caller 객체
 ```
 
 첫번째는 함수 호출, 두번째는 메소드 호출이라고 말하는데 이런 구분이 괜한 혼란을 야기합니다. 첫번째 alert 도 따지고보면 `window.alert()`과 동일하기 때문에 window 객체의 메소드 호출이라봐도 무방합니다. 다만, `strict-mode`에서는 전역 객체냐 일반 객체냐에 따라 함수내부에 this 의 결과가 다르다는 차이는 있죠. 그러나 이 문제 또한 window 를 함수 호출 앞에 붙여주면 해결됩니다.
 
-```
+```javascript
 function nonStrictMode() {
-  return this;
+  return this
 }
 
 function strictMode() {
   'use strict'
-  return this;
+  return this
 }
 
-console.log(nonStrictMode()); // window
-console.log(strictMode()); // undefined
-console.log(window.stricMode()); // window
+console.log(nonStrictMode()) // window
+console.log(strictMode()) // undefined
+console.log(window.stricMode()) // window
 ```
 
 ### 생성자 함수 / 객체에서는 어떻게 쓰이나?
 
 생성자는 new 로 객체를 만들어 사용하는 방식입니다. 객체지향 언어에서 일반적으로 객체를 만들 때 쓰이는 문법과 동일하죠. 가리키는 대상 또한 객체지향 언어의 `this`와 같기 때문에 이해하기가 한결 수월합니다.
 
-```
+```javascript
 function NewObject(name, color) {
-  this.name = name;
-  this.color = color;
+  this.name = name
+  this.color = color
   this.isWindow = function() {
-    return this === window;
+    return this === window
   }
 }
 
-const newObj = new NewObject('nana', 'yellow');
-console.log(newObj.name); // nana
-console.log(newObj.color); // yellow
-console.log(newObj.isWindow()); // false
+const newObj = new NewObject('nana', 'yellow')
+console.log(newObj.name) // nana
+console.log(newObj.color) // yellow
+console.log(newObj.isWindow()) // false
 
-const newObj2 = new NewObject('didi', 'red');
-console.log(newObj2.name); // didi
-console.log(newObj2.color); // red
-console.log(newObj2.isWindow()); // false
+const newObj2 = new NewObject('didi', 'red')
+console.log(newObj2.name) // didi
+console.log(newObj2.color) // red
+console.log(newObj2.isWindow()) // false
 ```
 
 new 키워드로 새로운 객체를 생성했을 경우 생성자 함수 내의 this 는 new 를 통해 만들어진 새로운 변수가 됩니다. `newObj`, `newObj2`는 같은 생성자 함수로 만들어진 객체이지만 완전히 별도의 객체이기 때문에 각 객체의 속성들은 서로 관련이 없습니다. 만약 new 키워드를 빼먹으면 어떻게 될까요?
 
-```
-const withoutNew = NewObject('nana', 'yellow');
-console.log(withoutNew.name); // error
-console.log(withoutNew.color); // error
-console.log(withoutNew.isWindow()); // error
+```javascript
+const withoutNew = NewObject('nana', 'yellow')
+console.log(withoutNew.name) // error
+console.log(withoutNew.color) // error
+console.log(withoutNew.isWindow()) // error
 ```
 
 new 키워드가 없으면 일반적인 함수 실행과 동일하게 동작하므로, `NewObject` 함수내의 this 는 `window` 객체가 됩니다. 하지만 `withoutNew`가 함수 실행의 결과값이 할당되므로 각 property 를 가져올 수 없습니다.
 그렇다면, 생성자 함수가 아닌 일반 객체에서는 어떨까요?
 
-```
+```javascript
 const person = {
   name: 'john',
   age: 15000,
   nickname: 'man from earth',
-  getName: function () {
-    return this.name;
-  }
+  getName: function() {
+    return this.name
+  },
 }
-console.log(person.getName()); // john
+console.log(person.getName()) // john
 
-const otherPerson = person;
-otherPerson.name = 'chris';
-console.log(person.getName()); // chris
-console.log(otherPerson.getName()); // chris
+const otherPerson = person
+otherPerson.name = 'chris'
+console.log(person.getName()) // chris
+console.log(otherPerson.getName()) // chris
 ```
 
 생성자 함수와 크게 다르지 않습니다. 한가지 눈여겨 볼 점은 `otherPerson.name`을 `chris`로 설정한 뒤 person.getName() 호출하면 그 결과는 `chris`입니다. 그 이유는 otherPerson 은 person 의 레퍼런스 변수이므로 하나(otherPerson)를 변경하면 다른 하나(person)도 변경됩니다. 이를 피하기 위해서는 `Object.assign()`메서드(ES6 지원)를 이용하여 완전히 별도의 객체로 만들어야 합니다.
 
-```
+```javascript
 const person = {
   name: 'john',
   age: 15000,
   nickname: 'man from earth',
-  getName: function () {
-    return this.name;
-  }
+  getName: function() {
+    return this.name
+  },
 }
-const newPerson = Object.assign({}, person);
-newPerson.name = 'chris';
-console.log(person.getName()); // john
-console.log(newPerson.getName()); // chris
+const newPerson = Object.assign({}, person)
+newPerson.name = 'chris'
+console.log(person.getName()) // john
+console.log(newPerson.getName()) // chris
 ```
 
 ### bind, arrow function
 
 이번에는 생성자 함수 안에서 또 다른 함수가 있는 경우를 살펴보겠습니다.
 
-```
+```javascript
 function Family(firstName) {
-  this.firstName = firstName;
-  const names = ['bill', 'mark', 'steve'];
+  this.firstName = firstName
+  const names = ['bill', 'mark', 'steve']
   names.map(function(lastName, index) {
-    console.log(lastName + ' ' + this.firstName);
-	console.log(this);
-  });
+    console.log(lastName + ' ' + this.firstName)
+    console.log(this)
+  })
 }
-const kims = new Family('kim');
+const kims = new Family('kim')
 // bill undefined
 // window
 // mark undefined
@@ -144,32 +144,32 @@ const kims = new Family('kim');
 
 비슷한 현상을 다른 예제에서 살펴보겠습니다. 아래 함수를 실행시키면 innerFunc 안의 this 는 window 가 출력됩니다.
 
-```
+```javascript
 const testObj = {
-  outerFunc:  function() {
+  outerFunc: function() {
     function innerFunc() {
-        console.log(this); // window
+      console.log(this) // window
     }
-    innerFunc();
-  }
+    innerFunc()
+  },
 }
-testObj.outerFunc();
+testObj.outerFunc()
 ```
 
 outherFunc 가 외부에서 실행(testObj.outerFunc())되면 this 는 testObj 입니다. 그리고 outerFunc 내부에서 innerFunc 가 호출할때는 그 어떤 문맥도 지정하지(바인드되지) 않았습니다. 전역 context(window)에서 실행되었다는 것이죠. 이게 바로 (비엄격모드에서) innerFunc 의 this 가 window 가 되는 이유 입니다.
 
 다시 이전의 생성자 함수(Family)로 돌아갑니다. map 메서드의 서브루틴에서 this 가 window 가 된다는 것은 위에서 이미 설명했습니다. 하지만, 생성자 함수 내의 특정 변수를 서브루틴 내에서 사용할 수도 있습니다. 이 때, 실행문맥(this)을 Family 로 지정하려면 간단하게는 별도의 상수(const)를 지정하면 됩니다.
 
-```
+```javascript
 function Family(firstName) {
-    this.firstName = firstName;
-    const names = ['bill', 'mark', 'steve'];
-    const that = this;
-    names.map(function(value, index) {
-        console.log(value + ' ' + that.firstName);
-    })
+  this.firstName = firstName
+  const names = ['bill', 'mark', 'steve']
+  const that = this
+  names.map(function(value, index) {
+    console.log(value + ' ' + that.firstName)
+  })
 }
-const kims = new Family('kim');
+const kims = new Family('kim')
 // bill kim
 // mark kim
 // steve kim
@@ -177,46 +177,48 @@ const kims = new Family('kim');
 
 문제 없이 이름들이 출력됩니다. 하지만, 항상 `that`이라는 상수를 만들어주면 귀찮습니다. 또한, 만에 하나 실수로 빼먹기라도 하면 어마어마한 문제가 발생할지도 모릅니다. 혹은 서브루틴 안에서 또다른 서브루틴을 사용할 수도 있습니다. 그 때는 `anotherThat`을 만들어야 할까요? 이 문제를 해결하기 위해서 `bind`라는 메서드를 사용합니다.
 
-```
+```javascript
 function Family(firstName) {
-    this.firstName = firstName;
-    const names = ['bill', 'mark', 'steve'];
-    names.map(function(value, index) {
-        console.log(value + ' ' + this.firstName);
-    }.bind(this));
+  this.firstName = firstName
+  const names = ['bill', 'mark', 'steve']
+  names.map(
+    function(value, index) {
+      console.log(value + ' ' + this.firstName)
+    }.bind(this)
+  )
 }
-const kims = new Family('kim');
+const kims = new Family('kim')
 ```
 
 that 을 쓸때보다는 깔끔해졌습니다. 하지만 `.bind(this)`도 항상 붙여줘야한다는 문제는 여전히 남아 있습니다. 이제 `arrow function`이 나올때가 된것 같네요.
 
-```
+```javascript
 function Family(firstName) {
-    this.firstName = firstName;
-    const names = ['bill', 'mark', 'steve'];
+  this.firstName = firstName
+  const names = ['bill', 'mark', 'steve']
 
-    names.map((value, index) => {
-        console.log(value + ' ' + this.firstName);
-    });
+  names.map((value, index) => {
+    console.log(value + ' ' + this.firstName)
+  })
 }
-const kims = new Family('kim');
+const kims = new Family('kim')
 ```
 
 이제 that 도 없고, bind 도 없습니다. 함수의 형태만 바꿔주면 모든게 해결됩니다. 그럼 일반 함수형태에서 arrow 함수를 사용했을때 어떤 차이가 있을까요? arrow 함수 또한 ES6 에서만 지원하기 때문에 babel 사이트에서 변환해보겠습니다.
 
-```
-"use strict";
+```javascript
+'use strict'
 
 function Family(firstName) {
-  var _this = this;
+  var _this = this
 
-  this.firstName = firstName;
-  var names = ["bill", "mark", "steve"];
+  this.firstName = firstName
+  var names = ['bill', 'mark', 'steve']
   names.map(function(value, index) {
-    console.log(value + " " + _this.firstName);
-  });
+    console.log(value + ' ' + _this.firstName)
+  })
 }
-var kims = new Family("kim");
+var kims = new Family('kim')
 ```
 
 that 을 사용했을 때와 동일한 방법으로 트랜스파일 되네요. 미리 내부에서만 사용할 변수 `_this`를 만들어 두고, this 를 할당합니다. 그리고 `_this`를 사용하여 firstName 을 가져옵니다. arrow 함수는 호출 대상에 따라 실행문맥이 결정되는 것이 아닙니다.

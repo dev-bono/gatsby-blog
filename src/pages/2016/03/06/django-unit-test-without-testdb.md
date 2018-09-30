@@ -33,7 +33,7 @@ proj/
 앱을 새로 만들게 되면 위와 같이 다섯 개의 파일과 migrations 라는 폴더가 생성됩니다.
 그 중에서 tests.py 파일이 바로 테스트 코드를 작성할 파일입니다.
 
-```
+```python
 import unittest
 
 class UnitTest(unittest.TestCase):

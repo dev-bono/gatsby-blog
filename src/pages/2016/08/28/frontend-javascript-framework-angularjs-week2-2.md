@@ -26,7 +26,7 @@ tags:
 
 #### app.js
 
-```
+```javascript
 // 기존 코드
 angular.module('confusionApp', [])
     .controller('MenuController',function(){
@@ -53,7 +53,7 @@ angular.module('confusionApp', [])
 
 #### menu.html
 
-```
+```html
 <!-- 기존 코드 -->
 <div class="container">
     <div class="row row-content" ng-controller="MenuController as menuCtrl">
@@ -106,7 +106,7 @@ angular.module('confusionApp', [])
 
 ng-show directive 는 주어진 조건(true/false)에 따라서 해당 DOM 객체를 보여줄것인지(show) 말것인지(not show)를 결정해준다. 길게 설명할 필요없이 예제를 보자
 
-```
+```html
 <div class="col-xs-12">
     <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right" type="button">
         {{showDetails ? 'Hide Details':'Show Details'}}
@@ -142,7 +142,7 @@ ng-model 의 개념이 약간 모호해서 한번 찾아봤다.
 form 과 자바스크립트 object 간의 연결해주는 역할을 하는 것이 ng-model 이다. ng-model 에 설정된 변수가 변경되면 변경된 것을 html 에 그대로 반영해준다.
 예를들어보자.
 
-```
+```javascript
 // javascript code
 .controller('ContactController', ['$scope', function($scope){
     $scope.feedback = {mychannel:"", firstname:"",
@@ -159,14 +159,20 @@ form 과 자바스크립트 object 간의 연결해주는 역할을 하는 것�
 
 select 의 경우에는 어떤가 보자
 
-```
+```javascript
 // javascript code
-var channels = [{value:"tel", label:"Tel."}, {value:"Email", label:"Email"}];
+var channels = [
+  { value: 'tel', label: 'Tel.' },
+  { value: 'Email', label: 'Email' },
+]
 
 // html code
-<select class="form-control" ng-model="feedback.mychannel"
-		ng-options="channel.value as channel.label for channel in channels">
-	<option value="">Tel. or Email?</option>
+;<select
+  class="form-control"
+  ng-model="feedback.mychannel"
+  ng-options="channel.value as channel.label for channel in channels"
+>
+  <option value="">Tel. or Email?</option>
 </select>
 ```
 
@@ -179,7 +185,7 @@ var channels = [{value:"tel", label:"Tel."}, {value:"Email", label:"Email"}];
 우선 HTML5 form validation 을 끄자
 그리고 ng-submit directive 를 이용하여 form 이 submit 될 때 sendFeedback 함수를 호출하도록 하자.
 
-```
+```html
 <form class="form-horizontal" name="feedbackForm" ng-submit="sendFeedback()" novalidate>
 ```
 
@@ -204,7 +210,7 @@ validation 체크할때 field name 을 이용하여 다음의 필드 속성들�
 
 #### app.js
 
-```
+```javascript
 ...
 
 	.controller('ContactController', ['$scope', function($scope){
@@ -241,7 +247,7 @@ validation 체크할때 field name 을 이용하여 다음의 필드 속성들�
 
 #### contactus.html
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en" ng-app="confusionApp">
 

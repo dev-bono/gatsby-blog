@@ -68,11 +68,11 @@ App.js 파일의 App 클래스를 보면, Header 컴포넌트 아래에 `{this.p
 index 에서 직접 라우팅을 구현하였습니다.
 third 뒤의 `:id` 부분은 컴포넌트의 `this.props.params.id` 형태로 전달되어 컴포넌트 내에서 사용할 수 있습니다.
 
-```
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import App, { Home, First, Second, Third, Item } from './App.js';
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import App, { Home, First, Second, Third, Item } from './App.js'
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -85,8 +85,8 @@ ReactDOM.render(
       </Route>
     </Route>
   </Router>,
-  document.getElementById('root'),
-);
+  document.getElementById('root')
+)
 ```
 
 #### Header.js
@@ -94,26 +94,34 @@ ReactDOM.render(
 헤더의 메뉴 부분입니다.
 버튼에 클릭했을때 라우터의 정보에 따라 컴포넌트를 바꿔줍니다.
 
-```
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+```jsx
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class Header extends Component {
   render() {
     return (
       <div>
         <ul>
-          <li><Link to={'/'}>홈</Link></li>
-          <li><Link to={'/first'}>첫번째</Link></li>
-          <li><Link to={'/second'}>두번째</Link></li>
-          <li><Link to={'/third'}>세번째</Link></li>
+          <li>
+            <Link to={'/'}>홈</Link>
+          </li>
+          <li>
+            <Link to={'/first'}>첫번째</Link>
+          </li>
+          <li>
+            <Link to={'/second'}>두번째</Link>
+          </li>
+          <li>
+            <Link to={'/third'}>세번째</Link>
+          </li>
         </ul>
       </div>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header
 ```
 
 #### App.js
@@ -126,10 +134,10 @@ App 컴포넌트는 최상위 패스인 `/`에서 렌더링 되는 부분인데�
 Third 부분이 v4 와 다른부분인데요. 컴포넌트 내에서 직접 라우팅 정보를 지정할 수 없기 때문에,
 우회하는 방법으로 `this.props.children` 컴포넌트가 있는지 여부에 따라서 어떻게 렌더링할지를 결정합니다.
 
-```
-import React, { Component } from 'react';
-import Header from './Header.js';
-import { Link } from 'react-router';
+```jsx
+import React, { Component } from 'react'
+import Header from './Header.js'
+import { Link } from 'react-router'
 
 class App extends Component {
   render() {
@@ -138,7 +146,7 @@ class App extends Component {
         <Header />
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
@@ -148,7 +156,7 @@ export class Home extends Component {
       <div>
         <h1>홈 페이지</h1>
       </div>
-    );
+    )
   }
 }
 
@@ -158,7 +166,7 @@ export class First extends Component {
       <div>
         <h2>1, 첫번째 페이지</h2>
       </div>
-    );
+    )
   }
 }
 
@@ -168,28 +176,28 @@ export class Second extends Component {
       <div>
         <h3>2, 두번째 페이지</h3>
       </div>
-    );
+    )
   }
 }
 
 export class Third extends Component {
   render() {
-    console.dir(this.props);
+    console.dir(this.props)
     return (
       <div>
         <Link to={'/third/1'} style={{ marginRight: '5px' }}>
           1번
         </Link>
-        <Link to={'/third/2'}>
-          2번
-        </Link>
-        {this.props.children
-          ? this.props.children
-          : <div>
-              <h3>id를 선택해 주세요.</h3>
-            </div>}
+        <Link to={'/third/2'}>2번</Link>
+        {this.props.children ? (
+          this.props.children
+        ) : (
+          <div>
+            <h3>id를 선택해 주세요.</h3>
+          </div>
+        )}
       </div>
-    );
+    )
   }
 }
 
@@ -199,11 +207,11 @@ export class Item extends Component {
       <div>
         <h3>{this.props.params.id}</h3>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 결과 화면입니다.
@@ -222,12 +230,12 @@ v3 에서는 history 객체를 별도로 가져와 Router 의 프로퍼티로 �
 이게 의미하는게 뭐냐면, 어떤 코드에서든 `Route` 컴포넌트를 넣을 수 있다는 뜻입니다.
 즉, 라우트는 필요할때마다 동적으로 생성 가능하다는 것이죠.
 
-```
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Home, First, Second, Third } from './App.js';
-import Header from './Header.js';
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Home, First, Second, Third } from './App.js'
+import Header from './Header.js'
 
 ReactDOM.render(
   <Router>
@@ -240,34 +248,42 @@ ReactDOM.render(
       <Route path="/third" component={Third} />
     </div>
   </Router>,
-  document.getElementById('root'),
-);
+  document.getElementById('root')
+)
 ```
 
 #### Header.js
 
 v3 와 거의 같습니다.
 
-```
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+```jsx
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   render() {
     return (
       <div>
         <ul>
-          <li><Link to={'/'}>홈</Link></li>
-          <li><Link to={'/first'}>첫번째</Link></li>
-          <li><Link to={'/second'}>두번째</Link></li>
-          <li><Link to={'/third'}>세번째</Link></li>
+          <li>
+            <Link to={'/'}>홈</Link>
+          </li>
+          <li>
+            <Link to={'/first'}>첫번째</Link>
+          </li>
+          <li>
+            <Link to={'/second'}>두번째</Link>
+          </li>
+          <li>
+            <Link to={'/third'}>세번째</Link>
+          </li>
         </ul>
       </div>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header
 ```
 
 #### App.js
@@ -278,10 +294,10 @@ v4 에서는 라우트 컴포넌트 내에 직접 다른 컴포넌트를 붙여�
 그리고 `Third` 컴포넌트는 위에서 동적라우팅 설명할때 잠깐 언급했던 것처럼
 컴포넌트 내에서 라우트 정보를 직접 넣어줄 수 있기 때문에 훨씬 명확한 코드를 작성할 수 있는것 같습니다.
 
-```
-import React, { Component } from 'react';
-import Header from './Header.js';
-import { Route, Link } from 'react-router-dom';
+```jsx
+import React, { Component } from 'react'
+import Header from './Header.js'
+import { Route, Link } from 'react-router-dom'
 
 export class Home extends Component {
   render() {
@@ -289,7 +305,7 @@ export class Home extends Component {
       <div>
         <h1>홈 페이지</h1>
       </div>
-    );
+    )
   }
 }
 
@@ -299,7 +315,7 @@ export class First extends Component {
       <div>
         <h2>1, 첫번째 페이지</h2>
       </div>
-    );
+    )
   }
 }
 
@@ -309,7 +325,7 @@ export class Second extends Component {
       <div>
         <h3>2, 두번째 페이지</h3>
       </div>
-    );
+    )
   }
 }
 
@@ -320,17 +336,19 @@ export class Third extends Component {
         <Link to={`${this.props.match.url}/1`} style={{ marginRight: '5px' }}>
           1번
         </Link>
-        <Link to={`${this.props.match.url}/2`}>
-          2번
-        </Link>
+        <Link to={`${this.props.match.url}/2`}>2번</Link>
         <Route
           exact
           path={this.props.match.url}
-          render={() => <div><h3>id를 선택해 주세요.</h3></div>}
+          render={() => (
+            <div>
+              <h3>id를 선택해 주세요.</h3>
+            </div>
+          )}
         />
         <Route path={`${this.props.match.url}/:id`} component={Item} />
       </div>
-    );
+    )
   }
 }
 
@@ -340,7 +358,7 @@ class Item extends Component {
       <div>
         <h3>{this.props.match.params.id}</h3>
       </div>
-    );
+    )
   }
 }
 ```

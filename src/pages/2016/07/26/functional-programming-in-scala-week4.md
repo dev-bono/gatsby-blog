@@ -17,7 +17,7 @@ Boolean 클래스에서는 실제 스칼라 Boolean 으로 사용할 수 있었�
 ifThenElse 는 if(cond) f1 else f2 과 같다(여기서 f1, f2 는 ifThenElse 의 파라미터)
 아래는 '<' 함수를 정의한 예제이다.
 
-```
+```scala
 claass Boolean {
   ...
   def < (x: Boolean): Boolean = ifThenElse(false, x)
@@ -28,7 +28,7 @@ claass Boolean {
 
 스칼라에서는 function values 는 오브젝트로 취급된다. 사실 function type A => B 는 scala.Function1[A, B]의 축약 형태와 같다고 할수 있다.
 
-```
+```scala
 package scala
 trait Function1[A, B] {
   def aaply(x: A): B
@@ -38,7 +38,7 @@ trait Function1[A, B] {
 즉, 함수는 apply 메소드를 가진 오브젝트와 같다.
 익명함수의 경우에는 다음과 같이 확장될 수 있다.
 
-```
+```scala
 (x: Int) => x * x
 
 // is expanded to
@@ -57,7 +57,7 @@ new FUnctino1[Int, Int] {
 그러니까 실제로 f(a, b) 라는 함수를 call 했을 때, f.apply(a, b)가 불리는 것과 같다는 말이다.
 예를 들면,
 
-```
+```scala
 val f = (x: Int) => x * x
 f(7)
 
@@ -69,7 +69,7 @@ f.apply(7)
 
 위에서 본것처럼 apply 메소드는 오브젝트 안에 있을 때 오브젝트 이름 그대로 호출할 수 있다. 지난번에 봤던 List 를 예로 들어보면 아래와 같다.
 
-```
+```scala
 trait List[T] {
   def isEmpty: Boolean
   def head: T
@@ -111,20 +111,20 @@ object List {
 
 위의 세가지 조건을 충족시킬 수 있는 함수를 생각해보자.
 
-```
+```scala
 def assertAllPos(s: IntSet): IntSet
 ```
 
 대부분의 경우는 위의 함수로 충분하지만 정확히 하자면 다음과 같이 쓸수 있다.
 
-```
+```scala
 def assertAllPos[S <: IntSet](r: S): S = ...
 ```
 
 "S <: IntSet"을 type parameter S 의 upper bound 라고 한다. 이것은 S 가 반드시 IntSet 의 subType(또는 자신)이어야 한다는 말과 같다.
 반대로 "S :> T"는 S 가 T 의 superType 이거나 T 가 S 의 subType 이라는 말이다. 이를 lower Bounds 라고 한다.
 
-```
+```scala
 [S >: NonEmpty]
 ```
 
@@ -132,7 +132,7 @@ def assertAllPos[S <: IntSet](r: S): S = ...
 
 마지막은 Mixed Bound
 
-```
+```scala
 [S >: NonEmpty <: IntSet]
 ```
 
@@ -142,7 +142,7 @@ def assertAllPos[S <: IntSet](r: S): S = ...
 
 서브클래스의 인스턴스 컬렉션을 상위클래스의 컬렉션으로 보내는 것을 Covariance(공변성)라고 한다. 왜냐하면 subtyping 관계가 컬렉션에서도 그대로 적용되었기 때문이다.
 
-```
+```scala
 NonEmpty <: IntSet
 // 위가 성립된다면 아래도 성립
 List[NonEmpty] <: List[IntSet]
@@ -150,7 +150,7 @@ List[NonEmpty] <: List[IntSet]
 
 ### Arrays in Scala
 
-```
+```scala
 T[]     // Java
 Array[T]  // Scala
 
@@ -161,7 +161,7 @@ Array[NonEmpty] <: Array[IntSet]  // Scala
 
 자바의 Array Typing 에는 타입과 관련된 아래의 문제가 있다.
 
-```
+```scala
 NonEmpty[] a = new NonEmpty[]{new NonEmpty(1, Empty, Empty)}
 IntSet[] b = a
 b[0] = Empty
@@ -175,7 +175,7 @@ a 는 NonEmpty 타입의 Array 를 가리키는 포인터이다. 두번째 줄�
 > If A <: B, then everything one can to do with a value of type B one should also be able to do with a value of type A
 > 리스코프 치환원칙은 타입 A 와 B 가 있을때 하나의 타입이 다른 하나의 서브타입이 될 수 있는 조건에 대해 말해준다.
 
-```
+```scala
 // in scala
 val a: Array[NonEmpty] = Array(new NonEmpty(1, Empty, Empty))
 val b: Array[IntSet] = a
@@ -205,7 +205,7 @@ B 가 A 의 수퍼타입이면서 C[B]가 C[A]의 수퍼타입인 경우에는 c
 함수의 파라미터가 더 구체적인(서브타입) 타입이 들어 갔을때는 반드시 그 타입으로 인자가 넘어와야한다. type B 를 보면 파라미터 타입이 IntSet 의 서브타입인 NonEmpty 이므로 인자가 반드시 NonEmpty 타입이어야 한다. 반면에 type A 를 보면, 파라미터 타입이 IntSet 이라 NonEmpty 포함 IntSet 의 모든 서브타입이 들어 올 수 있다. 리턴타입은 NonEmpty 이므로 IntSet 이라 할 수 있다. 즉, A 는 B 의 규칙을 만족시킨다. 게다가 A 는 파라미터에 추가로 Empty 같은 타입이 들어 올 수 있으므로, A 가 B 보다 더 확장된 형태이다.
 그러므로, B 가 A 의 수퍼타입이다. 함수의 파라미터는 contravariant 하고 함수의 리턴값은 covariant 하기 때문에 A <: B 가 참이다.
 
-```
+```scala
 type A = IntSet => NonEmpty
 type B = NonEmpty => IntSet
 ```
@@ -223,7 +223,7 @@ If A2 <: A1 and B1 <: B2, then
 
 위에서 Array 는 mutable 한 속성 때문에 covariant 하지 못하다는 문제를 살펴봤었다. mutable 한 속성이라는 것은 update 가능하다는 말과 같은데, Array 클래스에서 update 함수의 파라미터의 타입이 어떤 문제를 가지고 있는지 살펴보자. 앞서서 covariant 타입은 함수의 result 타입에만 나타날 수 있다고 말했다.
 
-```
+```scala
 class Array[+T] {
   def update(x: T) ...
 }
@@ -234,7 +234,7 @@ class Array[+T] {
 
 그래서 앞서서 보았던(4.2) Function1 은 사실 아래와 같은 형태이다.
 
-```
+```scala
 package scala
 trait Function1[-T, +U] {
   def apply(x: T): U
@@ -244,7 +244,7 @@ trait Function1[-T, +U] {
 그렇다면 List 의 경우는 어떨까?
 Nil, Cons 클래스의 경우로 살펴보자.
 
-```
+```scala
 package week4
 
 trait List[+T] {
@@ -275,7 +275,7 @@ Nil 이 List[Nothing]을 상속하게 만들면 모든 리스트의 서브타입
 
 List 클래스에 다음과 같은 prepend 메서드를 추가해보자.
 
-```
+```scala
 def prepend(elem: T): List[T] = new Cons(eleml, this)
 ```
 
@@ -286,13 +286,13 @@ def prepend(elem: T): List[T] = new Cons(eleml, this)
 prepend 메서드가 왜 Liskov Substitution Principle 을 위반했는지 알아보자
 xs 의 타입이 List[IntSet]인 경우에는 문제가 없다.
 
-```
+```scala
 xs.prepend(Empty)
 ```
 
 하지만 ys 의 타입이 List[NonEmpty]라고 했을 때는 문제가 있다.
 
-```
+```scala
 ys.prepend(Empty)
 ```
 
@@ -300,7 +300,7 @@ NonEmpty 타입이 들어와야 할 자리에 Empty 타입이 들어왔으므로
 
 하지만 prepend 메서드는 immutable list 에 실제로 존재한다. 어떻게 이게 가능할까? 답은 lower bound 에 있다. U >: T 는 U 가 T 의 부모 타입이라는 말이다. 이렇게 되면, elem 이 T 보다 상위 타입이 오더라도 문제가 되지 않는다.
 
-```
+```scala
 def prepend[U >: T](elem: U): List[U] = new Cons(elem, list)
 ```
 
@@ -308,7 +308,7 @@ def prepend[U >: T](elem: U): List[U] = new Cons(elem, list)
 
 다음과 같은 class 구조가 있다고 하자
 
-```
+```scala
 trait Expr {
   // classification
   def isNumber: Boolean
@@ -339,7 +339,7 @@ class Sum(e1: Expr, e2: Expr) extends Expr {
 무척 쓸모 없어 보이는 메서드들이 여럿 보인다. 일단은 더 나은 코드를 설명하기 위한 단계이므로 참고 살펴보자.
 그리고 위의 클래스 구조를 evaluation 하는 간단한 인터프리터 함수인 eval 이 다음과 같다
 
-```
+```scala
 def eval(e: Expr): Int = {
   if (e.isNumber) e.numValue
   else if (e.isSum) eval(e.leftOp) + eval(e.rightOp)
@@ -349,13 +349,13 @@ def eval(e: Expr): Int = {
 
 이때 다음과 같은 코드가 있다면, 우선 eval 함수가 실행되면서 e 가 어떤 타입인지 찾기 위해 classification method 인 isSum 으로 Sum 타입인지 찾을 것이다. 그리고 그 안의 두 인자가 각각 Number 이므로 또다시 eval 함수 내에서 isNumber 에 의해 Number 타입인지 찾을 수 있을 것이다. 뭔가 비효율적으로 보인다.
 
-```
+```scala
 eval(Sum(Number(1), Number(2))) = 3
 ```
 
 여기서 만약에 아래와 같은 두개의 클래스가 추가 된다면 어떨까?
 
-```
+```scala
 class Prod(e1: Expr, e2: Expr) extends Expr   // e1 * e2
 class Var(x: String) extends Expr         // Variable 'x'
 ```
@@ -373,7 +373,7 @@ x.asInstanceOf[T]     (T) x       // type cast
 
 평가함수인 eval 을 조금 고쳐보자.
 
-```
+```scala
 def eval(e: Expr): Int = {
   if (e.isInstanceOf[Number])
     e.asInstanceOf[Number].numValue
@@ -387,7 +387,7 @@ def eval(e: Expr): Int = {
 
 Object-Oriented Decomposition 을 이용한 또다른 해법을 살펴보자
 
-```
+```scala
 trait Expr {
   def eval: Int
 }
@@ -403,7 +403,7 @@ class Sum(e1: Expr, e2: Expr) extends Expr {
 
 각각의 클래스에 eval 함수를 구현하였다. 각 클래스에 맞게 구현되기 때문에 accessor 함수들도 불필요하다. 이제 많이 깔끔해졌다. 하지만 문제는 여전히 있다. rait 에 하나의 메서드가 추가된다면, 나머지 클래스에 모두 구현해야한다는 점이다. 또다른 문제가 있다.
 
-```
+```scala
 a * b + a * c = a * (b + 3)
 ```
 
@@ -424,7 +424,7 @@ classification 과 accessor 의 주 목적은 아래와 같다.
 
 보통 사용되는 new Sum(e1, e2)와 같은 형태의 생성자를 스칼라는 case class 라는 문법을 통해서 자동으로 Pattern Matching 시켜준다.
 
-```
+```scala
 // 두개의 case class
 trait Expr
 case class Number(n: Int) extends Expr
@@ -458,7 +458,7 @@ def eval(e: Expr): Int = e match {
 
 eval 함수를 trait Expr 에 넣어보자.
 
-```
+```scala
 trait Expr {
   def eval: Int = this match {
     case Number(n) => n
@@ -471,7 +471,7 @@ trait Expr {
 
 가장 기본적인 리스트 형태는 아래와 같이 정의할 수 있다.
 
-```
+```scala
 // List(X1, ..., Xn)
 val fruit: List[String] = List("Apples", "oranges", "pears")
 val nums: List[Int] = List(1, 2, 3, 4)
@@ -486,7 +486,7 @@ val empty: List[Nothing] = List()
 
 또한 스칼라에서는 construction operation 인 ::(cons 라 부름, 지난주의 prepend 함수랑 동일하다)를 이용하여 좀더 간단하게 리스트를 만들 수 있다. cons 는 right-associative 연산이기 때문에 우측에서부터 왼쪽으로 하나씩 붙여 나간다는 생각으로 사용하면 된다. 위의 리스트 들을 cons 를 이용해서 작성해보면 다음과 같다.
 
-```
+```scala
 fruit = "apples" :: ("oranges" :: ("pears" :: Nil))
 fruit = "apples" :: "oranges" :: "pears" :: Nil
 
@@ -507,7 +507,7 @@ Nils.::(4).::(3).::(2).::(1)
 
 재귀를 이용한 Insertion Sort
 
-```
+```scala
 def isort(xs: List[Int]): List[Int] = {
   xs match {
     case Nil => List()

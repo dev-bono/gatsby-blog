@@ -102,14 +102,14 @@ Angular Directives 는 ng-_ or data-ng-_ 로 시작하는 HTML 속성이다. 다
 
 - ng-init : 자바스크립트 변수를 선언하는것과 같다. Angular expression 을 Evaluation 한다(좀더 매끄러운 한글 표현이 필요할 것 같다). object, array 도 사용가능하다.
 
-```
+```html
 <p ng-init="index=1"></p>
 <div ng-init="dish={name:'example', ...}"></div>
 ```
 
 - ng-model : input value 를 변수로 바인드 한다. (Two-way data binding) ng-model 속성을 부여하면 언제든지 어떤 변수든지 변경이 가능하게 된다.
 
-```
+```html
 <p>Comment: {{dish.comment}}</p>
 <p>Type your comment:
 	<input type="text" ng-model="dish.comment" />
@@ -133,7 +133,7 @@ dish object 의 comment 는 위에서 이미 정의를 한 상태다. 이때 아
 - Expressions enclosed in {{ expression }}
   중괄호 두개를 겹쳐서 사용한다.
 
-```
+```html
 <p>6 + 5 = {{ 6 + 5 }}</p>
 <h2>{{ dish.name }}</h2>
 ```
@@ -168,7 +168,7 @@ MVC 패턴의 파생된 형태중 하나인 MVVM 은 Model, View, View-Model 로
 
 Angular Modules 은 다음처럼 스크립트 태그안에 정의한다. angular.module 메서드는 두개의 파라미터를 가지는데, 첫번째는 ngApp 속성에 정의된 이름이고 두번째는 array 인데 나중에 설명할 것이다. 아래같은 경우 ngApp 이 html 태그에 선언되어 있으므로 아래의 모듈에서 현재 페이지 모두를 관리 할 수 있게 된다.
 
-```
+```html
 <html ngApp="confusionApp">
 
 ...
@@ -190,7 +190,7 @@ Angular Modules 은 다음처럼 스크립트 태그안에 정의한다. angular
 
 Angular 컨트롤러는 특정 태그의 ng-controller 속성으로 선언된다.
 
-```
+```html
 <div class="row row-content" ng-controller="menuController as menuCtrl">
 
 </div>
@@ -212,7 +212,7 @@ app.controller('menuController', function() {
 
 필터는 서버사이드 또는 클라이언트에서 만들어진 data 를 end user 에게 잘 표현하기 위한 수단으로 사용된다. 필터는 기반 데이터를 바꿀 수는 없으며 view templates, controllers, services 등에서 사용된다. AngularJS 는 기본적으로 빌트인 필터를 여러개 제공하고 있고, 개발자 필요에 따라 커스텀 필터를 만들어 사용할 수 있다.
 
-```
+```html
 <div class="media-body">
 	<h2 class="media-headgin">{{dish.name}}
 		<span class="label label-danger label-xs">{{dish.label}}</span>
@@ -232,7 +232,7 @@ app.controller('menuController', function() {
 - orderBy : 조건에 맞게 정렬한다.
 - json, limitTo 등도 있다.
 
-```
+```html
 <!-- filter 예제, HTML 코드 -->
 <li class="media" ng-repeat="dish in menuCtrl.dishes | filter:menuCtrl.filtText">...</li>
 
@@ -259,7 +259,7 @@ this.select = function(setTab) {
 
 ## Excercise Code
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en" ng-app="confusionApp">
 

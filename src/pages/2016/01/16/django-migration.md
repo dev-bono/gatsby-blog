@@ -23,7 +23,7 @@ django 에서 기본적으로 제공해주는 데코레이터이므로, 따로 �
 
 가장 간단하게 atomic(원자성)한 트랜잭션을 처리하기 위한 손쉬운 방법이죠.
 
-```
+```python
 from django.db import transaction
 
 @transaction.atomic
@@ -40,7 +40,7 @@ def transaction_test1(arg1, arg2):
 메서드 전체가 아닌 메서드의 일부분만 트랜잭션으로 묶어줄 필요가 있을 때 사용합니다.
 트랜잭션으로 묶일 부분을 직접 지정해줘야 하는 불편함(?)이 있지만, 데코레이터와 마찬가지로 비교적 간단하게 처리가 가능합니다.
 
-```
+```python
 from django.db import transaction
 
 def transaction_test2(arg1, arg2):
@@ -60,7 +60,7 @@ def transaction_test2(arg1, arg2):
 1 번과 2 번의 방법의 경우, 메서드 내에서(트랜잭션으로 묶여져있는) exception 이 발생하더라도 저절로 롤백이 되기 때문에 예외처리를 따로 해 줄 필요는 없습니다.
 하지만, 3 번의 경우에는 savepoint 및 cummit 지점을 직접 지정해 주기 때문에 예외처리 또한 별도로 처리되어야 합니다.
 
-```
+```python
 from django.db import transaction
 
 def transaction_test3(arg1, arg2):
@@ -84,7 +84,7 @@ def transaction_test3(arg1, arg2):
 
 위의 세가지가 django 에서 트랜잭션을 처리하는 방법입니다. 간단한 트랜잭션 함수를 호출할 때는 위의 세가지 중에 알맞은 방법을 선택해서 처리하면 되겠습니다. 좀 더 복잡한 상황을 한번 살펴보도록 하죠.
 
-```
+```python
 from django.db import transaction
 
 def method1():

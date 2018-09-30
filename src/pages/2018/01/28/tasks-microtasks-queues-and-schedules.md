@@ -15,20 +15,22 @@ tags:
 
 아래 자바스크립트 코드를 살펴보자.
 
-```
-console.log('script start');
+```javascript
+console.log('script start')
 
 setTimeout(function() {
-  console.log('setTimeout');
-}, 0);
+  console.log('setTimeout')
+}, 0)
 
-Promise.resolve().then(function() {
-  console.log('promise1');
-}).then(function() {
-  console.log('promise2');
-});
+Promise.resolve()
+  .then(function() {
+    console.log('promise1')
+  })
+  .then(function() {
+    console.log('promise2')
+  })
 
-console.log('script end');
+console.log('script end')
 ```
 
 위의 코드를 실행하면 아래와 같은 순서로 출력된다.
@@ -61,28 +63,30 @@ promise 가 처리될 때 혹은 이미 처리된 promise 는 callback 을 처�
 
 > 원문에서 확인함을 추천, 원문에는 animation 으로 코드의 실행과정과 task queue 및 js 실행 스택을 확인할 수 있다.
 
-```
+```javascript
 // 1 - task1 실행: script, script start 출력
-console.log('script start');
+console.log('script start')
 
 // 2 - task2 등록: timer task 대기열에 들어감
 setTimeout(function() {
   // 8 - task2 실행
-  console.log('setTimeout');
-}, 0);
+  console.log('setTimeout')
+}, 0)
 
 // 3 - microtask1 등록: promise가 microtask 대기열에 들어감
-Promise.resolve().then(function() {
-  // 5 - microtask1 실행: promise1 출력
-  console.log('promise1');
-// 6 - microtask2 등록:
-}).then(function() {
-  // 7 - microtask2 실행: promise2 출력
-  console.log('promise2');
-});
+Promise.resolve()
+  .then(function() {
+    // 5 - microtask1 실행: promise1 출력
+    console.log('promise1')
+    // 6 - microtask2 등록:
+  })
+  .then(function() {
+    // 7 - microtask2 실행: promise2 출력
+    console.log('promise2')
+  })
 
 // 4 - task1 종료: script end 출력
-console.log('script end');
+console.log('script end')
 ```
 
 ### 그럼 어떤 브라우저에서는 왜 다르게 동작할까?
@@ -109,7 +113,7 @@ promise 를 task 로써 다룰 때는 성능상 문제가 발생할 수 있는�
 
 아래에 간단한 html 이 있다.
 
-```
+```html
 <div class="outer">
   <div class="inner"></div>
 </div>
@@ -117,36 +121,36 @@ promise 를 task 로써 다룰 때는 성능상 문제가 발생할 수 있는�
 
 그리고 아래 자바스크립트 코드 일부가 있다. 이때 `div .inner`를 클릭하면 로그가 어떻게 출력될까?
 
-```
+```javascript
 // outer 클래스 element와 inner 클래스 element를 가져온다.
-var outer = document.querySelector('.outer');
-var inner = document.querySelector('.inner');
+var outer = document.querySelector('.outer')
+var inner = document.querySelector('.inner')
 
 // outer element의 상태(attribute) 변화를 감시한다.
 new MutationObserver(function() {
-  console.log('mutate');
+  console.log('mutate')
 }).observe(outer, {
-  attributes: true
-});
+  attributes: true,
+})
 
 // click 리스너
 function onClick() {
-  console.log('click');
+  console.log('click')
 
   setTimeout(function() {
-    console.log('timeout');
-  }, 0);
+    console.log('timeout')
+  }, 0)
 
   Promise.resolve().then(function() {
-    console.log('promise');
-  });
+    console.log('promise')
+  })
 
-  outer.setAttribute('data-random', Math.random());
+  outer.setAttribute('data-random', Math.random())
 }
 
 // inner, outer element에 클릭 이벤트를 붙인다.
-inner.addEventListener('click', onClick);
-outer.addEventListener('click', onClick);
+inner.addEventListener('click', onClick)
+outer.addEventListener('click', onClick)
 ```
 
 `div.inner`를 클릭했을 때와, `div .outer`를 클릭했을때 어떻게 다른지 알겠는가? 당신이 여전히 맞을수도 있겠지만 불행하게도 브라우저마다 동일한 결과를 보여주지는 않는다(버전 명시가 안되있어서 현재 최신 버전에서도 동일할지는 테스트가 필요하겠다).
@@ -169,47 +173,47 @@ click - click - mutate - timeout - promise - timeout - promise
 
 클릭 이벤트를 전달하는것은 하나의 task 다(즉, `div .inner`에서 클릭이 발생해서 `div .outer`로 버블링되더라도 두개의 동작이 별도의 task 가 아니라 하나의 task 라는 의미). Mutation observer 나 promise callback 은 microtask 로 대기열에 들어가고 `setTimeout` 콜백은 task 로 대기열에 들어간다. 즉 아래와 같은 방식으로 처리된다.
 
-```
+```javascript
 // 1 - task1 실행: script 실행
-var outer = document.querySelector('.outer');
-var inner = document.querySelector('.inner');
+var outer = document.querySelector('.outer')
+var inner = document.querySelector('.inner')
 
 new MutationObserver(function() {
   // 8 - microtask2 실행: mutation observer 콜백 실행
   // 13 - microtask4 실행: mutation observer 콜백 실행
-  console.log('mutate');
+  console.log('mutate')
 }).observe(outer, {
-  attributes: true
-});
+  attributes: true,
+})
 
 // 3 - task2 등록 및 실행: inner 영역 click 이벤트 발생
 // 9 - task2 계속 실행 : inner에서 outer로 click 이벤트 버블링
 function onClick() {
-  console.log('click');
+  console.log('click')
 
   // 4 - task3 등록: inner 영역 타이머 task 생성, setTimeout
   // 10 - task4 등록: outer 영역 타이머 task 생성, setTimeout
   setTimeout(function() {
     // 14 - task3 실행: inner 영역 타이머 콜백 실행
     // 15 - task4 실행: outer 영역 타이머 콜백 실행
-    console.log('timeout');
-  }, 0);
+    console.log('timeout')
+  }, 0)
 
   // 5 - microtask1 등록: inner 영역 promise
   // 11 - microtask3 등록: outer 영역 promise
   Promise.resolve().then(function() {
     // 7 - microtask1 실행 : inner 영역의 promise 콜백 실행
-    console.log('promise');
-  });
+    console.log('promise')
+  })
 
   // 6 - microtask2 등록: inner 영역 Mutation observer
   // 12 - microtask4 등록: outer 영역 Mutation observer 등록
-  outer.setAttribute('data-random', Math.random());
+  outer.setAttribute('data-random', Math.random())
 }
 
 // 2 - task1 종료 : inner 및 outer element에 click 이벤트 리스너 등록
-inner.addEventListener('click', onClick);
-outer.addEventListener('click', onClick);
+inner.addEventListener('click', onClick)
+outer.addEventListener('click', onClick)
 ```
 
 역시 크롬이 맞다(글 작성자가 구글 직원이다). 다른 자바스크립트가 실행되고 있지 않다고 가정하고 microtask 가 task 의 끝에서 처리된다기 보다는 콜백들이 모두 처리된 이후에 처리된다고 보는게 맞다. 이 규칙은 콜백을 호출하는 HTML 스펙에 잘 정의되어 있다.
@@ -232,9 +236,9 @@ Firefox 와 Safari 에서는 mutation 콜백에서 보여줬듯이 클릭 리스
 
 그렇다면 아래처럼 자바스크립트에서 직접 click 함수를 호출하는 경우에는 어떨까?
 
-```
+```javascript
 // 위 코드와 동일, 직접 리스너를 호출하는 아래 코드만 추가
-inner.click();
+inner.click()
 ```
 
 조금 다른 결과가 나왔다. 브라우저 별로 어떻게 다른지도 살펴보자

@@ -27,7 +27,7 @@ tags:
 
 ### file A
 
-```
+```python
 from package.temp import TempClass
 from package import b
 
@@ -39,7 +39,7 @@ def a_function():
 
 ### file B
 
-```
+```python
 import importlib          # 모듈을 import 할 수 있는 모듈
 
 def b_function(module_name, class_name):

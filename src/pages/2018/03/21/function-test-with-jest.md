@@ -24,26 +24,26 @@ $ create-react-app jest-fn
 
 #### /src/number.js
 
-```
-import { justReturn } from "./util";
+```javascript
+import { justReturn } from './util'
 
 export function getFirstNumber(num) {
   if (num >= 10) {
-    return returnFirstNum(num);
+    return returnFirstNum(num)
   } else {
-    return justReturn(num);;
+    return justReturn(num)
   }
 }
 export function returnFirstNum(num) {
-  return num % 10;
+  return num % 10
 }
 ```
 
 #### /src/util.js
 
-```
+```javascript
 export function justReturn(num) {
-  return num;
+  return num
 }
 ```
 
@@ -51,19 +51,19 @@ export function justReturn(num) {
 
 #### /src/number.test.js
 
-```
-import * as util from './util';
-import * as number from './number';
+```javascript
+import * as util from './util'
+import * as number from './number'
 
 describe('getFirstNumber', () => {
-  it ('number === 8', () => {
-    util.justReturn = jest.fn();
-    number.getFirstNumber(8);
+  it('number === 8', () => {
+    util.justReturn = jest.fn()
+    number.getFirstNumber(8)
     expect(util.justReturn).toBeCalled()
   })
-  it ('number === 15', () => {
-    number.returnFirstNum = jest.fn();
-    number.getFirstNumber(15);
+  it('number === 15', () => {
+    number.returnFirstNum = jest.fn()
+    number.getFirstNumber(15)
     expect(number.returnFirstNum).toBeCalled()
   })
 })
@@ -94,26 +94,26 @@ babel 사이트를 통해서 위의 코드를 트랜스파일링 해보면 아�
 
 #### /src/number.js
 
-```
-"use strict";
+```javascript
+'use strict'
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getFirstNumber = getFirstNumber;
-exports.returnFirstNum = returnFirstNum;
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+})
+exports.getFirstNumber = getFirstNumber
+exports.returnFirstNum = returnFirstNum
 
-var _util = require("./util");
+var _util = require('./util')
 
 function getFirstNumber(num) {
   if (num > 10) {
-    return returnFirstNum(num);
+    return returnFirstNum(num)
   } else {
-    return (0, _util.justReturn)(num);
+    return (0, _util.justReturn)(num)
   }
 }
 function returnFirstNum(num) {
-  return num % 10;
+  return num % 10
 }
 ```
 
@@ -121,7 +121,7 @@ number.js 를 다른 모듈에서 import(require)하면 function 자체를 가�
 
 이제 test 코드를 다시 살펴보겠습니다. util 모듈의 `justReturn`에 Jest mock function 을 할당하고 있습니다.
 
-```
+```javascript
 import * as number from './number';
 ...
 it ('number === 8', () => {
@@ -132,13 +132,13 @@ it ('number === 8', () => {
 
 이는 util 모듈의 `justReturn`이라는 함수를 실제로 mock function 으로 변경한게 아닙니다. 단지 util 모듈의 exports 객체의 justReturn 에 `jest.fn()`을 할당한 것입니다. 즉, 이렇게 된 것입니다.
 
-```
-exports.justReturn = jest.fn();
+```javascript
+exports.justReturn = jest.fn()
 ```
 
 이 사실을 바탕으로 잘 생각해보면, 두번째 테스트가 왜 실패했는지 짐작해볼 수 있습니다.
 
-```
+```javascript
 import * as number from './number';
 ...
 it ('number === 15', () => {
@@ -156,18 +156,18 @@ it ('number === 15', () => {
 
 테스트를 성공시킬수 있는 아주 간단한 방법이 하나 있습니다. 하지만 그다지 추천하고 싶지는 않습니다. `number.js` 파일을 다음과 같이 수정합니다.
 
-```
-import { justReturn } from "./util";
+```javascript
+import { justReturn } from './util'
 
 export function getFirstNumber(num) {
   if (num >= 10) {
-    return exports.returnFirstNum(num);
+    return exports.returnFirstNum(num)
   } else {
-    return justReturn(num);;
+    return justReturn(num)
   }
 }
 export function returnFirstNum(num) {
-  return num % 10;
+  return num % 10
 }
 ```
 

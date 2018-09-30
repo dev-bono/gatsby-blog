@@ -20,18 +20,18 @@ HTTP Response 는 클라이언트로 보낼 HTML 페이지나 특정 포맷으�
 JSON 데이터 구조를 간단히 살펴보자
 자바스크립트 object 와 구조가 비슷하다. name : value 구조로 이뤄지며, value 내에는 array, 스트링, 숫자, object 등의 데이터 타입 등이 들어갈 수 있다.
 
-```
-{"promotion":
-	[
-		{
-			"id": 0,
-			"name": "weekend buffet",
-			"image": "images/buffet.png",
-			"label": "New",
-			"price": "19.99",
-			"description": "asdjfkljaskdlfjas..."
-		}
-	]
+```json
+{
+  "promotion": [
+    {
+      "id": 0,
+      "name": "weekend buffet",
+      "image": "images/buffet.png",
+      "label": "New",
+      "price": "19.99",
+      "description": "asdjfkljaskdlfjas..."
+    }
+  ]
 }
 ```
 
@@ -45,7 +45,7 @@ $http 는 브라우저에서 서버와의 통신을 위한 가장 핵심적인 �
 
 자바스크립트에서 Promise 란 비동기 통신이 완료된 후에 상태에 따라 특정 콜백을 리턴해 줄 것이라는 일종의 약속 같은 것을 말한다. $http 서비스 역시 프로미스를 리턴한다. 패턴은 아래와 같다.
 
-```
+```javascript
 $http({method: 'GET', url:'/dishes'})
 	.then(function() { ... }, function() { ... });
 ```
@@ -66,7 +66,7 @@ then 뒤에는 두개의 function 이 파라미터로 들어가 있다. 첫번�
 
 html 코드를 작성할 때 해당 DOM 을 보여줄지 말지를 결정하기 위해 ngIf directive 를 사용할 수 있다. 사용법은 간단하다.
 
-```
+```html
 <div class="col-xs-12" ng-if="!showMenu">
 	<h3>{{message}}</h3>
 </div>
@@ -136,7 +136,7 @@ bower install angular-resource -S
 
 DI 를 이용해서 ngResource 를 사용할 수 있다.
 
-```
+```javascript
 angular.module('confusionApp', ['ui.router', 'ngResource'])
 ```
 
@@ -144,7 +144,7 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
 
 $http 에 비해 $resource 는 훨씬 편리하게 사용할 수 있다. 우선 사용 예시를 살펴보기 전에 $resource 서비스를 사용하기 위해서는 사용하고자하는 service 나 controller 에 DI 로 추가한다.
 
-```
+```javascript
 .service('menuFactory', ['$resouce', 'baseURL', function($resource, baseURL) {
 
 	...
@@ -170,8 +170,11 @@ $resource 의 기본 action 들은 다음과 있다.
 
 action 을 커스텀으로 만들 수도 있는데, 위의 예제에서 본 것 처럼 update 라는 메서드를 HTTP PUT 메서드로 정의해 놓으면 update() 함수를 사용할 수 있다. 다음의 예제를 보자
 
-```
-$resource(baseURL+"dishes/:id", null, {'update':{method:'PUT'}}).update({id:$scope.dish.id},$scope.dish);
+```javascript
+$resource(baseURL + 'dishes/:id', null, { update: { method: 'PUT' } }).update(
+  { id: $scope.dish.id },
+  $scope.dish
+)
 ```
 
 ### Angular Testing
@@ -184,17 +187,17 @@ angularJS 를 테스트하기위해 Behavior driven development 프레임웍인 
 
 다음의 예를 보자
 
-```
+```javascript
 describe('Controller:MenuController', function() {
-	it('should create "dishes" with 2 dishes fetched from xhr', function() {
-		// showMenu가 true이길 기대함
-		expect(scope.showMenu).toBeTruthy();
-		// dishes가 정의됨을 기대함
-		expect(scope.dishes).toBeDefined();
-		// dishes의 개수가 2개임을 기대함
-		expect(scope.dishes.length).toBe(2);
-	});
-});
+  it('should create "dishes" with 2 dishes fetched from xhr', function() {
+    // showMenu가 true이길 기대함
+    expect(scope.showMenu).toBeTruthy()
+    // dishes가 정의됨을 기대함
+    expect(scope.dishes).toBeDefined()
+    // dishes의 개수가 2개임을 기대함
+    expect(scope.dishes.length).toBe(2)
+  })
+})
 ```
 
 describe 는 MenuController 를 테스트 한다는것을 말한다. 두번째 it 은 xhr 로부터 dishes 가 2 dishes 가 fetched 된 dishes 가 만들어질 것이라는 걸 말하고 두번째 인자에 들어간 함수 내에서는 expect 함수로 각각의 조건이 만족하는지를 체크한다.
@@ -232,63 +235,58 @@ bower install angular-mocks -S
 
 /conFusion/test 폴더를 생성하고 karma.conf.js 파일을 생성한다.
 
-```
+```javascript
 module.exports = function(config) {
-	config.set({
-		basePath: '../',
-		frameworks: ['jasmine'],
-		// list of files, 테스트하려는 파일 목록
-		files: [
-			'bower_components/angular/angular.js',
-			'bower_components/angular-resource/angular-resource.js',
-			'bower_components/angular-ui-router/release/angular-ui-router.js',
-			'bower_components/angular-mocks/angular-mocks.js',
-			'app/scripts/*.js',
-			'test/unit/**/*.js'
-		],
-		// list of files to exclude, 테스트 제외 목록
-		exclude: [
-			'test/protractor.conf.js', 'test/e2e/*.js'
-		],
-		preprocessors: {
-
-		},
-		// test results reporter to use
-		// possible values: 'dots', 'progress'
-		reporters: ['progress'],
-		port: 9876,
-		// colors in the output (reporters and logs)
-		colors: true,
-		// config.LOG_DISALBE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-		logLevel: config.LOG_INFO,
-		// 파일 변경시 auto reload
-		autoWatch: true,
-		// browser, available browser launchers
-		browsers: ['Chrome', 'PhantomJS', 'PhantomJS_custom'],
-		customLaunchers: {
-			'PhantomJS_custom': {
-				base: 'PhantomJS',
-				options: {
-					windowName: 'my-window',
-					settings: {
-						webSecurityEnabled: false
-					},
-				},
-				flags: ['--load-images=true'],
-				debug: true
-			}
-		},
-		phantomjsLauncher: {
-			// ResourceError 발생시 phantomjs 종료, 비정상 종료시 유용함
-			exitOnResourceError: true
-		},
-		// Continuous Integration mode
-		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false,
-		// Concurrency level
-		concurrency: Infinity
-
-	})
+  config.set({
+    basePath: '../',
+    frameworks: ['jasmine'],
+    // list of files, 테스트하려는 파일 목록
+    files: [
+      'bower_components/angular/angular.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'app/scripts/*.js',
+      'test/unit/**/*.js',
+    ],
+    // list of files to exclude, 테스트 제외 목록
+    exclude: ['test/protractor.conf.js', 'test/e2e/*.js'],
+    preprocessors: {},
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    reporters: ['progress'],
+    port: 9876,
+    // colors in the output (reporters and logs)
+    colors: true,
+    // config.LOG_DISALBE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
+    // 파일 변경시 auto reload
+    autoWatch: true,
+    // browser, available browser launchers
+    browsers: ['Chrome', 'PhantomJS', 'PhantomJS_custom'],
+    customLaunchers: {
+      PhantomJS_custom: {
+        base: 'PhantomJS',
+        options: {
+          windowName: 'my-window',
+          settings: {
+            webSecurityEnabled: false,
+          },
+        },
+        flags: ['--load-images=true'],
+        debug: true,
+      },
+    },
+    phantomjsLauncher: {
+      // ResourceError 발생시 phantomjs 종료, 비정상 종료시 유용함
+      exitOnResourceError: true,
+    },
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: false,
+    // Concurrency level
+    concurrency: Infinity,
+  })
 }
 ```
 

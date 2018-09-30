@@ -20,7 +20,7 @@ react v16.3.0 이 릴리즈 되었습니다. 개인적인 생각으로는 가장
 
 간단히 말해서 Context 는 앱 전체에 공통으로 사용할 데이터를 담는 역할을 합니다. 저는 개발하면서 한번도 사용해본적은 없습니다만, react-redux, react-router 등의 react 관련 핵심 라이브러리에서 Context 가 사용되고 있습니다. 리덕스를 사용하고 있다면 아래와 같은 코드 조각을 본적이 있을 것입니다.
 
-```
+```jsx
 <Provider store={store}>
   <App />
 </Provider>
@@ -28,8 +28,8 @@ react v16.3.0 이 릴리즈 되었습니다. 개인적인 생각으로는 가장
 
 react-router 의 경우에는 브라우저 history 관리등을 위해 Context 를 사용하고 있습니다.
 
-```
-this.props.history.push('/list');
+```jsx
+this.props.history.push('/list')
 ```
 
 props 로 하위 컴포넌트에 데이터를 넘기는 전통적인 방식은 간단한 어플리케이션 개발에는 아무런 문제가 없습니다. 하지만 어플리케이션이 복잡해지고 하위 컴포넌트의 단계가 많아질수록 이런식의 상태 관리는 개발난이도가 높아질뿐 아니라 유지보수 측면에서도 문제를 야기할 수 있습니다. 이럴때 Context 는 하나의 대안이 될 수 있습니다.
@@ -42,14 +42,14 @@ props 로 하위 컴포넌트에 데이터를 넘기는 전통적인 방식은 �
 
 #### App.jsx
 
-```
+```jsx
 export default class App extends Component {
   render() {
     return (
       <OldProvider userId="bono" nickName="보노">
         <OldConsumer />
       </OldProvider>
-    );
+    )
   }
 }
 ```
@@ -58,20 +58,20 @@ export default class App extends Component {
 
 `OldProvider`에서 context 데이터를 미리 만들어줍니다.
 
-```
+```jsx
 export default class OldProvider extends Component {
   static childContextTypes = {
     userId: PropTypes.string,
-    nickName: PropTypes.string
-  };
+    nickName: PropTypes.string,
+  }
   getChildContext = () => {
     return {
       userId: this.props.userId,
-      nickName: this.props.nickName
-    };
-  };
+      nickName: this.props.nickName,
+    }
+  }
   render() {
-    return <div>{this.props.children}</div>;
+    return <div>{this.props.children}</div>
   }
 }
 ```
@@ -80,16 +80,16 @@ export default class OldProvider extends Component {
 
 `Provider`로 감싸진 컴포넌트 어디에서든 `this.context`로 context 데이터에 접근이 가능합니다.
 
-```
+```jsx
 export default class OldConsumer extends Component {
   render() {
-    const { userId, nickName } = this.context;
+    const { userId, nickName } = this.context
     return (
       <div>
         <h1>{userId}</h1>
         <h2>{nickName}</h2>
       </div>
-    );
+    )
   }
 }
 ```
@@ -100,14 +100,14 @@ export default class OldConsumer extends Component {
 
 #### App.jsx
 
-```
+```jsx
 export default class App extends Component {
   render() {
     return (
       <Provider userId="bono" nickName="보노">
         <Consumer />
       </Provider>
-    );
+    )
   }
 }
 ```
@@ -116,22 +116,22 @@ export default class App extends Component {
 
 `Provider`와 `Consumer`에서 공통으로 Context 객체를 사용하기 위해 Context.tsx 를 별도로 생성합니다.
 
-```
-export default React.createContext();
+```jsx
+export default React.createContext()
 ```
 
 #### Provider.jsx
 
 Context 객체에 데이터를 넣어주는 역할을 합니다.
 
-```
+```jsx
 export default class Provider extends Component {
   render() {
     return (
       <Context.Provider value={this.props}>
         {this.props.children}
       </Context.Provider>
-    );
+    )
   }
 }
 ```
@@ -140,7 +140,7 @@ export default class Provider extends Component {
 
 Context 의 데이터를 사용하는 부분입니다. 좀 특이한 것은 `<Context.Consumer>` 컴포넌트 바로 아래가 React Element 를 리턴하는 함수 형태로 되어 있다는 것입니다. 이는 [Render Props](https://reactjs.org/docs/render-props.html)라는 패턴입니다.
 
-```
+```jsx
 export default class Consumer extends Component {
   render() {
     return (
@@ -152,7 +152,7 @@ export default class Consumer extends Component {
           </div>
         )}
       </Context.Consumer>
-    );
+    )
   }
 }
 ```
@@ -173,10 +173,10 @@ ref 는 reference 의 줄임말로, 특정 컴포넌트를 참조합니다. 컴�
 
 기존의 ref 는 string 형태로 정의합니다(아마 string 형태로 정의하는게 여러 문제를 야기하지 않았을까 추측해봅니다). ref 의 대상이 되는 컴포넌트에 ref 속성을 만들고 텍스트로 이름을 만들어줍니다. 그리고 `this.refs.xxx`와 같이 사용하면 됩니다.
 
-```
+```jsx
 export default class OldRef extends Component {
   componentDidMount() {
-    this.refs.oldRef.focus();
+    this.refs.oldRef.focus()
   }
   render() {
     return (
@@ -184,7 +184,7 @@ export default class OldRef extends Component {
         <span>oldRef: </span>
         <input type="text" ref="oldRef" />
       </div>
-    );
+    )
   }
 }
 ```
@@ -193,14 +193,14 @@ export default class OldRef extends Component {
 
 공식문서의 예제와 동일한 형태입니다. 위의 OldRef 와 비교해보면, 우선 ref 가 string 에서 `객체형태`로 바꼈습니다. 그리고 `createRef()` 함수로 ref 를 만든 다음 실제 타겟 컴포넌트의 ref 속성에 해당 객체를 할당합니다. ref 를 사용할때는 생성자함수에서 만들어둔 `this.inputRef`를 그대로 이용합니다.
 
-```
+```jsx
 export default class NewRef extends Component {
   constructor(props) {
-    super(props);
-    this.inputRef = React.createRef();
+    super(props)
+    this.inputRef = React.createRef()
   }
   componentDidMount() {
-    this.inputRef.current.focus();
+    this.inputRef.current.focus()
   }
 
   render() {
@@ -209,7 +209,7 @@ export default class NewRef extends Component {
         <span>newRef: </span>
         <input type="text" ref={this.inputRef} />
       </div>
-    );
+    )
   }
 }
 ```

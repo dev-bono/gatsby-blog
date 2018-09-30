@@ -20,7 +20,7 @@ npm install --save next react react-dom
 
 그리고 `package.json`파일에 다음의 스크립트를 추가합니다.
 
-```
+```json
 {
   "scripts": {
     "dev": "next",
@@ -38,8 +38,8 @@ nextjs 를 사용하기 위해서 반드시 따라야 할 규칙이 있습니다
 
 #### pages/index.jsx
 
-```
-import Link from "next/link";
+```jsx
+import Link from 'next/link'
 
 export default () => (
   <div>
@@ -48,13 +48,13 @@ export default () => (
       <a>second2</a>
     </Link>
   </div>
-);
+)
 ```
 
 #### pages/second.jsx
 
-```
-export default () => <h1>Second Page</h1>;
+```jsx
+export default () => <h1>Second Page</h1>
 ```
 
 그 다음 실행합니다.

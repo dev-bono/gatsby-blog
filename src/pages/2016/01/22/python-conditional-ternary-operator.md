@@ -12,7 +12,7 @@ tags:
 그 중에서 대표적인 것 중 하나인 3 항 연사자를 파이썬에서도 사용가능 합니다. 파이썬 언어의 장점 중에 하나가 타 언어에 비해 훨씬 적은 분량으로 똑같은 코드를 작성할 수 있는 것이기에, 3 항 연산자가 있는건 당연하다 할 수 있습니다.
 3 항연산자는 일반적으로 아래와 같이 사용됩니다. (C, Java 등)
 
-```
+```python
 result = condition ? when True : when False;
 ```
 
@@ -24,7 +24,7 @@ result = condition ? when True : when False;
 
 ### 1. and 와 or 를 이용한 3 항 연산자
 
-```
+```python
 # result = condition and when True or when False;
 a = 10
 b = 20
@@ -46,7 +46,7 @@ a 가 True 면 b 를 확인하고, a 가 False 면 (a and b)가 False 가 되므
 그런데 위 설명을 잘 뜯어보면 어딘가 문제가 있습니다.
 어떤 문제인지 확인하기 위해 아래 예제를 살펴보겠습니다.
 
-```
+```python
 a = 10
 b = 10
 result = a == b and a-b or a+b    # 결과는 a+b = 20 ???????
@@ -61,7 +61,7 @@ a 가 10 이고 b 가 10 일때 a == b 는 True 가 되므로 result 는 당연�
 
 ### 2. if 와 else 를 이용한 3 항 연산자
 
-```
+```python
 # result = when True if condition else when False;
 a = 10
 b = 20
@@ -77,7 +77,7 @@ if 문을 이용한 3 항 연산자는 파이썬 언어의 특징을 잘 보여�
 
 이러한 형태의 코드는 for 문을 사용하여 list 를 만들때도 비슷하게 적용할 수 있는데요.
 
-```
+```python
 list = [ idx for idx in range(10)]
 # list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```

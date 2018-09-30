@@ -13,7 +13,7 @@ tags:
 
 추상 클래스는 abstract 키워드를 class 앞에 붙임으로써 정의할 수 있다. 추상 클래스는 구현체가 없는 추상함수를 1 개 이상 멤버로 가진다. 스칼라의 추상클래스는 자바의 그것과는 달리 new 로 선언할 수가 없다(자바의 추상클래스는 new 할당 가능, 대신 인터페이스는 new 할당이 불가함).
 
-```
+```scala
 abstract class IntSet {
   def incl(x: Int): IntSet
   def contains(x: Int): Boolean
@@ -47,7 +47,7 @@ val t2 = t1 incl 4
 
 위에서 IntSet 은 Empty 와 NonEmpty 클래스의 base class 이다. 구현체가 없는 incl 메소드와 contains 메소드는 각각 Empty 와 NonEmpty 클래스에서 구현하게 된다.
 
-```
+```scala
 abstract class Base {
   def foo = 1
   def bar: Int
@@ -70,7 +70,7 @@ evaluation 측면에서 보자면, 위에서도 얘기 했듯이 object 자체�
 
 ### exercise - union 함수 구현
 
-```
+```scala
 abstract class IntSet {
   def incl(x: Int): IntSet
   def contains(x: Int): Boolean
@@ -102,7 +102,7 @@ class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet {
 
 자바의 패키지 지정 방식과 같다.
 
-```
+```scala
 package progfun.examples
 
 object Hello { ... }
@@ -112,7 +112,7 @@ object Hello { ... }
 
 ### import
 
-```
+```scala
 import week3.Rational           // imports just Rational
 import week3.{Rational, Hello}  // imports both Rational and Hello
 import week3._                  // import everything in package week3
@@ -125,7 +125,7 @@ All members of package scala
 All members of package java.lang
 All members of the singleton object scala.Predef
 
-```
+```scala
 require       scala.Predef.require
 assert        scala.Predef.assert
 ```
@@ -134,7 +134,7 @@ assert        scala.Predef.assert
 
 스칼라도 자바처럼 상속을 하나의 클래스에서만 받을 수 있다. 그렇기 때문에 자바와 동일하게 여러개의 슈퍼타입이 필요한 경우 traits 키워드를 이용하여 구현할 수 있다. 참고로 trait 키워드는 abstract class 와 동일하다.
 
-```
+```scala
 trait Planar {
   def height: Int
   def width: Int
@@ -180,7 +180,7 @@ class Square extends Shape with Planar with Movable ...
 The type of null is Null, null 의 타입은 Null 이라는 말
 모든 다른 AnyRef 타입의 subType 이다.
 
-```
+```scala
 val x = null          // x: Null
 val y: String = null  // y: String
 val z: Int = null     // error: type mismatch, 레퍼런스 타입만 적용
@@ -191,7 +191,7 @@ val z: Int = null     // error: type mismatch, 레퍼런스 타입만 적용
 아래 두 Cons 클래스는 동일한 표현이다.
 클래스 파라미터에 value 를 사용하는 것은, implementaion 해야할 함수를 파라미터에 직접 구현하는 것과 같다.
 
-```
+```scala
 class Cons(val head: Int, val tail: IntList) extends IntList { ... }
 
 // 즉, _head, _tail 은 쓰지 않는 이름
@@ -203,7 +203,7 @@ class Cons(_head: Int, _tail: IntList) extends IntList {
 
 Cons 클래스와 List trait 를 generic 하게 구현한다
 
-```
+```scala
 trait List[T] {
   def isEmpty: Boolean
   def head: T
@@ -223,7 +223,7 @@ class Nil[T] extends List[T] {
 
 함수도 제네릭하게 구현할 수 있다.
 
-```
+```scala
 def singleton[T](elem: T) = new Cons(elem, new Nil[T])
 
 singleton[Int](1)

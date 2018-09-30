@@ -18,23 +18,23 @@ ES6(ECMA Script 2015, 줄여서 ES6)로 넘어오면서 기존 ES5 까지 사용
 
 ### 재할당 및 재선언하기
 
-```
+```javascript
 // var의 경우
-var a = 1;
-a = 2;
-console.log(a); // 2
-var a = 3;
-console.log(a); // 3
+var a = 1
+a = 2
+console.log(a) // 2
+var a = 3
+console.log(a) // 3
 
 // let의 경우
-let b = 1;
-b = 2;
-console.log(b)	// 2
-let b = 3; 		// SyntaxError: Identifier 'b' has already been declared
+let b = 1
+b = 2
+console.log(b) // 2
+let b = 3 // SyntaxError: Identifier 'b' has already been declared
 
 // const의 경우
-const c = 1;
-c = 2; 			// TypeError: Assignment to constant variable
+const c = 1
+c = 2 // TypeError: Assignment to constant variable
 ```
 
 var 의 경우 굉장히 유연합니다. *var a = 1;*로 선언한 뒤, 2 를 재할당하고 다시 *var = 3;*으로 재선언(?) 해도 문제될게 없습니다.
@@ -43,31 +43,31 @@ var 의 경우 굉장히 유연합니다. *var a = 1;*로 선언한 뒤, 2 를 �
 
 ### 스코프 (Scope)
 
-```
-var a = 1;
-let b = 2;
+```javascript
+var a = 1
+let b = 2
 
-if(true) {
-	var a = 11;
-	let b = 22;
-	console.log("a = " + a);		// 11
-	console.log("b = " + b);		// 22
+if (true) {
+  var a = 11
+  let b = 22
+  console.log('a = ' + a) // 11
+  console.log('b = ' + b) // 22
 }
 
-console.log("a = " + a);			// 11
-console.log("b = " + b);			// 2
+console.log('a = ' + a) // 11
+console.log('b = ' + b) // 2
 
 function func() {
-	var a = 111;
-	let b = 222;
-	console.log("a = " + a);		// 111
-	console.log("b = " + b);		// 222
+  var a = 111
+  let b = 222
+  console.log('a = ' + a) // 111
+  console.log('b = ' + b) // 222
 }
 
-func();
+func()
 
-console.log("a = " + a);			// 11
-console.log("b = " + b);			// 2
+console.log('a = ' + a) // 11
+console.log('b = ' + b) // 2
 ```
 
 전역 영역에서 var a, let b 를 선언하고 각각 1, 2 를 할당했습니다. 우선 if 블럭 내에서 각각의 변수 값을 변형시켰더니 블럭 내에서는 변경된 값이 모두 출력되었습니다. 그런데, if 블럭 바깥으로 나갔더니 let 으로 선언했던 b 값은 가장 상단에 선언한 값과 동일한 2 인데, a 는 11 로 변경되었습니다. 그 이유는 var 의 경우 변수의 유효범위가 함수이므로 블럭으로 감쌌다고 하더라도 함수 스코프가 바뀐것이 아니기 때문에 if 블럭 내에서 재할당한 값을 출력하는 것입니다.
@@ -78,29 +78,29 @@ console.log("b = " + b);			// 2
 
 위에서 let 은 변수, const 는 상수라고 구분지어 설명했지만, 좀더 구체적으로 설명할 필요가 있어보입니다. let 은 변수고 const 는 상수가 맞긴 하지만, 할당된 값이 원시타입이냐 참조타입(array, object, function)이냐에 따라서 조금 다르게 사용됩니다.
 
-```
-let a = 1;
-const b = 2;
+```javascript
+let a = 1
+const b = 2
 
-a = 11;
-b = 22;				// TypeError: Assignment to constant variable.
+a = 11
+b = 22 // TypeError: Assignment to constant variable.
 
 let obj_a = {
-	name: 'obj_a'
-};
-
-const obj_b = {
-	name: 'obj_b'
+  name: 'obj_a',
 }
 
-obj_a['name'] = 'a';
-obj_b['name'] = 'b';
+const obj_b = {
+  name: 'obj_b',
+}
 
-obj_a['number'] = 1;
-obj_b['number'] = 2;
+obj_a['name'] = 'a'
+obj_b['name'] = 'b'
+
+obj_a['number'] = 1
+obj_b['number'] = 2
 
 obj_a = {}
-obj_b = {}			// TypeError: Assignment to constant variable.
+obj_b = {} // TypeError: Assignment to constant variable.
 ```
 
 기본적으로 let 은 재할당이 가능한반면, const 는 재할당이 불가합니다. 재할당하게 되면 TypeError 가 발생하죠. 그런데 차이점이 있다면, 처음 할당된 객체를 변형시킬때는 아무 문제없이 동작한다는 것을 알 수 있습니다. 처음에는 두 객체 모두 'name' 이라는 속성만 가지고 있었는데, 이를 변형하거나 새로운 속성(number)를 추가하더라도 let, const 둘다 에러를 발생시키지 않습니다. 이는 array 와 function 의 경우도 마찬가지인데, 이유는 const 에 실제로 할당된 값은 원시타입처럼 특정 값이 아니라 객체의 주소값이기 때문입니다. 실제 객체가 변한다고해서 한번 할당된 객체의 주소값이 바뀌는건 아니죠.

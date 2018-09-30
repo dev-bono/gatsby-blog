@@ -27,7 +27,7 @@ ES6 모듈은 기본적으로 CommonJs 와 AMD 모듈을 혼용해서 사용할 
 
 **ES6**
 
-```
+```javascript
 // 모듈 전체를 export, 파일내 한번만 사용가능하다.
 var module = {};
 export default module
@@ -45,24 +45,22 @@ export {property};
 
 **CommonJs**
 
-```
+```javascript
 // 모듈 전체를 export
-module.exports = module;
-
+module.exports = module
 
 // 모든 속성을 export
 // (아시는 분 알려주세요)
 
-
 // 함수를 직접 export
-exports.moduleFunc = function() {};
+exports.moduleFunc = function() {}
 ```
 
 #### 모듈 가져오기 (import)
 
 **ES6**
 
-```
+```javascript
 // 모듈 전체를 import
 import module
 import module as myModule
@@ -78,9 +76,9 @@ import {moduleFunc, moduleFunc2} from module
 
 **CommonJs**
 
-```
+```javascript
 // 모듈 전체를 import
-var module = require('./someModule.js');
+var module = require('./someModule.js')
 
 // 모든 속성 import
 // (위의 module 객체에 모든 속성이 담아져 온다.)

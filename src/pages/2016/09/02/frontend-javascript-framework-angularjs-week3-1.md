@@ -33,7 +33,7 @@ services, directives, filters and animations 등의 컴포넌트에서 DI 가 �
 또한 config 와 run method 역시 어떤 컴포넌트를 주입하여 사용 가능한다.
 몇가지 예를 들어보자.
 
-```
+```javascript
 // 첫번째 방법은 array에 명시
 module.controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
 
@@ -68,7 +68,7 @@ factory 는 보통 컨트롤러에 데이터를 제공하는 역할을 한다. f
 
 우선 factory 사용 예를 보자
 
-```
+```javascript
 // factory code
 angular.module('confusionApp')
     .factory('menuFactory', function() {
@@ -95,7 +95,7 @@ angular.module('confusionApp')
 
 service 사용과 비교해보자
 
-```
+```javascript
 // service code
 angular.module('confusionApp')
     .service('menuFactory', function() {
@@ -126,19 +126,17 @@ app.js
 
 모든 컨트롤러 코드는 controllers.js 로 이동한다.
 
-```
-'use strict';
+```javascript
+'use strict'
 
 angular.module('confusionApp', [])
-
-;
 ```
 
 controllers.js
 
 controller 코드는 모두 controllers.js 로 이동하였고, 데이터를 가져오는 부분은 services.js 로 이동
 
-```
+```javascript
 'use strict';
 
 angular.module('confusionApp')
@@ -174,7 +172,7 @@ services.js
 그리고 dishdetail.html 에서 사용하던 comment 를 dishes 에 합쳐서 사용
 각 dish 의 comment 속성에 리스트로 선언
 
-```
+```javascript
 'use strict';
 
 angular.module('confusionApp')
@@ -215,7 +213,7 @@ Angular Template 은 Angular JS 의 여러 요소에 사용되었는데, Directi
 external HTML 조각을 HTML 내에 포함하기 위해 directive 다.
 사용방법은 간단하다.
 
-```
+```html
 <div ng-include="'menu.html'"></div>
 <ng-include src="'menu.html'"></ng-include>
 ```
@@ -230,7 +228,7 @@ index.html
 
 header, footer, js, css 등을 import 하는 부분을 모두 index.html 에 둔다. 그리고 필요한 부분에 menu.html, dishdetail.html, contactus.html 등의 파일을 ng-include 를 이용하여 포함시킨다.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en" ng-app="confusionApp">
 <head>

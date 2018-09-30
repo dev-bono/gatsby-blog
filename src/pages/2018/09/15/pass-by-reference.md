@@ -12,13 +12,13 @@ tags:
 
 의문은 아래와 같은 코드에서 시작되었습니다.
 
-```
+```javascript
 function change(obj) {
   obj = { p1: 100 }
 }
-const o = { p1: 1 };
-change(o);
-console.log(o);
+const o = { p1: 1 }
+change(o)
+console.log(o)
 ```
 
 객체를 매개변수로 받는 `change` 함수에 새롭게 만든 `o`객체를 인자로 전달하였습니다. 그리고 `change` 함수에서 obj 변수에 새로운 객체를 할당하였습니다. 과연 `o`는 어떤 값이 출력될까요?
@@ -33,13 +33,13 @@ console.log(o);
 
 자바스크립트에는 5 가지 원시타입이 있습니다. `boolean`, `number`, `string`, `null`, `undefined` 이렇게 다섯가지 입니다. 함수의 인자로 원시타입의 값이 전달되면, 함수가 실행될때 전달받은 인자를 복사합니다. 인자가 복사되었기 때문에 전달된 인자와 전달 받은 인자는 전혀 다른 값(주소값이 다른)이 됩니다. 코드로 확인해 보겠습니다.
 
-```
+```javascript
 function change(pri) {
-  pri = 10;
+  pri = 10
 }
-const p = 1;
-change(p);
-console.log(p); // p = 1
+const p = 1
+change(p)
+console.log(p) // p = 1
 ```
 
 변수 `p`에 1 이 할당된 다음, change 함수의 인자로 p 가 전달되었습니다. change 함수 내에서는 매개변수 `pri`에 10 을 할당하여 값을 변경 시킵니다. change 함수가 호출된 이후 log 를 찍어보면, p 값은 change 함수가 호출되기 전과 동일하게 `1`이 됩니다. 즉, 처음 선언한 `p`와 change 함수로 전달한 인자는 별도의 값으로 존재한다는 뜻입니다.
@@ -48,13 +48,13 @@ console.log(p); // p = 1
 
 주소값을 직접 찍어볼 방법이 없기 때문에(있으면 좀 알려주세요^^;;), `===` 연산자로 참조값이 동일한지 비교해보도록 하겠습니다.
 
-```
-let obj = { p1: 10 };
-let objCopy = obj;
-console.log(obj === objCopy); // true
+```javascript
+let obj = { p1: 10 }
+let objCopy = obj
+console.log(obj === objCopy) // true
 
-objCopy = { p2: 100 };
-console.log(obj === objCopy); // false
+objCopy = { p2: 100 }
+console.log(obj === objCopy) // false
 ```
 
 obj 라는 객체를 선언합니다. 그리고 objCopy 에 obj 를 할당합니다. 좀더 자세히 알아보기 위해 임의의 주소값으로 표현해보겠습니다.
@@ -83,24 +83,24 @@ objCopy 는 obj 와 동일한 객체를 가리키고 있습니다. 그래서 `==
 
 objCopy 의 주소값이 변경되었습니다. objCopy 는 원래 `0x001`라는 주소값을 value 로 가지고 있었습니다. 그런데, 새로운 객체를 할당했더니 주소값이 변경되었습니다. 그 이유는 `{ p2: 100 }`이라는 객체는 새로운 주소로 만들어집니다. 그리고 기존에 잇던 objCopy 라는 변수에 할당했으므로, 이제 objCopy 는 `0x002` 주소값을 가리키게 되었습니다. 이해를 쉽게 하기 위해 코드를 조금 변형시켜보겠습니다.
 
-```
-let obj = {p1: 10}; // obj 주소값 : 0x001
-let objCopy = obj; // objCopy 주소값 : 0x001
-const newObj = {p2: 100}; // newObj 주소값 : 0x002
-objCopy = newObj; // objCopy 주소값 : 0x002
+```javascript
+let obj = { p1: 10 } // obj 주소값 : 0x001
+let objCopy = obj // objCopy 주소값 : 0x001
+const newObj = { p2: 100 } // newObj 주소값 : 0x002
+objCopy = newObj // objCopy 주소값 : 0x002
 ```
 
 newObj 라는 새로운 객체가 objCopy 에 할당되었으니 objCopy 가 가리키는 주소값이 당연히 바뀌게 되는 것입니다. 애초에 객체타입(reference type)에 할당되는 값이 실제 객체가 아니라 객체를 가리키는 주소값이기 때문에 당연한 결과인지도 모르겠습니다.
 
 ### 인자를 함수내에서 변경(속성만 변경)하면 어떻게 될까?
 
-```
+```javascript
 function change(obj) {
   obj.p1 = 100
 }
-const o = { p1: 1 };
-change(o);
-console.log(o);
+const o = { p1: 1 }
+change(o)
+console.log(o)
 ```
 
 | 변수 | 값       |
@@ -116,13 +116,13 @@ console.log(o);
 
 그럼 이제 처음에 봤던 코드를 다시 한번 살펴보도록 합니다.
 
-```
+```javascript
 function change(obj) {
   obj = { p1: 100 }
 }
-const o = { p1: 1 };
-change(o);
-console.log(o);
+const o = { p1: 1 }
+change(o)
+console.log(o)
 ```
 
 log 에 찍히는 값은 바로 `{ p1: 1 }`입니다. 위에서 보았던 `재할당`을 잘 기억하면서 위 코드의 주소값 변화를 살펴보겠습니다.

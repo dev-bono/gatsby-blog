@@ -26,7 +26,7 @@ Mixin 이라는 개념은 루비와 같은 타 언어에서도 많이 쓰이고 
 다중상속이 주는 모호함을 피하기 위함이라는 생각이듭니다.
 명확하게 기능을 암시하는 이름(mixin)을 줌으로써 상속받는 클래스와 혼동하지 않도록 하는 것이죠.
 
-```
+```python
 class FirstMixin(object):
     def test1(self):
         print("first mixin!!!")
@@ -51,7 +51,7 @@ ParentClass 를 상속하고 FirstMixin 과 SecondMixin 의 기능을 추가로 
 
 ### views.py
 
-```
+```python
 from django.views.generic import TemplateView
 
 
@@ -73,7 +73,7 @@ views.py 는 urls.py 에서 호출되는 url 에 매핑된 클래스(또는 메�
 
 ### generic/base.py
 
-```
+```python
 class TemplateView(TemplateResponseMixin, ContextMixin, View):
     """
     A view that renders a template.  This view will also pass into the context
@@ -97,7 +97,7 @@ TempalteResponseMixin, ContextMixin 그리고 View 입니다.
 
 ### TemplateResponseMixin
 
-```
+```python
 class TemplateResponseMixin(object):
     template_name = None
     template_engine = None
@@ -137,7 +137,7 @@ TemplateResponse 클래스에 대해서 자세히 설명하진 않겠지만,
 
 ### ContextMixin
 
-```
+```python
 class ContextMixin(object):
     def get_context_data(self, **kwargs):
         if 'view' not in kwargs:
@@ -157,7 +157,7 @@ TemplateView 의 구현부분을 살펴보면,
 
 ### views.py - 2
 
-```
+```python
 from django.views.generic import TemplateView
 
 

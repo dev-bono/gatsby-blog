@@ -19,38 +19,38 @@ async, await 는 ES8(ECMAScript2017)의 공식 스펙([링크](https://developer
 
 setTimeout 은 특정 시간 동안 기다렸다가 이후 첫번째 파라미터의 함수를 실행하는 방식을 사용합니다.
 
-```
-let first = 10;
-let second = 20;
-let result = 0;
+```javascript
+let first = 10
+let second = 20
+let result = 0
 
 function add(x, y) {
-  return x + y;
+  return x + y
 }
 
 setTimeout(function() {
-  result = add(first, second);
-  console.log(result); // 30
+  result = add(first, second)
+  console.log(result) // 30
 }, 1000)
 ```
 
 위 코드는 1 초 후에 10 과 20 을 더해서 result 에 30 을 할당하는 간단한 setTimeout 예제입니다. setTimeout 함수의 첫번째 파라미터는 실행될 함수이고, 두번째 파라미터는 첫번째 파라미터가 얼마후(ms)에 실행될지를 결정합니다. 여기에 별 문제는 없어 보이지만 비동기에 대한 이해가 부족한 상황에서 더 복잡한 코드를 작성하다가는 큰 문제에 부딪칠수도 있습니다. 조금 수정된 코드입니다.
 
-```
-let first = 10;
-let second = 20;
-let result = 0;
+```javascript
+let first = 10
+let second = 20
+let result = 0
 
 function add(x, y) {
-  return x + y;
+  return x + y
 }
 
 setTimeout(function() {
-  result = add(first, second);
-  console.log(result); // 40
+  result = add(first, second)
+  console.log(result) // 40
 }, 1000)
 
-first = 20;
+first = 20
 ```
 
 이 코드가 동기식으로 처리된다면 result 가 30 이겠지만, 실제로 console 에 찍히는 값은 40 입니다. 어디가 잘못 되었을까요?
@@ -59,25 +59,25 @@ first = 20;
 
 그럼 이 코드를 동기식으로 처리하려면 어떻게 해야할까요?
 
-```
-let first = 10;
-let second = 20;
-let result = 0;
+```javascript
+let first = 10
+let second = 20
+let result = 0
 
 function add(x, y) {
-  return x + y;
+  return x + y
 }
 function getResult(callback) {
   setTimeout(function() {
-    result = add(first, second);
-    console.log(result); // 30
-    callback();
+    result = add(first, second)
+    console.log(result) // 30
+    callback()
   }, 1000)
 }
 
 getResult(function() {
-  first = 20;
-});
+  first = 20
+})
 ```
 
 위와 같이 callback 함수를 사용하면 비동기 코드를 동기식으로 작성할 수 있습니다. 그렇다면 이제 비동기 코드를 동기식으로 바꾸기 위해 사용하는 callback 이 무엇이고 어떻게 사용하는지 알아보도록 하겠습니다.
@@ -88,7 +88,7 @@ callback 함수란 호출하는 함수(calling function)가 호출되는 함수(
 
 callback 이 직관적(하나만 사용했을 때)이고 이해가 어렵지는 않지만, 여러개의 callback 을 연달아 사용하게 되면 에러가 발생할 가능성이 높고, 코드의 가독성도 크게 떨어지게 됩니다.
 
-```
+```javascript
 // 각 함수는 비동기로 처리되는 로직이라 가정합니다
 function goWork(time1, timeStartWork) {
   wakeUp(time1, function (time2) {
@@ -111,7 +111,7 @@ callback 은 비동기 코드를 동기적 만드는데 확실한 방법이긴 �
 
 promise 는 약속입니다. 어떤 작업이 성공했을 때(resolve), promise 객체의 then() 함수에 넘겨진 파라미터(함수)를 단 한번만 호출하겠다는 약속입니다. callback 의 경우 제어권이 호출되는 함수로 넘어가 버리기 때문에 신뢰성이 다소 떨어지지만 promise 는 함수 실행이 성공했을때 then() 함수의 파라미터(함수)가 단 한번만 호출되기 때문에 함수를 호출하는 입장에서 확신을 가지고 코드를 작성할 수 있습니다. 또한 실패했을 경우(reject)에도 catch()함수를 통해서 실패 이후의 작업을 처리할 수 있습니다. 위의 함수(goWork)를 promise 로 바꾸어보겠습니다.
 
-```
+```javascript
 function goWork(time1, timeStartWork) {
   return wakeUp(time1).then(function(time2) {
       return tackSubway(time2);
@@ -129,7 +129,7 @@ function goWork(time1, timeStartWork) {
 
 callback 보다는 훨씬 덜 복잡해 보입니다. 여기에다 ES6 의 arrow function 문법을 적용하면 훨씬 더 간단해집니다.
 
-```
+```javascript
 function goWork(time1, timeStartWork) {
   return wakeUp(time1)
     .then(time2 => tackSubway(time2))
@@ -137,9 +137,9 @@ function goWork(time1, timeStartWork) {
     .then(time4 => arriveWork(time4))
     .then(arrivalTime => {
       if (arrivalTime > timeStartWork) {
-        fire();
+        fire()
       }
-    });
+    })
 }
 ```
 
@@ -150,14 +150,14 @@ promise 는 충분히 깔끔하고 완성되어 보이지만, 사실 완전히 �
 
 async 와 await 는 절차적 언어에서 작성하는 코드와 같이 사용법도 간단하고 이해하기도 쉽습니다. function 키워드 앞에 `async`만 붙여주면 되고 비동기로 처리되는 부분 앞에 `await`만 붙여주면 됩니다. 다만, 몇 가지 주의할 점이 있다면 await 뒷부분이 반드시 promise 를 반환해야 한다는 것과 async function 자체도 promise 를 반환한다는 것입니다. 그럼 사용법을 먼저 살펴보겠습니다.
 
-```
+```javascript
 async function goWork(time1, timeStartWork) {
-  const time2 = await wakeUp(time1);
-  const time3 = await takeSubway(time2);
-  const time4 = await takeOffSubway(time3);
-  const arrivalTime = await arriveWork(time4);
+  const time2 = await wakeUp(time1)
+  const time3 = await takeSubway(time2)
+  const time4 = await takeOffSubway(time3)
+  const arrivalTime = await arriveWork(time4)
   if (arrivalTime > timeStartWork) {
-    fire();
+    fire()
   }
 }
 ```
@@ -167,7 +167,7 @@ async function goWork(time1, timeStartWork) {
 두 부분으로 나누어 간단히 살펴보겠습니다.
 (아래 설명들은 정리가 잘 안되있어 이해하기 어렵습니다. 설명을 잘 못하는거 보니 아직 저도 잘 이해 못하고 있는 부분이 있는것 같네요ㅠㅠ)
 
-```
+```javascript
 var goWork = (function() {
   var _ref = _asyncToGenerator(
     regeneratorRuntime.mark(function _callee(
@@ -211,35 +211,35 @@ var goWork = (function() {
 
 제너레이터가 생성되어 실행되면 이터레이터가 만들어지고 이터레이터의 next 함수로 yield 구문의 코드를 차례차례 실행하는게 보통의 제너레이터 구조입니다. 여기에서는 만들어진 이터레이터의 next 함수(step('next'))가 호출될 때 마다 context 의 위치를 변경하고(context.next), 해당 위치의 함수를 실행합니다. (실제 await 부분).
 
-```
+```javascript
 function _asyncToGenerator(fn) {
   return function() {
-    var gen = fn.apply(this, arguments);
+    var gen = fn.apply(this, arguments)
     return new Promise(function(resolve, reject) {
       function step(key, arg) {
         try {
-          var info = gen[key](arg);
-          var value = info.value;
+          var info = gen[key](arg)
+          var value = info.value
         } catch (error) {
-          reject(error);
-          return;
+          reject(error)
+          return
         }
         if (info.done) {
-          resolve(value);
+          resolve(value)
         } else {
           return Promise.resolve(value).then(
             function(value) {
-              step("next", value);
+              step('next', value)
             },
             function(err) {
-              step("throw", err);
+              step('throw', err)
             }
-          );
+          )
         }
       }
-      return step("next");
-    });
-  };
+      return step('next')
+    })
+  }
 }
 ```
 

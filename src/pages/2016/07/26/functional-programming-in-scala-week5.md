@@ -34,7 +34,7 @@ xs 는 list 의 object 를 뜻한다.
 
 last 가 과연 필요한지 모르겠지만(tail 을 recursive 하게 반복하면 찾을 수 있음), 유용하게 쓰일 수 있다면 last 의 복잡도는 어떻게 될까?
 
-```
+```scala
 def last[T](xs: List[T]): T = xs match {
   case List() => throw new Error("last of empty list")
   case List(x) => x
@@ -45,7 +45,7 @@ def last[T](xs: List[T]): T = xs match {
 위와 같이 list 의 길이와 같으므로, 복잡도는 O(n)이 되겠다.
 init 메서드는 어떨까?
 
-```
+```scala
 def init[T](xs: List[T]): List[T] = xs match {
   case List() => throw new Error("init of empty list")
   case List(x) => List()
@@ -56,7 +56,7 @@ def init[T](xs: List[T]): List[T] = xs match {
 마찬가지로 O(n)
 그다음은 concat(Same as :::)
 
-```
+```scala
 def concat[T](xs: List[T], ys: List[T]) = xs match {
   case List() => ys
   case z :: zs => z :: concat(zs, ys)
@@ -66,7 +66,7 @@ def concat[T](xs: List[T], ys: List[T]) = xs match {
 복잡도는 |xs|, 즉 xs 의 길이가 된다.
 다음은 reverse
 
-```
+```scala
 def reverse[T](xs: List[T]): List[T] = xs match {
   case List() => xs
   case y :: ys => reverse(ys) ++ List(y)
@@ -78,7 +78,7 @@ reverse(ys) :: y 가 아니라 reverse(ys) ++ List(y)인 이유는 ::의 마지�
 
 마지막으로 removeAt
 
-```
+```scala
 def removeAt[T](n: Int, xs: List[T]) = (xs take n) ::: (xs drop n+1)
 ```
 
@@ -86,7 +86,7 @@ def removeAt[T](n: Int, xs: List[T]) = (xs take n) ::: (xs drop n+1)
 
 앞서 살펴보앗던 insertion sort 보다 더 개선된 merge sort 알고리즘에 대해서 살펴보자. 기본적인 개념은 zero or one element 리스트는 이미 sorted 하다는 것.
 
-```
+```scala
 def msort(xs: List[Int]): List[Int] = {
   val n = xs.length/2
   if (n == 0) xs
@@ -112,7 +112,7 @@ def msort(xs: List[Int]): List[Int] = {
 
 밑에서 나오는 splitAt 함수는 index n 을 기준으로 리스트를 두개로 쪼개서 리턴한다. 여기서 리턴된 val 의 모양을 보자. fst 와 snd 두개의 타입으로 묶여져 있다. 이를 Pair 라고 한다. 예를 들면
 
-```
+```scala
 val pair = ("answer", 42) > pair: (String, Int) = (answer,42)
 
 val (label, value) = pare > label: String = answer | value : Int = 42
@@ -120,7 +120,7 @@ val (label, value) = pare > label: String = answer | value : Int = 42
 
 위와 같이 타입으로도 쓰일 수 있고, 패턴으로도 사용될 수 있다. 이때 2 개 이상의 요소를 가지면 Tuples 라 한다. Tuples 는 다양하게 사용될 수 있는데, parameterized type 으로 사용될 경우, function applictaion 으로 사용될 경우, constructor 패턴으로 사용될 경우 각각
 
-```
+```scala
 scala.Tuplen[T1, ..., Tn]
 scala.Tuplen(e1, ..., en)
 scala.Tuplen(p1, ..., pn)
@@ -130,7 +130,7 @@ scala.Tuplen(p1, ..., pn)
 튜플의 각 element 는 \_1, \_2 와 같이 접근할 수 있다.
 이제 merge 메소드를 개선해보자.
 
-```
+```scala
 def merge(xs: List[Int], ys: List[Int]): List[Int] = (xs, ys) match {
   case (Nil, ys) => ys
   case (xs, Nil) => xs
@@ -146,7 +146,7 @@ def merge(xs: List[Int], ys: List[Int]): List[Int] = (xs, ys) match {
 
 이전 장에서 보았던 msort 는 List[Int] 타입으로 지정되어 있는데 parameterize 를 통해서 Int 말고도 다른 타입이 들어올 수 있도록 임의의 타입 T 로 변경해보자
 
-```
+```scala
 object mergesort {
   def msort[T](xs: List[T]): List[T] = {
     val n = xs.length/2
@@ -173,7 +173,7 @@ object mergesort {
 x < y 부분에서 에러가 발생한다. 왜냐하면 comparison '<'가 임의의 타입 T 에 정의되어 있지 않기 때문이란다....
 그래서 우리는 comparison 함수가 필요하다. 이 때 가장 유연한 방법은 msort 함수에 comparison operation 을 추가적인 파라미터로 붙이는 것이다. 아래처럼
 
-```
+```scala
 def msort[T](xs: List[T])(lt: (T, T) => Boolean) = {
   ...
   merge(msort(fst)(lt), msort(snd)(lt))
@@ -182,7 +182,7 @@ def msort[T](xs: List[T])(lt: (T, T) => Boolean) = {
 
 그래서 원래 mergesort 에 적용하면 다음과 같다.
 
-```
+```scala
 object mergesort {
   def msort[T](xs: List[T])(lt: (T, T) => Boolean): List[T] = {
     val n = xs.length/2
@@ -219,7 +219,7 @@ object mergesort {
 
 그래서 lt 명령어를 parameterizing 하는 대신 Orderging 클래스로 parameterize 할 수 있다.
 
-```
+```scala
 def msort[T](xs: List[T])(ord: Ordering) =
 
   def merge(xs: List[T], ys: List[T]) =
@@ -233,7 +233,7 @@ def msort[T](xs: List[T])(ord: Ordering) =
 대체로 완성된 느낌이 나지만, Ordering 함수가 처음 콜 될때부터 계속 전달되는게 좀 비효율적으로 보인다. 그래서 여기에다가 또하나를 추가해보자.
 ord 파라미터에 implicit(절대적인이란 뜻) 키워드를 앞에 붙여보자. 그러면, 함수를 실제로 호출하는 부분에서 실제 파라미터를 넣어줄 필요가 없다.
 
-```
+```scala
 def msort[T](xs: List[T])(implicit ord: Ordering) =
 
   def merge(xs: List[T], ys: List[T]) =
@@ -266,7 +266,7 @@ msort(nums)
 
 첫번째 예제는 각 요소를 multiply 하는 것이다.
 
-```
+```scala
 def scaleList(xs: List[Double], factor: Double): List[Double] = xs match {
   case Nil => xs
   case y :: ys => y * factor :: scaleList(ys, factor)
@@ -278,7 +278,7 @@ def scaleList(xs: List[Double], factor: Double): List[Double] = xs match {
 위 예제는 list 의 map 메서드를 이용하여 만들 수 있다.
 map 메서드의 구조를 살펴보면 아래와 같다.
 
-```
+```scala
 abstract class List[T] { ...
   def map[U](f: T => U): List[U] = this match {
     case Nil => this
@@ -289,14 +289,14 @@ abstract class List[T] { ...
 
 파라미터로 들어온 함수 f 가 각 element 에 적용되어서 새로운 리스트를 만들어 내는 함수가 바로 map 이다. map 메서드를 이용하면 훨씬 간단하게 작성할 수 있다
 
-```
+```scala
 def scaleList(xs: List[Double], factor: Double) =
   xs.map(x => x * factor)
 ```
 
 또하나의 예제를 살펴보자
 
-```
+```scala
 def squareList(xs: List[Int]): List[Int] = xs match {
   case Nil => Nil
   case y :: ys => y * y :: squareList(ys)
@@ -311,7 +311,7 @@ def squareList(xs: List[Int]): List[Int] =
 필터링은 어떤 조건에 맞는 element 를 모아 새로운 리스트를 만들어 내는 메서드이다.
 0 보다 큰수만 필터링 하는 다음의 함수를 보자
 
-```
+```scala
 def posElems(xs: List[Int]): List[Int] = xs match {
   case Nil => xs
   case y :: ys => if (y > 0) y :: posElems(ys) else posElems(ys)
@@ -320,7 +320,7 @@ def posElems(xs: List[Int]): List[Int] = xs match {
 
 필터를 이용하면 간단하게 해결할 수 있다. 우선은 filter 메서드가 어떻게 생겼는지부터 살펴보도록 하자.
 
-```
+```scala
 abstract class List[T] {
   ...
   def filter(p: T => Boolean): List[T] = this match {
@@ -333,7 +333,7 @@ abstract class List[T] {
 필터는 특정조건함수(p)가 true 이면 :: 연산자를 이용하여 리스트에 붙이고 false 이면 제외하는 방식으로 새로운 리스트를 만들어간다.
 그럼 위에서 보았던 posElems 를 filter 를 이용해 재구성해보자
 
-```
+```scala
 def posElems(xs: List[Int]): List[Int] =
   xs filter(x => x > 0)
 ```
@@ -348,7 +348,7 @@ def posElems(xs: List[Int]): List[Int] =
 
 예를 들어보자
 
-```
+```scala
 scala> val nums = List(2, -4, 5, 7, 1)
 nums: List[Int] = List(2, -4, 5, 7, 1)
 
@@ -375,7 +375,7 @@ res5: (List[Int], List[Int]) = (List(2),List(-4, 5, 7, 1))
 
 5.4 절에 이어 higr-order Function 패턴을 이용한 List 메서드에 대해서 계속 알아보도록 하자. 5.4 에서 보았던 세가지 패턴 중에 마지막인 element 를 결합하는 방법들에 대한 내용들이 되겠다.
 
-```
+```scala
 sum(List(x1, ..., xn))      = 0 + x1 + ... + xn
 product(List(x1, ..., xn))  = 1 * x1 * ... * xn
 ```
@@ -384,7 +384,7 @@ product(List(x1, ..., xn))  = 1 * x1 * ... * xn
 
 각 요소를 더하거나 곱하는 sum 과 product 메서드가 있다. 이를 ReduceLeft 메서드를 이용하여 구현해보도록하자. ReduceLeft 메서드는 아래와 같은 구조를 가진다.
 
-```
+```scala
 List(x1, ..., xn) reduceLeft op = (...(x1 op x2) op ... ) op xn
 
 // 위의 구조를 이용하면 sum과 product는 아래와 같이 구현가능하다.
@@ -397,20 +397,20 @@ def product(xs: List[Int]) = (1 :: xs) reduceLeft ((x, y) => x * y) // or (_ * _
 foldLeft 함수는 reduceLeft 함수에 비해 좀더 일반적인 형태이다. foldLeft 가 reduceLeft 와 비슷하지만, foldLeft 는 하나의 accumulator(z)를 가진다.
 구조는 아래와 같다.
 
-```
+```scala
 (List(x1, ..., xn) foldLeft z)(op) = (...(z op x1) op ...) op xn
 ```
 
 foldLeft 로 sum 과 product 를 구현해보자
 
-```
+```scala
 def sum(xs: List[Int]) = (xs foldLeft 0) (_ + _)
 def product(xs: List[Int]) = (xs foldLeft 1) (_ * _)
 ```
 
 foldLeft 와 reduceLeft 는 List class 에서 다음과 같이 구현된다.
 
-```
+```scala
 abstract class List[T] { ...
   def reduceLeft(op: (T, T) => T): T = this match {
     case Nil => throw new Error("Nil.reduceLeft")
@@ -430,7 +430,7 @@ reduceLeft 도 내부적으로는 foldLeft 메서드를 이용한다.
 
 foldLeft 와 foldRight 는 무엇이 다를까? 기본적으로 sum 을 가지고 생각했을때, 왼쪽부터 더하는 것이나 오른쪽부터 더하는 것이나 결과는 동일하다. 하지만 어떤 경우에는 둘 중 하나만 적절할 때도 있다. 아래의 예제를 보자
 
-```
+```scala
 def concat[T](xs: List[T], ys: List[T]): List[T] = (xs foldRight ys) (_ :: _)
 ```
 
@@ -459,7 +459,7 @@ structural induction 은 다음과 같이 동작한다.
 
 이제 concat 함수를 다시 살펴보자
 
-```
+```scala
 def concat[T](xs: List[T], ys: List[T]) = xs match {
   case List() => ys
   case x :: xs1 => x :: concat(xs1, ys)
@@ -468,7 +468,7 @@ def concat[T](xs: List[T], ys: List[T]) = xs match {
 
 그리고 다음의 수식을 structural induction 으로 증명해보자
 
-```
+```scala
 (xs ++ ys) ++ zs = xs ++ (ys ++ zs)
 // ++(concat) 연산자의 두가지 정리를 참고한다
 // Nil ++ ys = ys
@@ -477,7 +477,7 @@ def concat[T](xs: List[T], ys: List[T]) = xs match {
 
 우선 xs 에 Nil 이 들어갈 때인 P(Nil)을 살펴보자
 
-```
+```scala
 // left
 (Nil ++ ys) ++ zs
 = ys ++ zs      // by 1st clause of ++
@@ -489,7 +489,7 @@ Nil ++ (ys ++ zs)
 
 다음은 xs 대신에 induction step 인 'x :: xs'를 넣어보자
 
-```
+```scala
 // left
 ((x :: xs) ++ ys) + zs
 = (x :: (xs ++ ys)) ++ zs      // by 2st clause of ++
@@ -507,7 +507,7 @@ Nil ++ (ys ++ zs)
 좀더 까다로운 function 인 reverse 에 대해서 알아보자
 다음의 두가지 amenable 한 사실을 가지고 그 아래의 식을 증명해보자
 
-```
+```scala
 (1) Nil.reverse = Nil               // 1st clause
 (2) (x :: xs).reverse = xs.reverse ++ List(x)   // 2nd clause
 
@@ -517,7 +517,7 @@ xs.reverse.reverse = xs
 
 base case 는 단순하다
 
-```
+```scala
 Nil.reverse.reverse
 = Nil.reverse
 = Nil
@@ -525,7 +525,7 @@ Nil.reverse.reverse
 
 이번엔 reduction step 이다.
 
-```
+```scala
 // left
 (x :: xs).reverse.reverse
 = (xs.reverse ++ List(x)).reverse     // by 2nd clause of reverse
@@ -537,21 +537,21 @@ x :: xs
 
 두 개를 합쳐보면,
 
-```
+```scala
 (xs.reverse ++ List(x)).reverse = x :: xs.reverse.reverse
 ```
 
 직접적으로 induction 이 불가하므로, 동일한 연산을 일반화 시켜보자
 여기서는 xs.reverse 를 ys 로 치환하도록 하자. 그럼 수식이 아래와 같이 바뀐다.
 
-```
+```scala
 (ys ++ List(x)).reverse = x :: ys.reverse
 ```
 
 그럼 이제 두번째 induction 인 ys 를 증명하면 동일함을 입증할 수 있겠다.
 우선 base case 부터 살펴보자
 
-```
+```scala
 // left
 (Nil ++ List(x)).reverse
 = List(x).reverse       // by 1st clause of ++
@@ -564,7 +564,7 @@ x :: xs
 
 결과는 우변의 ys 에 Nil 을 집어넣었을 때와 동일한 결과과 도출되었으므로 base case 를 증명되었다. 이제 reduction step 으로 가보자
 
-```
+```scala
 // left
 ((y :: ys) ++ List(x)).reverse
 = (y :: (ys ++ List(x))).reverse    // by 2nd clause of ++
@@ -581,7 +581,7 @@ x :: (y :: ys).reverse
 
 ### Exercise
 
-```
+```scala
 (xs ++ ys) map f = (xs map f) ++ (ys map f)
 
 Nil map f = Nil
@@ -590,7 +590,7 @@ Nil map f = Nil
 
 base case..
 
-```
+```scala
 // left
 (Nil ++ ys) map f
 = ys map f
@@ -603,7 +603,7 @@ base case..
 
 reduction step
 
-```
+```scala
 // left
 ((x :: xs) ++ ys) map f
 = (x :: (xs ++ ys)) map f

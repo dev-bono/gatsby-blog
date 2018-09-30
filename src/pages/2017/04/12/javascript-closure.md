@@ -20,17 +20,17 @@ tags:
 
 이런 정의만 보고 과연 사람들이 이해를 할 수 있는건지는 잘 모르겠지만, 클로저에 대한 이해가 거의 없는 분들은 아마도 이해하기 어렵울 것입니다. 그러면, 일단 코드를 보도록 하죠.
 
-```
+```javascript
 function outFunc(name) {
-	var outVar = "my name is ";
-	function innerFunc() {
-		return outVar + name;
-	}
-	return innerFunc;
+  var outVar = 'my name is '
+  function innerFunc() {
+    return outVar + name
+  }
+  return innerFunc
 }
 
-var result = outFunc("bono");
-console.log("result: " + result());
+var result = outFunc('bono')
+console.log('result: ' + result())
 
 // result: my name is bono
 ```
@@ -39,24 +39,24 @@ console.log("result: " + result());
 
 다른 예제를 살펴보겠습니다.
 
-```
-var out = "out value";
+```javascript
+var out = 'out value'
 
 function outFunc() {
-	var inner = "in value";
+  var inner = 'in value'
 
-	function inFunc(inParam) {
-		console.log("out: " + out);
-		console.log("inner: " + inner);
-		console.log("inParam: " + inParam);
-	}
+  function inFunc(inParam) {
+    console.log('out: ' + out)
+    console.log('inner: ' + inner)
+    console.log('inParam: ' + inParam)
+  }
 
-	return inFunc;
+  return inFunc
 }
 
-var param = "this is param";
-var outResult = outFunc();
-outResult(param);
+var param = 'this is param'
+var outResult = outFunc()
+outResult(param)
 
 // out: out value
 // inner: in value

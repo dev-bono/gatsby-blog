@@ -13,14 +13,14 @@ item 이 너무 많아지게 되면, 메모리 등의 성능 이슈가 발생할
 이 때 첫번째 문제가 발생했습니다. python 에서 set 은 분절 할 수 없다는 것입니다.
 리스트의 경우에는 아래와 같이 분절이 가능합니다만, set 은 리스트 처럼 분절이 불가합니다.
 
-```
+```python
 temp_list = ['a, 'b', 'c', 'd', 'e', 'f']
 temp_list[:3]
 
 # ['a, 'b', 'c'] 출력
 ```
 
-```
+```python
 temp_set = {'a, 'b', 'c', 'd', 'e', 'f'}
 temp_set[:3]
 
@@ -54,7 +54,7 @@ temp_set[:3]
 
 우선 진짜 set 이 list 에 비해 iteration 성능이 떨어지는지 확인해 보았습니다.
 
-```
+```python
 from timeit import timeit
 
 def iter(iterable):

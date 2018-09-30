@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-
-import { rhythm, scale } from '../utils/typography'
+import { rhythm } from '../utils/typography'
 import Header from './header'
 
 class Template extends React.Component {
@@ -11,6 +9,7 @@ class Template extends React.Component {
       <div>
         <Header {...this.props} />
         <div
+          // Header를 제외한 본문의 모든 스타일은 여기서 정의한다.
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',

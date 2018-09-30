@@ -1,0 +1,25 @@
+a {
+  color: #3a3a3a;
+  text-decoration: none;
+}
+a:active,
+a:hover {
+  text-decoration: underline;
+  outline-width: 0;
+  text-shadow: none;
+  background-image: none;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #2d2d2d;
+}
+
+:not(pre) > code[class*='language-'] {
+  border-radius: 0;
+  background: #ffebeb;
+  color: #333;
+  padding: 2px;
+  border: 1px solid #ffc3c3;
+  border-radius: 2px;
+}

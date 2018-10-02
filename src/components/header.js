@@ -6,8 +6,7 @@ import { DEFAULT_STYLE_LINK } from '../constants'
 
 class Header extends React.Component {
   render() {
-    const { location, children } = this.props
-    const { pathname } = location
+    const { pathname } = this.props.location
     return (
       <div
         style={{
@@ -36,31 +35,24 @@ class Header extends React.Component {
               bono's blog
             </Link>
           </span>
-          <Menu
-            pathname={location.pathname}
-            menuPathname="/programming"
-            menuName="개발"
-          />
-          <Menu
-            pathname={location.pathname}
-            menuPathname="/essay"
-            menuName="일기"
-          />
-          <Menu
-            pathname={location.pathname}
-            menuPathname="/review"
-            menuName="책리뷰"
-          />
-          <Menu
-            pathname={location.pathname}
-            // menuPathname="/tags"
-            menuPathname="/"
-            menuName="태그"
-          />
+          {MENU_DATA.map(item => (
+            <Menu
+              pathname={pathname}
+              menuPathname={item.pathname}
+              menuName={item.title}
+            />
+          ))}
         </div>
       </div>
     )
   }
 }
+
+const MENU_DATA = [
+  { pathname: '/programming', title: '개발' },
+  { pathname: '/essay', title: '일기' },
+  { pathname: '/review', title: '책리뷰' },
+  { pathname: '/', title: '태그' },
+]
 
 export default Header

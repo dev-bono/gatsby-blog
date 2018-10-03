@@ -1,6 +1,8 @@
 import React from 'react'
 import { rhythm } from '../utils/typography'
 import Header from './header'
+import 'prismjs/themes/prism-tomorrow.css'
+import '../common.css'
 
 class Template extends React.Component {
   render() {

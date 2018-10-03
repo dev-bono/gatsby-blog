@@ -1,8 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Posts from '../components/list'
-import 'prismjs/themes/prism-tomorrow.css'
-import '../common.css'
 
 export default class BlogIndex extends React.Component {
   render() {

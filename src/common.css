@@ -1,14 +1,13 @@
-a {
+.contents a {
   color: #3a3a3a;
   text-decoration: none;
+  border-bottom: 3px solid #e0d6eb;
 }
-a:active,
-a:hover:not(.gatsby-resp-image-link) {
-  /* text-decoration: underline; */
+.contents a:active,
+.contents a:hover:not(.gatsby-resp-image-link) {
   outline-width: 0;
   text-shadow: none;
-  background-image: none;
-  border-bottom: 4px solid #e0d6eb;
+  background-color: #e0d6eb;
 }
 
 :not(pre) > code[class*='language-'],
@@ -18,9 +17,8 @@ pre[class*='language-'] {
 
 :not(pre) > code[class*='language-'] {
   border-radius: 0;
-  background: #f5ebff;
-  color: #333;
-  padding: 2px;
-  border: 2px solid #e3c9ff;
-  border-radius: 2px;
+  background: #dfdfdf;
+  color: rgb(34, 34, 34);
+  padding: 3px;
+  font-weight: 600;
 }

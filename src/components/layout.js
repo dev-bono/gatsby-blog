@@ -9,6 +9,7 @@ class Template extends React.Component {
       <div>
         <Header {...this.props} />
         <div
+          className="contents"
           // Header를 제외한 본문의 모든 스타일은 여기서 정의한다.
           style={{
             marginLeft: 'auto',

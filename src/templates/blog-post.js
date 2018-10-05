@@ -6,6 +6,9 @@ import Layout from '../components/layout'
 import { rhythm, scale } from '../utils/typography'
 
 class BlogPostTemplate extends React.Component {
+  componentDidMount() {
+    initUtterances()
+  }
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
@@ -44,6 +47,7 @@ class BlogPostTemplate extends React.Component {
           {post.frontmatter.date}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="commentsWrap" />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -76,6 +80,25 @@ class BlogPostTemplate extends React.Component {
       </Layout>
     )
   }
+}
+
+function initUtterances() {
+  const utterancesConfig = {
+    src: 'https://utteranc.es/client.js',
+    repo: 'blueshw/gatsby-blog',
+    branch: 'master',
+    async: true,
+    'issue-term': 'pathname',
+    theme: 'github-light',
+  }
+  const utterances = document.createElement('script')
+  const commentsWrap = document.querySelector('.commentsWrap')
+
+  Object.keys(utterancesConfig).forEach(configKey => {
+    utterances.setAttribute(configKey, utterancesConfig[configKey])
+  })
+
+  commentsWrap.insertAdjacentElement('afterend', utterances)
 }
 
 export default BlogPostTemplate

@@ -18,6 +18,18 @@ class BlogPostTemplate extends React.Component {
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
+          script={[
+            {
+              async: true,
+              src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+            },
+            {
+              innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-4588610260101909",
+                enable_page_level_ads: true
+              });`,
+            },
+          ]}
         />
         <h3 style={{ lineHeight: rhythm(1.1) }}>{post.frontmatter.title}</h3>
         <p

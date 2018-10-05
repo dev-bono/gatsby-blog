@@ -4,37 +4,36 @@ import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
 import Layout from '../components/layout'
 import { rhythm, scale } from '../utils/typography'
+import Disqus from 'disqus-react'
 
 class BlogPostTemplate extends React.Component {
-  componentDidMount() {
-    initUtterances()
-  }
   render() {
-    const post = this.props.data.markdownRemark
+    const { data, pageContext, location } = this.props
+    const { previous, next } = pageContext
+    const { href } = location
+    const post = data.markdownRemark
+    const { title, date } = post.frontmatter
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const siteDescription = post.excerpt
-    const { previous, next } = this.props.pageContext
 
+    if (!href) {
+      return null
+    }
+    const disqusShortname = 'bonogithub'
+    const disqusConfig = {
+      url: href,
+      identifier: post.id,
+      title,
+    }
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
-          title={`${post.frontmatter.title} | ${siteTitle}`}
-          script={[
-            {
-              async: true,
-              src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-            },
-            {
-              innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-4588610260101909",
-                enable_page_level_ads: true
-              });`,
-            },
-          ]}
+          title={`${title} | ${siteTitle}`}
+          script={[ADSENSE_SCRIPT_1, ADSENSE_SCRIPT_2]}
         />
-        <h3 style={{ lineHeight: rhythm(1.1) }}>{post.frontmatter.title}</h3>
+        <h3 style={{ lineHeight: rhythm(1.1) }}>{title}</h3>
         <p
           style={{
             ...scale(-1 / 5),
@@ -44,10 +43,9 @@ class BlogPostTemplate extends React.Component {
             color: '#bbb',
           }}
         >
-          {post.frontmatter.date}
+          {date}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <div className="commentsWrap" />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -61,17 +59,18 @@ class BlogPostTemplate extends React.Component {
             listStyle: 'none',
             padding: 0,
             margin: 0,
+            marginBottom: 30,
             fontSize: rhythm(0.5),
           }}
         >
-          <li style={{ width: 280 }}>
+          <li style={{ maxWidth: 280 }}>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
-          <li style={{ width: 280 }}>
+          <li style={{ maxWidth: 280 }}>
             {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
@@ -79,31 +78,25 @@ class BlogPostTemplate extends React.Component {
             )}
           </li>
         </ul>
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
       </Layout>
     )
   }
 }
 
-function initUtterances() {
-  const utterancesConfig = {
-    src: 'https://utteranc.es/client.js',
-    repo: 'blueshw/gatsby-blog',
-    branch: 'master',
-    async: true,
-    'issue-term': 'pathname',
-    theme: 'github-light',
-  }
-  const utterances = document.createElement('script')
-  const commentsWrap = document.querySelector('.commentsWrap')
-
-  Object.keys(utterancesConfig).forEach(configKey => {
-    utterances.setAttribute(configKey, utterancesConfig[configKey])
-  })
-
-  commentsWrap.insertAdjacentElement('afterend', utterances)
+const ADSENSE_SCRIPT_1 = {
+  async: true,
+  src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
 }
-
-export default BlogPostTemplate
+const ADSENSE_SCRIPT_2 = {
+  innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4588610260101909",
+    enable_page_level_ads: true
+  });`,
+}
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -124,3 +117,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export default BlogPostTemplate

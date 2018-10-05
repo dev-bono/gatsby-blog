@@ -37,6 +37,7 @@ class Header extends React.Component {
           </span>
           {MENU_DATA.map(item => (
             <Menu
+              key={item.pathname}
               pathname={pathname}
               menuPathname={item.pathname}
               menuName={item.title}

@@ -1,9 +1,9 @@
-.contents a {
+.contents a:not(.gatsby-resp-image-link) {
   color: #3a3a3a;
   text-decoration: none;
   border-bottom: 3px solid #e0d6eb;
 }
-.contents a:active,
+.contents a:active:not(.gatsby-resp-image-link),
 .contents a:hover:not(.gatsby-resp-image-link) {
   outline-width: 0;
   text-shadow: none;

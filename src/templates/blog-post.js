@@ -60,16 +60,18 @@ class BlogPostTemplate extends React.Component {
             justifyContent: 'space-between',
             listStyle: 'none',
             padding: 0,
+            margin: 0,
+            fontSize: rhythm(0.5),
           }}
         >
-          <li>
+          <li style={{ width: 280 }}>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
-          <li>
+          <li style={{ width: 280 }}>
             {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →

@@ -1,16 +1,16 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { rhythm, scale } from '../utils/typography'
-import Menu from './menu'
-import { DEFAULT_STYLE_LINK } from '../constants'
+import React from 'react';
+import { Link } from 'gatsby';
+import { rhythm, scale } from '../utils/typography';
+import Menu from './menu';
+import { DEFAULT_STYLE_LINK } from '../constants';
 
 class Header extends React.Component {
   render() {
-    const { pathname } = this.props.location
+    const { pathname } = this.props.location;
     return (
       <div
         style={{
-          height: '50px',
+          height: rhythm(1.7),
           widht: '100%',
           borderBottom: '1px solid #eee',
           padding: 10,
@@ -45,7 +45,7 @@ class Header extends React.Component {
           ))}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -54,6 +54,6 @@ const MENU_DATA = [
   { pathname: '/essay', title: '일기' },
   { pathname: '/review', title: '책리뷰' },
   { pathname: '/', title: '태그' },
-]
+];
 
-export default Header
+export default Header;

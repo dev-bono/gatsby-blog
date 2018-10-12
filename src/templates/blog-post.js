@@ -1,30 +1,30 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
-import Layout from '../components/layout'
-import { rhythm, scale } from '../utils/typography'
-import Disqus from 'disqus-react'
+import React from 'react';
+import Helmet from 'react-helmet';
+import { Link, graphql } from 'gatsby';
+import get from 'lodash/get';
+import Layout from '../components/layout';
+import { rhythm, scale } from '../utils/typography';
+import Disqus from 'disqus-react';
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const { data, pageContext, location } = this.props
-    const { previous, next } = pageContext
-    const { href } = location
-    const post = data.markdownRemark
-    const { title, date } = post.frontmatter
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const siteDescription = post.excerpt
+    const { data, pageContext, location } = this.props;
+    const { previous, next } = pageContext;
+    const { href } = location;
+    const post = data.markdownRemark;
+    const { title, date } = post.frontmatter;
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    const siteDescription = post.excerpt;
 
     if (!href) {
-      return null
+      return null;
     }
-    const disqusShortname = 'bonogithub'
+    const disqusShortname = 'bonogithub';
     const disqusConfig = {
       url: href,
       identifier: post.id,
       title,
-    }
+    };
     return (
       <Layout location={location}>
         <Helmet
@@ -83,20 +83,20 @@ class BlogPostTemplate extends React.Component {
           config={disqusConfig}
         />
       </Layout>
-    )
+    );
   }
 }
 
 const ADSENSE_SCRIPT_1 = {
   async: true,
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-}
+};
 const ADSENSE_SCRIPT_2 = {
   innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({
     google_ad_client: "ca-pub-4588610260101909",
     enable_page_level_ads: true
   });`,
-}
+};
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -116,6 +116,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
 
-export default BlogPostTemplate
+export default BlogPostTemplate;

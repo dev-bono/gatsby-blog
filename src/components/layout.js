@@ -1,12 +1,12 @@
-import React from 'react'
-import { rhythm } from '../utils/typography'
-import Header from './header'
-import 'prismjs/themes/prism-tomorrow.css'
-import '../common.css'
+import React from 'react';
+import { rhythm } from '../utils/typography';
+import Header from './header';
+import 'prismjs/themes/prism-tomorrow.css';
+import '../common.css';
 
 class Template extends React.Component {
   render() {
-    const { children } = this.props
+    const { children } = this.props;
     return (
       <div>
         <Header {...this.props} />
@@ -16,15 +16,15 @@ class Template extends React.Component {
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: rhythm(24),
+            maxWidth: rhythm(26),
             padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
           }}
         >
           {children}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Template
+export default Template;

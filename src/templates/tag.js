@@ -2,21 +2,25 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Posts from '../components/list';
 
-export default class BlogIndex extends React.Component {
-  render() {
-    return <Posts {...this.props} />;
-  }
-}
+const Tag = props => {
+  return <Posts {...props} isTagPage={true} />;
+};
+
+export default Tag;
 
 export const pageQuery = graphql`
-  query {
+  query($tag: String) {
     site {
       siteMetadata {
         title
         description
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      limit: 2000
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
       totalCount
       edges {
         node {

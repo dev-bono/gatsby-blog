@@ -28,14 +28,14 @@ class BlogPostTemplate extends React.Component {
     return (
       <Layout location={location}>
         <Helmet
-          htmlAttributes={{ lang: 'en' }}
+          htmlAttributes={{ lang: 'ko' }}
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${title} | ${siteTitle}`}
           script={[ADSENSE_SCRIPT_1, ADSENSE_SCRIPT_2]}
         />
-        <h3 style={{ lineHeight: rhythm(1.1) }}>{title}</h3>
+        <h3 css={{ lineHeight: rhythm(1.1) }}>{title}</h3>
         <p
-          style={{
+          css={{
             ...scale(-1 / 5),
             display: 'block',
             marginBottom: rhythm(3),
@@ -47,12 +47,12 @@ class BlogPostTemplate extends React.Component {
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
-          style={{
+          css={{
             marginBottom: rhythm(1),
           }}
         />
         <ul
-          style={{
+          css={{
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-between',
@@ -63,14 +63,14 @@ class BlogPostTemplate extends React.Component {
             fontSize: rhythm(0.5),
           }}
         >
-          <li style={{ maxWidth: 280 }}>
+          <li css={{ maxWidth: 280 }}>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
-          <li style={{ maxWidth: 280 }}>
+          <li css={{ maxWidth: 280 }}>
             {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →

@@ -9,7 +9,7 @@ class Header extends React.Component {
     const { pathname } = this.props.location;
     return (
       <div
-        style={{
+        css={{
           height: rhythm(1.7),
           widht: '100%',
           borderBottom: '1px solid #eee',
@@ -17,21 +17,21 @@ class Header extends React.Component {
         }}
       >
         <div
-          style={{
+          css={{
             display: 'flex',
             width: '100%',
             marginBottom: rhythm(1.5),
           }}
         >
           <span
-            style={{
+            css={{
               ...scale(0.25),
               flex: '1 0 auto',
               color: '#bbb',
               marginLeft: 20,
             }}
           >
-            <Link style={DEFAULT_STYLE_LINK} to={'/'}>
+            <Link css={DEFAULT_STYLE_LINK} to={'/'}>
               bono's blog
             </Link>
           </span>
@@ -53,7 +53,7 @@ const MENU_DATA = [
   { pathname: '/programming', title: '개발' },
   { pathname: '/essay', title: '일기' },
   { pathname: '/review', title: '책리뷰' },
-  { pathname: '/', title: '태그' },
+  { pathname: '/tags', title: '태그' },
 ];
 
 export default Header;

@@ -1,10 +1,10 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Posts from '../components/list'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Posts from '../components/list';
 
 export default class Essay extends React.Component {
   render() {
-    return <Posts {...this.props} />
+    return <Posts {...this.props} />;
   }
 }
 
@@ -20,6 +20,7 @@ export const pageQuery = graphql`
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { category: { eq: "essay" } } }
     ) {
+      totalCount
       edges {
         node {
           excerpt
@@ -35,4 +36,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

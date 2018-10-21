@@ -1,10 +1,10 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Posts from '../components/list'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Posts from '../components/list';
 
 export default class Programming extends React.Component {
   render() {
-    return <Posts {...this.props} />
+    return <Posts {...this.props} />;
   }
 }
 
@@ -22,6 +22,7 @@ export const pageQuery = graphql`
         frontmatter: { category: { regex: "/^(?!review|essay)([a-z0-9]+)$/" } }
       }
     ) {
+      totalCount
       edges {
         node {
           excerpt
@@ -37,4 +38,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

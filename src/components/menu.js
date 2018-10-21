@@ -8,12 +8,12 @@ class Menu extends React.Component {
     const { pathname, menuPathname, menuName } = this.props;
     return (
       <span
-        style={{
+        css={{
           ...DEFAULT_STYLT_MENU,
           fontWeight: pathname === menuPathname ? 800 : 300,
         }}
       >
-        <Link style={DEFAULT_STYLE_LINK} to={menuPathname}>
+        <Link css={DEFAULT_STYLE_LINK} to={menuPathname}>
           {menuName}
         </Link>
       </span>

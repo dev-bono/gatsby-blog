@@ -17,23 +17,23 @@ tags:
 ### 상황
 
 > - 동적으로 자바스크립트 a.js를 서버로부터 다운로드 받는다.
-> -> appendDOM.js에는 추가할 DOM정보가 있고 appendDOM이라는 함수를 호출한다(appendDOM함수는 domHelper.js에 미리 구현해둔다).
-> -> DOM에는 HTML 코드 뿐 아니라 javascript, css 코드도 있다.
-> -> javascript, css 코드는 인라인으로 삽입되어 있고 파싱하기 힘들만큼 크다.
-> -> 다운받는 js파일은 콘텐츠마다 다르며 css 코드도 다르다(즉, 예측 불가능하다).
-> -> css 코드에 따라 메인 DOM의 스타일이 영향받을 수 있는 위험이 있다.
+> - appendDOM.js에는 추가할 DOM정보가 있고 appendDOM이라는 함수를 호출한다(appendDOM함수는 domHelper.js에 미리 구현해둔다).
+> - DOM에는 HTML 코드 뿐 아니라 javascript, css 코드도 있다.
+> - javascript, css 코드는 인라인으로 삽입되어 있고 파싱하기 힘들만큼 크다.
+> - 다운받는 js파일은 콘텐츠마다 다르며 css 코드도 다르다(즉, 예측 불가능하다).
+> - css 코드에 따라 메인 DOM의 스타일이 영향받을 수 있는 위험이 있다.
 
 아래처럼 네개의 파일이 있다. 실제 프로젝트 내에는 `Main.js`, `domHelper.js`, `Main.css` 세개만 있고 `appendDOM_1234.js`는 서버로부터 동적으로 다운로드 받는다.
 
-```
+~~~
 Main.js 
 domHelper.js
 Main.css
 appendDOM_1234.js // 동적으로 서버에서 받아온다. id(1234)에 따라 콘텐츠(DOM)도 다르다.
-```
+~~~
 
 #### Main.js
-```
+~~~
 import React, { Component } from "react";
 import "./domHelper";
 import "./Main.css";
@@ -57,27 +57,27 @@ class Main extends Component {
   }
 }
 export default Main;
-```
+~~~
 
 #### domHelper.js
-``` 
+~~~ 
 window.appendDOM = function(data) {
   const dom = data;
   const addPoint = document.querySelector("#addPoint");
   addPoint.innerHTML = dom;
 };
-```
+~~~
 appendDOM.js가 추가되면 `appendDOM()` 함수가 호출된다.
 
 #### Main.css 
-```
+~~~
 h1 {
   color: red;
 }
-```
+~~~
 
 #### appendDOM.js (_1234 생략)
-```
+~~~
 const data = `
   <div>
     <h1>동적으로 추가한 DOM (파란색)</h1>
@@ -87,7 +87,7 @@ const data = `
   </div>
 `;
 window.appendDOM(data);
-```
+~~~
 
 이런 상황이다.
 
@@ -97,7 +97,7 @@ npm start로 앱을 실행해보면 아래처럼 보일 것이다.
 
 `js 가져오기` 버튼을 눌러보자. 그럼 아래처럼 `main DOM (빨간색)` text의 글자색이 파란색 바뀐다.
 
-![img0](./1.jpg)
+![img1](./1.jpg)
 
 위 사례처럼 메인 DOM의 스타일이 영향받을 수 있음을 알면서도 그냥 `element.innerHTML = data`로 밀어넣었다. 문제가 발생하면 그때그때 스타일과 메인 DOM의 요소를 수정하는 식으로 해결했다. 하지만, 이건 근본적인 문제 해결책이 아님을 알고 있었다. 이렇게 수정하기 시작해서는 끝도 없이 이어질것이라 생각했다. 다운받은 콘텐츠를 파싱(parsing)해서 요소(html, javascript, css)를 분리할수도 있었다. 하지만, 콘텐츠의 길이를 가늠할 수 없는 상황에서 모든 요소를 파싱하는것은 무리라 판단했다.
 
@@ -105,9 +105,9 @@ npm start로 앱을 실행해보면 아래처럼 보일 것이다.
 
 `웹 컴포넌트(Web Component)`의 `쉐도우 돔(Shadow DOM)`을 이용하기로 했다. 일반적으로 DOM내 사용하는 CSS는 선언된 위치와 상관없이 모든 DOM 요소에 적용된다. 예를 들어 DOM 중간에 선언된 `<style>`태그 내에 다음과 같은 코드가 있다고 생각해보자
 
-```
+~~~
 div { background: black }
-```
+~~~
 
 이러면 모든 div 태그의 배경색이 검정색(black)이 되어 브라우저를 암흑으로 만들어 버릴 것이다. 왜 DOM 가운데 선언한 스타일 하나 때문에 모든 DOM이 고통받아야 하는걸까? 
 
@@ -116,13 +116,13 @@ div { background: black }
 위의 프로젝트에서는 domHelper.js의 appendDOM 함수만 바꿔주면 해결된다. `addPoint.attachShadow({mode: 'open'})`만 추가하면 쉐도우 돔이 만들어진다. {mode: 'open'}`은 지금은 몰라도 되니 넘어가자.  
 
 #### domHelper.js (쉐도우 돔 사용)
-``` 
+~~~
 window.appendDOM = function(data) {
   const dom = data;
   const addPoint = document.querySelector("#addPoint");
   addPoint.attachShadow({mode: 'open'}).innerHTML = dom;
 };
-```
+~~~
  
 다시 `js 가져오기` 버튼을 눌러보자. 이제 제대로 스타일이 적용된 화면을 볼 수 있다.
 

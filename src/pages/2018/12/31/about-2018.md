@@ -3,8 +3,8 @@ title: '2018 회고'
 date: 2018-12-30 11:58:20
 category: essay
 tags: 
-  - 2018
-  - 2019
+  - '2018'
+  - '2019'
   - 회고
   - react
   - next

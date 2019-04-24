@@ -13,7 +13,7 @@ tags:
   - momentum scroll
 ---
 
-react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. 근데 이 react-modal을 쓰다보면 한가지 문제에 부딪힌다. 바로 모달 외부의 dimmed 영역이 스크롤되는 문제다. 예제를 살펴보자.
+react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. 근데 이 react-modal을 쓰다보면 한가지 문제에 부딪힌다. 바로 모달 외부의 dimmed 영역이 스크롤되는 문제다. 예제를 살펴보자 (모바일이라면 반드시 새창으로 열어서 확인하자). 
 
 <iframe src="https://codesandbox.io/embed/p514nlnnvx?fontsize=14" title="[prevent-scroll] 1. base-modal" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -27,11 +27,7 @@ react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. �
 }
 ```
 
-> 모든 codeSandbox 코드는 모바일에서 테스트해보자
-
-<iframe src="https://codesandbox.io/embed/7wry96q4j0?fontsize=14" title="[prevent-scroll] 2. add-style" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
-잘된다. 적어도 데스크탑에서는 잘 된다.
+해보면, 잘된다. 적어도 데스크탑에서는 잘 된다.
 그런데 issue를 조금 더 보면 모바일에서 여전히 스크롤이 발생한다는 보고가 군데군데 보인다.
 모바일에서 테스트해보자. 정말 `안된다!`
 
@@ -45,8 +41,6 @@ react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. �
   height: 100%;
 }
 ```
-
-<iframe src="https://codesandbox.io/embed/0w6lknnzv?fontsize=14" title="[prevent-scroll] 3. add-more-style" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 되는것 같이(?) 보인다. 그런데, 좀더 테스트 해보면 문제가 있음을 알 수 있다. 스크롤을 아래로 내린 상태에서 `modal 열기` 버튼을 클릭하자. 그러면 스크롤이 가장 상위로 올라간다. 이는 확실히 문제가 있다. 예를들어 스크롤 뷰어(웹툰이라고 상상하자)에서 특정 버튼을 눌렀을때 모달뷰가 뜨는 경우가 있다. 중간정도 위치를 보는 중이었는데 갑자기 모달이 뜨면서 스크롤이 가장 위로 올라가면 사용자는 자신이 보던 위치를 잃어버리게 된다. 그러므로 위 방법이 적절한 해결책은 아니다.
 
@@ -78,9 +72,7 @@ useEffect(() => {
 showModal === true일때 `event.preventDefault()`를 호출하고 EventListenerOptions 옵션에 `passive: false`를 설정한다.
 첫째는 modal이 떠있을때 `preventDefault` 함수로 터치 이벤트의 기본 동작인 `scroll`을 막겠다는 의도다. 그리고 두번째 `passive: false`는 touch 이벤트가 발생했을때 preventDefault가 호출된다면 이벤트(scroll) 발생을 막겠다는 것이다. passive가 true일때는 preventDefault 함수를 무시하고 scroll을 하겠다는 의미다. passive의 기본값은 false기 때문에 따로 설정할 필요가 없다. 그럼에도 명시적으로 false를 넣어준것은 특정 브라우저 버전이나 기기에서 기본값이 `true`인 경우가 있기 때문이다.
 
-<iframe src="https://codesandbox.io/embed/54w7jlv4k?fontsize=14" title="[prevent-scroll] 4. prevent-by-event" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
-이제 문제가 해결된 것처럼 보인다. 그런데, 만약 모달뷰 내부에 콘텐츠가 길어져서 스크롤이 필요한 경우라면 어떨까? 아래 코드를 테스트해보자.
+이제 문제가 해결된 것처럼 보인다. 그런데, 만약 모달뷰 내부에 콘텐츠가 길어져서 스크롤이 필요한 경우라면 어떨까? 아래 코드를 테스트해보자 (모바일에서 새 창으로 열어서 테스트해야 정상적으로 확인가능하다.).
 
 <iframe src="https://codesandbox.io/embed/p29k96rq2m?fontsize=14" title="[prevent-scroll] 5. prevent-by-event-bug" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -108,9 +100,7 @@ window.addEventListener('click', handleClick, {capture: true});
 <div className="modal-body" onTouchMove={e => e.stopPropagation()}>
 ```
 
-<iframe src="https://codesandbox.io/embed/q3ozn35j86?fontsize=14" title="[prevent-scroll] 6. use-event-bubbling" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
-모바일에서 테스트해보자. 내부 영역이 스크롤되면서 외부 영역은 스크롤되지 않는걸 확인할수 있다. 몇번 더 해보자. 이상하다. 간헐적으로 내부 스크롤이 안되고 외부만 스크롤 되는 현상이 발생한다. 좀더 구체적으로 말하자면, 모달뷰가 스크롤 가능할때 가장 위에서 위쪽으로 스크롤을 시도하거나 가장 아래에서 아래쪽으로 스크롤을 시도하면 모달뷰가 아닌 외부의 dimmed 영역이 스크롤 되는 문제(?)가 있다(모바일만..). 심지어 touchmove 이벤트가 dimmed 영역으로 전파되지 않았음에도 말이다. 아마 터치 이벤트가 종료되더라도 계속해서 스크롤이 이어지는 모멘텀(Momentum) 스크롤 때문이 아닐까 조심스레 추측해본다(정말??).
+내부 영역이 스크롤되면서 외부 영역은 스크롤되지 않는걸 확인할수 있다. 몇번 더 해보자. 이상하다. 간헐적으로 내부 스크롤이 안되고 외부만 스크롤 되는 현상이 발생한다. 좀더 구체적으로 말하자면, 모달뷰가 스크롤 가능할때 가장 위에서 위쪽으로 스크롤을 시도하거나 가장 아래에서 아래쪽으로 스크롤을 시도하면 모달뷰가 아닌 외부의 dimmed 영역이 스크롤 되는 문제(?)가 있다(모바일만..). 심지어 touchmove 이벤트가 dimmed 영역으로 전파되지 않았음에도 말이다. 아마 터치 이벤트가 종료되더라도 계속해서 스크롤이 이어지는 모멘텀(Momentum) 스크롤 때문이 아닐까 조심스레 추측해본다(정말??).
 
 ### 여섯번째 방법: 마지막(?)
 
@@ -162,6 +152,8 @@ function preventMomentumScroll(el) {
   return false;
 }
 ```
+
+반드시 모바일에서 새창으로 열어서 확인하자.
 
 <iframe src="https://codesandbox.io/embed/xlm05zzzyo?fontsize=14" title="[prevent-scroll] 7. final" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 

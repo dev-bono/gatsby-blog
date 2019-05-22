@@ -24,3 +24,9 @@ pre[class*='language-'] {
   padding: 3px;
   font-weight: 600;
 }
+
+blockquote {
+  margin-left: 0;
+  padding-left: 1.2rem;
+  border-left: 5px solid #e5e5e5;
+}

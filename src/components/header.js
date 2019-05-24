@@ -27,7 +27,10 @@ export default function Header({ location }) {
             ...scale(0.25),
             flex: '1 0 auto',
             color: '#bbb',
-            marginLeft: 10,
+            marginLeft: 20,
+            '@media (max-width: 600px)': {
+              marginLeft: 10,
+            },
           }}
         >
           <Link css={DEFAULT_STYLE_LINK} to={'/'}>

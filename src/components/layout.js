@@ -14,7 +14,7 @@ export default function Template(props) {
         css={{
           marginLeft: 'auto',
           marginRight: 'auto',
-          maxWidth: rhythm(16),
+          maxWidth: rhythm(26),
           padding: `${rhythm(1.5)} ${rhythm(1 / 2)}`,
         }}
       >

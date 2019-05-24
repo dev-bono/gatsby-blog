@@ -2,11 +2,9 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Posts from '../components/list';
 
-const Tag = props => {
+export default function Tag(props) {
   return <Posts {...props} isTagPage={true} />;
-};
-
-export default Tag;
+}
 
 export const pageQuery = graphql`
   query($tag: String) {

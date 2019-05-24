@@ -2,10 +2,8 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Posts from '../components/list';
 
-export default class Essay extends React.Component {
-  render() {
-    return <Posts {...this.props} />;
-  }
+export default function Essay(props) {
+  return <Posts {...props} />;
 }
 
 export const pageQuery = graphql`

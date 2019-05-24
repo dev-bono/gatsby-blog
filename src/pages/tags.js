@@ -6,60 +6,53 @@ import { navigate, graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { rhythm } from '../utils/typography';
 
-class TagsPage extends React.Component {
-  onClickTag = e => {
-    navigate(e.target.dataset.url);
-  };
-
-  render() {
-    const { data, location } = this.props;
-    const { group } = data.allMarkdownRemark;
-    const { title } = data.site.siteMetadata;
-    const sortedGroup = group
-      .filter(tag => tag.totalCount >= MIN_TAG_COUNT)
-      .sort(compare);
-    return (
-      <Layout location={location}>
-        <Helmet htmlAttributes={{ lang: 'ko' }} title={title} />
-        <div css={{ marginTop: rhythm(1.3) }}>
-          <ul
-            css={{
-              listStyle: 'none',
-              margin: 0,
-              display: 'flex',
-              flexWrap: 'wrap',
-            }}
-          >
-            {sortedGroup.map(tag => (
-              <li
-                key={tag.fieldValue}
-                css={{ marginRight: 13, height: rhythm(1.4) }}
+export default function TagsPage({ data, location }) {
+  const { group } = data.allMarkdownRemark;
+  const { title } = data.site.siteMetadata;
+  const sortedGroup = group
+    .filter(tag => tag.totalCount >= MIN_TAG_COUNT)
+    .sort(compare);
+  return (
+    <Layout location={location}>
+      <Helmet htmlAttributes={{ lang: 'ko' }} title={title} />
+      <div css={{ marginTop: rhythm(1.3) }}>
+        <ul
+          css={{
+            listStyle: 'none',
+            margin: 0,
+            display: 'flex',
+            flexWrap: 'wrap',
+          }}
+        >
+          {sortedGroup.map(tag => (
+            <li
+              key={tag.fieldValue}
+              css={{ marginRight: 13, height: rhythm(1.4) }}
+            >
+              <div
+                css={{
+                  ...getTagCountStyle(tag.totalCount),
+                  padding: '3px 13px',
+                  borderRadius: 18,
+                  cursor: 'pointer',
+                  transition: '0.5s',
+                  ':hover': {
+                    backgroundColor: '#aaa',
+                    color: '#eee',
+                    fontWeight: 600,
+                  },
+                }}
+                onClick={e => navigate(e.target.dataset.url)}
+                data-url={`/tag/${kebabCase(tag.fieldValue)}/`}
               >
-                <div
-                  css={{
-                    ...getTagCountStyle(tag.totalCount),
-                    padding: '3px 13px',
-                    borderRadius: 18,
-                    cursor: 'pointer',
-                    transition: '0.5s',
-                    ':hover': {
-                      backgroundColor: '#aaa',
-                      color: '#eee',
-                      fontWeight: 600,
-                    },
-                  }}
-                  onClick={this.onClickTag}
-                  data-url={`/tag/${kebabCase(tag.fieldValue)}/`}
-                >
-                  {tag.fieldValue}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Layout>
-    );
-  }
+                {tag.fieldValue}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
+  );
 }
 
 // TODO: 타입스크립트로 바꾸면 없애자.
@@ -96,8 +89,6 @@ function getTagCountStyle(totalCount) {
     return { backgroundColor: '#f3f3f3', color: '#999' };
   }
 }
-
-export default TagsPage;
 
 export const pageQuery = graphql`
   query {

@@ -19,7 +19,7 @@ tags:
 
 input 태그를 이용하는 방법의 핵심은 보이지 않는(display: none) input태그(type="checkbok" 또는 type="radio")와 label을 이용하는 것이다. input에 id를 부여하고 label의 `for` 속성에 input의 id를 동일하게 넣어주면, label을 터치했을때 input의 check 상태를 변경할수 있다. 코드를 보자.
 
-~~~
+~~~html
 <style>
   .checkbox {
     display: none; 
@@ -97,7 +97,7 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 
 브라우저 호환성 이외에도 transition이나 animation이 제대로 적용되지 않는 문제가 있다. 적용되긴 하더라도 위에서 보여줬던 UI보다도 퀄리티가 한참 떨어져보인다. 우선 간단한 사용법을 알아보자.
 
-~~~
+~~~html
 <style>
   .title {
     color: purple;
@@ -144,7 +144,7 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 
 details에는 `open`이라는 속성이 존재하는데, 터치(클릭)을 하게되면 open이 참이 된다. 트랜지션을 발생시키기 위해 open 속성을 이용하여 아래처럼 CSS를 작성하였다. 트랜지션이 발생하긴 하지만 상세 설명 부분이 사라지는 타이밍과 맞지 않아 뭔가 어색한 느낌이다.
 
-~~~
+~~~css
 details {
   transition: height 1s;
 }
@@ -160,7 +160,7 @@ details[open] {
 
 또 한가지 details를 사용하면 기본적으로 좌측에 삼각형 이미지가 생긴다. 닫힌 상태일때는 오른쪽 방향 삼각형이고 open 상태일때는 아래로 향하는 삼각형이 된다. MDN web docs 사이트에 나온 설명을 읽어보면, summary에 `list-style: none` 속성을 부여하면 icon을 없앨 수 있다고 하는데, webkit 기반의 chrome 브라우저에서는 제대로 icon이 사라지지 않는다. 그래서 아래 코드를 넣어줘야 icon을 없앨 수 있다.
 
-~~~
+~~~css
 details > summary::-webkit-details-marker {
   display: none;
 }

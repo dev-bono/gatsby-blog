@@ -21,11 +21,11 @@ react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. �
 
 ### 첫번째 방법: (overflow: hidden;)
 
-```
+~~~css
 .ReactModal__Body--open {
   overflow: hidden;
 }
-```
+~~~
 
 해보면, 잘된다. 적어도 데스크탑에서는 잘 된다.
 그런데 issue를 조금 더 보면 모바일에서 여전히 스크롤이 발생한다는 보고가 군데군데 보인다.
@@ -33,14 +33,14 @@ react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. �
 
 ### 두번째 방법: 스타일을 좀 더 추가하자.
 
-```
+~~~css
 .ReactModal__Body--open {
   overflow: hidden;
   position: fixed;
   width: 100%;
   height: 100%;
 }
-```
+~~~
 
 되는것 같이(?) 보인다. 그런데, 좀더 테스트 해보면 문제가 있음을 알 수 있다. 스크롤을 아래로 내린 상태에서 `modal 열기` 버튼을 클릭하자. 그러면 스크롤이 가장 상위로 올라간다. 이는 확실히 문제가 있다. 예를들어 스크롤 뷰어(웹툰이라고 상상하자)에서 특정 버튼을 눌렀을때 모달뷰가 뜨는 경우가 있다. 중간정도 위치를 보는 중이었는데 갑자기 모달이 뜨면서 스크롤이 가장 위로 올라가면 사용자는 자신이 보던 위치를 잃어버리게 된다. 그러므로 위 방법이 적절한 해결책은 아니다.
 
@@ -53,7 +53,7 @@ react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. �
 
 네번째 방법은 modal이 떠 있을때(isOpen === true 상태) touchmove 이벤트를 아예 차단하는 방법이다.
 
-```
+~~~javascript
 const [showModal, setShowModal] = useState(false);
 useEffect(() => {
   function handleTouchMove(event) {
@@ -67,7 +67,7 @@ useEffect(() => {
   return () =>
     window.removeEventListener("touchmove", handleTouchMove);
 }, [showModal]);
-```
+~~~
 
 showModal === true일때 `event.preventDefault()`를 호출하고 EventListenerOptions 옵션에 `passive: false`를 설정한다.
 첫째는 modal이 떠있을때 `preventDefault` 함수로 터치 이벤트의 기본 동작인 `scroll`을 막겠다는 의도다. 그리고 두번째 `passive: false`는 touch 이벤트가 발생했을때 preventDefault가 호출된다면 이벤트(scroll) 발생을 막겠다는 것이다. passive가 true일때는 preventDefault 함수를 무시하고 scroll을 하겠다는 의미다. passive의 기본값은 false기 때문에 따로 설정할 필요가 없다. 그럼에도 명시적으로 false를 넣어준것은 특정 브라우저 버전이나 기기에서 기본값이 `true`인 경우가 있기 때문이다.
@@ -87,18 +87,18 @@ showModal === true일때 `event.preventDefault()`를 호출하고 EventListenerO
 
 이벤트 전파 과정을 잘 이용하면 모달뷰 내 스크롤이 막히는 현상을 해결할 수 있다. 이벤트는 기본적으로 부모 노드부터 타겟 노드로 전파(캡쳐링)되고 그다음 타겟 노드에서 다시 부모 노드로 전파(버블링)된다. 이때 노드에 바인딩한 이벤트 핸들러가 언제 호출될지는 capturing과 bubbling을 옵션으로 정할수 있다. 예를들어 `EventListenerOptions` 객체 기준으로 `capture: true`를 넣어주면 capturing시에 이벤트 핸들러가 실행된다. 기본 값은 false기 때문에 기본적으로 event bubbling시에만 이벤트 핸들러가 실행된다.
 
-```
-ex) 캡쳐링 이벤트를 감지해서 핸들러 함수(handleClick)를 실행시키고 싶다면..
+~~~javascript
+// ex) 캡쳐링 이벤트를 감지해서 핸들러 함수(handleClick)를 실행시키고 싶다면..
 window.addEventListener('click', handleClick, {capture: true});
-```
+~~~
 
 조금 생각해보자. 네번째 방법에서 window 객체에 `touchmove` 이벤트를 바인딩 했는데, 이때 capture 옵션을 별도로 넣어주지 않았다. 즉, 이벤트가 버블링될때 핸들러 함수가 실행된다. 이벤트 버블링은 타겟 노드부터 부모 노드 방향으로 이벤트가 전파된다. 그래서 window 객체의 `handleTouchMove` 핸들러 함수는 touchmove 이벤트 전파 중 가장 마지막에 호출된다. 만약, 중간에 어떤 부분(예를들어 .modal-body)에서 이벤트 버블링은 막을수 있다면 결과적으로 handleTouchMove 함수의 호출을 막을수 있다. 그말은 즉, 정상적으로 스크롤을 할수 있게 된다는 의미다. modal-body 클래스 노드에 onTouchMove 이벤트 핸들러를 바인딩하고 핸들러에서 `e.stopPropagation()`을 호출하자. 
 
 > 참고로 stopPropagation 함수는 더 이상 이벤트가 전파되지 않도록 막는다. 
 
-```
+~~~javascript
 <div className="modal-body" onTouchMove={e => e.stopPropagation()}>
-```
+~~~
 
 내부 영역이 스크롤되면서 외부 영역은 스크롤되지 않는걸 확인할수 있다. 몇번 더 해보자. 이상하다. 간헐적으로 내부 스크롤이 안되고 외부만 스크롤 되는 현상이 발생한다. 좀더 구체적으로 말하자면, 모달뷰가 스크롤 가능할때 가장 위에서 위쪽으로 스크롤을 시도하거나 가장 아래에서 아래쪽으로 스크롤을 시도하면 모달뷰가 아닌 외부의 dimmed 영역이 스크롤 되는 문제(?)가 있다(모바일만..). 심지어 touchmove 이벤트가 dimmed 영역으로 전파되지 않았음에도 말이다. 아마 터치 이벤트가 종료되더라도 계속해서 스크롤이 이어지는 모멘텀(Momentum) 스크롤 때문이 아닐까 조심스레 추측해본다(정말??).
 
@@ -106,14 +106,15 @@ window.addEventListener('click', handleClick, {capture: true});
 
 마지막 방법이다. 최소한 내가 찾은 마지막 방법이다. 출처를 밝히고 싶은데, 기록은 안해둬서 찾기가 어렵다. 아무튼 다섯번째 방법에서 발생했던 문제를 해결하는 방법은 다음과 같다.  
 
-```
+~~~css
 # css
 .modal-body {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 300px; <- modal 높이와 동일하게 맞춰준다.
 }
-
+~~~
+~~~javascript
 # react
 ...
 const divRef = useRef(null);
@@ -151,7 +152,7 @@ function preventMomentumScroll(el) {
   }
   return false;
 }
-```
+~~~
 
 반드시 모바일에서 새창으로 열어서 확인하자.
 

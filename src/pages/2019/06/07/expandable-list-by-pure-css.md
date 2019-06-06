@@ -99,16 +99,16 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 
 ~~~html
 <style>
-  .title {
+  .title-summary {
     color: purple;
     font-weight: bold;
   }
 </style>
 <details>
-  <summary class="desc">
+  <summary class="title-summary">
     제목입니다.
   </summary>
-  <p class="desc">
+  <p>
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem 
     quam alias veritatis esse deserunt veniam explicabo sunt eligendi,
     eaque perferendis, doloremque omnis delectus distinctio incidunt
@@ -118,16 +118,16 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 ~~~
 <div>
   <style>
-    .title {
+    .title-summary {
       color: purple;
       font-weight: bold;
     }
   </style>
   <details>
-    <summary class="title">
+    <summary class="title-summary">
       제목입니다.
     </summary>
-    <p class="desc">
+    <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem 
       quam alias veritatis esse deserunt veniam explicabo sunt eligendi,
       eaque perferendis, doloremque omnis delectus distinctio incidunt

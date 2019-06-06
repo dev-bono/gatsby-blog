@@ -24,6 +24,10 @@ input 태그를 이용하는 방법의 핵심은 보이지 않는(display: none)
   .checkbox {
     display: none; 
   }
+  .title {
+    color: purple;
+    font-weight: bold;
+  }
   .desc {
     max-height: 0px;
     overflow: hidden;
@@ -47,6 +51,10 @@ input 태그를 이용하는 방법의 핵심은 보이지 않는(display: none)
   <style>
     .checkbox {
       display: none; 
+    }
+    .title {
+      color: purple;
+      font-weight: bold;
     }
     .desc {
       max-height: 0px;

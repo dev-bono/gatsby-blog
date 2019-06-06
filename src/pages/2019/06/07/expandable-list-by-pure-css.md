@@ -98,6 +98,12 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 브라우저 호환성 이외에도 transition이나 animation이 제대로 적용되지 않는 문제가 있다. 적용되긴 하더라도 위에서 보여줬던 UI보다도 퀄리티가 한참 떨어져보인다. 우선 간단한 사용법을 알아보자.
 
 ~~~
+<style>
+  .title {
+    color: purple;
+    font-weight: bold;
+  }
+</style>
 <details>
   <summary class="desc">
     제목입니다.
@@ -110,20 +116,27 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
   </p>
 </details>
 ~~~
+<div>
+  <style>
+    .title {
+      color: purple;
+      font-weight: bold;
+    }
+  </style>
+  <details>
+    <summary class="title">
+      제목입니다.
+    </summary>
+    <p class="desc">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem 
+      quam alias veritatis esse deserunt veniam explicabo sunt eligendi,
+      eaque perferendis, doloremque omnis delectus distinctio incidunt
+      adipisci. Sit distinctio vero dolore.
+    </p>
+  </details>
+</div>
 
-<details>
-  <summary class="desc">
-    제목입니다.
-  </summary>
-  <p class="desc">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem 
-    quam alias veritatis esse deserunt veniam explicabo sunt eligendi,
-    eaque perferendis, doloremque omnis delectus distinctio incidunt
-    adipisci. Sit distinctio vero dolore.
-  </p>
-</details>
-
-1번에서 보았던 방법보다 훨씬 코드가 간단하다. 심지어 CSS는 단 1줄도 필요없다. details안에 제목으로 사용될 summary를 넣고 그 아래에다가 상세정보를 넣으면 된다. p코드를 썼지만, div나 span을 써도 무방하다. 
+1번에서 보았던 방법보다 훨씬 코드가 간단하다. 심지어 필요한 CSS는 단 1줄도 필요없다(.title은 잘 보이게 하려고 넣은것). details안에 제목으로 사용될 summary를 넣고 그 아래에다가 상세정보를 넣으면 된다. p코드를 썼지만, div나 span을 써도 무방하다. 
 
 이번에는 위에서 작업했던것과 동일하게 list를 만들어보았다.
 

@@ -15,8 +15,18 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
     <Layout location={location}>
       <Helmet
         htmlAttributes={{ lang: 'ko' }}
-        meta={[{ name: 'description', content: siteDescription }]}
         title={siteTitle}
+        meta={[
+          { name: 'description', content: siteDescription },
+          {
+            name: 'naver-site-verification',
+            content: '23eddf7267bb527337927baff11fc26157637f30',
+          },
+          {
+            name: 'google-site-verification',
+            content: 'R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA',
+          },
+        ]}
       />
       {isTagPage && (
         <div css={{ margin: '20px auto 60px', textAlign: 'center' }}>

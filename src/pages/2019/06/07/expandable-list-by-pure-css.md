@@ -95,6 +95,10 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 
 ![img0](./0.png)
 
+<p align="center">
+<a target="_blank" rel="noopener noreferrer" href="https://caniuse.com/#feat=details">브라우저 호환성 확인하기</a>
+</p>
+
 브라우저 호환성 이외에도 transition이나 animation이 제대로 적용되지 않는 문제가 있다. 적용되긴 하더라도 위에서 보여줬던 UI보다도 퀄리티가 한참 떨어져보인다. 우선 간단한 사용법을 알아보자.
 
 ~~~html

@@ -82,13 +82,18 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       </ul>
       <div
         style={{
+          width: '100%',
           display: 'flex',
           justifyContent: 'space-around',
           flexWrap: 'wrap',
         }}
       >
-        <Adsense slot="5306007932" />
-        <Adsense slot="3063768225" />
+        <div style={{ flex: '1 0 auto' }}>
+          <Adsense slot="5306007932" />
+        </div>
+        <div style={{ flex: '1 0 auto' }}>
+          <Adsense slot="3063768225" />
+        </div>
       </div>
       <Disqus.DiscussionEmbed
         shortname={disqusShortname}

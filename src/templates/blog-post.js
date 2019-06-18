@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
+import Adsense from '../components/adsense';
 import { rhythm, scale } from '../utils/typography';
 import Disqus from 'disqus-react';
 

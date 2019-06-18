@@ -44,7 +44,9 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       >
         {date}
       </p>
-      <Adsense slot="1331884154" />
+      <div css={{ marginBottom: '40px' }}>
+        <Adsense slot="1331884154" />
+      </div>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
       <hr
         css={{
@@ -78,6 +80,16 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
           )}
         </li>
       </ul>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Adsense slot="5306007932" />
+        <Adsense slot="3063768225" />
+      </div>
       <Disqus.DiscussionEmbed
         shortname={disqusShortname}
         config={disqusConfig}

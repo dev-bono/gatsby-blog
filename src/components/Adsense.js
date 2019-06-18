@@ -5,15 +5,13 @@ export default function Adsense({ slot }) {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
   return (
-    <div css={{ marginBottom: '20px' }}>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-4588610260101909"
-        data-ad-slot={slot}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </div>
+    <ins
+      className="adsbygoogle"
+      style={{ display: 'block' }}
+      data-ad-client="ca-pub-4588610260101909"
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   );
 }

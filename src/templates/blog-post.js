@@ -30,7 +30,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         htmlAttributes={{ lang: 'ko' }}
         meta={[{ name: 'description', content: siteDescription }]}
         title={`${title} | ${siteTitle}`}
-        script={[ADSENSE_SCRIPT_1, ADSENSE_SCRIPT_2]}
+        script={[ADSENSE_SCRIPT_1]}
       />
       <h3 css={{ lineHeight: rhythm(1.1) }}>{title}</h3>
       <p
@@ -90,9 +90,9 @@ const ADSENSE_SCRIPT_1 = {
   async: true,
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
 };
-const ADSENSE_SCRIPT_2 = {
-  innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({});`,
-};
+// const ADSENSE_SCRIPT_2 = {
+//   innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+// };
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

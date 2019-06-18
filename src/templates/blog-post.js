@@ -43,6 +43,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       >
         {date}
       </p>
+      <Adsense slot="1331884154" />
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
       <hr
         css={{
@@ -89,10 +90,7 @@ const ADSENSE_SCRIPT_1 = {
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
 };
 const ADSENSE_SCRIPT_2 = {
-  innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-4588610260101909",
-    enable_page_level_ads: true
-  });`,
+  innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({});`,
 };
 
 export const pageQuery = graphql`

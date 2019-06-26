@@ -1,5 +1,5 @@
 ---
-title: '[CSS] javascript없이 css만으로 expandable(collapsible) 리스트 만들기'
+title: '[CSS] javascript없이 css만으로 expandable(collapsible) list 만들기'
 date: 2019-06-07 12:26:43
 category: javascript
 tags:
@@ -11,7 +11,7 @@ tags:
   - collapsible list
 ---
 
-공지사항이나 FAQ 페이지에는 `expandble리스트`가 많이 사용된다. `collapsible`이라고도 하는데, 기본적인 리스트에서 각 항목을 터치(클릭)하면 세부 내용이 확장되는 형태의 UI다. 비교적 간단한 UI기 때문에 css와 javscript를 적절히 조합하면 누구나 손쉽게(feat. google) 만들수 있다. 하지만 간혹 자바스크립트 없는 pure한 HTML(with CSS)이 필요한 경우가 있다. javascript가 잘 동작하지 않는 브라우저거나, 유저가 아예 javascript 기능을 꺼버렸다면(도대체 왜??) pure한 HTML이 빛을 발하게 된다. 사실, 그냥 내가 이전부터 하고 싶었다.
+공지사항이나 FAQ 페이지에는 `expandble list`가 많이 사용된다. `collapsible`이라고도 하는데, 기본적인 리스트에서 각 항목을 터치(클릭)하면 세부 내용이 확장되는 형태의 UI다. 비교적 간단한 UI기 때문에 css와 javscript를 적절히 조합하면 누구나 손쉽게(feat. google) 만들수 있다. 하지만 간혹 자바스크립트 없는 pure한 HTML(with CSS)이 필요한 경우가 있다. javascript가 잘 동작하지 않는 브라우저거나, 유저가 아예 javascript 기능을 꺼버렸다면(도대체 왜??) pure한 HTML이 빛을 발하게 된다. 사실, 그냥 내가 이전부터 하고 싶었다.
 
 구글에 expandable(collapsible) list라고 검색을 해보면 2가지 방법이 등장하는데, 대부분은 input태그를 이용한 일종의 꼼수다. 그리고 두번째는 비교적 최신 스펙인 = `details`와 `summary` 태그를 이용한 방법이다. 하나씩 살펴보자.
 

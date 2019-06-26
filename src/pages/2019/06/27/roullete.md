@@ -149,6 +149,7 @@ clip을 이용해서 색을 채우기위해 우선 400x400px의 빈 원을 그�
 ~~~
 
 ### 개선할점
+* 연속 뽑기가 가능하도록 수정하자.
 * clip 대신에 `clip-path`를 사용하자. 굳이 after 영역을 추가해서 rotategk할 필요없다. `.fill` 영역에 clip-path 하나만으로 충분할 것 같다.
 * `rotation keyframe`을 동적으로 만들자. rotate값을 동적으로 변하도록 구현하여 값에따라 특정 금액(or 상품)이 선택되도록 만들수 있겠다. 
 * rotation animation의 `timing-function`을 조절하자. 마지막에 좀더 천천히 돌아가면 훨씬 긴장감이 느껴질것 같다.

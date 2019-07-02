@@ -1,10 +1,10 @@
 ---
-title: '[CSS] css로 roullete 만들기'
+title: '[CSS] css로 roulette 만들기'
 date: 2019-06-27 01:20:33
 category: javascript
 tags:
   - css
-  - roullete
+  - roulette
   - 뽑기
   - gotcha
   - 룰렛
@@ -16,7 +16,7 @@ tags:
 
 우선 결과물부터 보자.
 
-<iframe src="https://codesandbox.io/embed/css-roullete-znic6?fontsize=14" title="css-roullete" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/css-roullete-znic6?fontsize=14" title="css-roulette" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 아래 버튼을 누르면 룰렛이 돌아간다. 그리고 이미 정해진(?) 위치에 가서 멈춘다(개선해야한다). 실제 운영하는 서비스 정도의 퀄리티는 아니지만, 그럴듯하다. 아이콘이나 이미지 등이 추가되다면 훨씬 그럴듯한 형태의 룰렛이 만들어질것 같다.
 
@@ -64,7 +64,7 @@ clip을 이용해서 색을 채우기위해 우선 400x400px의 빈 원을 그�
   }
 </style>
 <div class="container">
-  <div class="roullete">
+  <div class="roulette">
     <div class="fill fill_1"></div>
     <div class="fill fill_2"></div>
     ...
@@ -95,7 +95,7 @@ clip을 이용해서 색을 채우기위해 우선 400x400px의 빈 원을 그�
   }
 </style>
 <div class="container">
-  <div class="roullete">
+  <div class="roulette">
     ...
     <div class="content content_1"></div>
     <div class="content content_2"></div>
@@ -118,7 +118,7 @@ clip을 이용해서 색을 채우기위해 우선 400x400px의 빈 원을 그�
       transform: rotate(7045deg);
     }
   }
-  .roullete {
+  .roulette {
     width: 400px;
     height: 400px;
     border-radius: 50%;
@@ -126,24 +126,24 @@ clip을 이용해서 색을 채우기위해 우선 400x400px의 빈 원을 그�
     border: 3px solid black;
     position: relative;
   }
-  .roullete.loop {
+  .roulette.loop {
     animation: rotation 7s ease-in-out forwards;
   }
 </style>
 <div class="container">
-  <div class="roullete">
+  <div class="roulette">
     ...
   </div>
   ...
   <button class="trigger">뽑기</button>
 </div>
 <script>
-  const roullete = document.querySelector(".roullete");
+  const roulette = document.querySelector(".roulette");
   const trigger = document.querySelector(".trigger");
   trigger.addEventListener("click", onClickTrigger);
 
   function onClickTrigger(e) {
-    roullete.classList.add("loop");
+    roulette.classList.add("loop");
   }
 </script>
 ~~~

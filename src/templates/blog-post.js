@@ -4,8 +4,8 @@ import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
 import Adsense from '../components/adsense';
-import { rhythm, scale } from '../utils/typography';
 import Disqus from 'disqus-react';
+import { Box, Flex, Text } from 'rebass';
 
 export default function BlogPostTemplate({ data, pageContext, location }) {
   const { previous, next } = pageContext;
@@ -32,57 +32,49 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         title={`${title} | ${siteTitle}`}
         script={[ADSENSE_SCRIPT_1]}
       />
-      <h3 css={{ lineHeight: rhythm(1.1) }}>{title}</h3>
-      <p
-        css={{
-          ...scale(-1 / 5),
-          display: 'block',
-          marginBottom: rhythm(3),
-          marginTop: rhythm(-1),
-          color: '#bbb',
-        }}
-      >
+      <Text fontSize="24px" lineHeight="1.1">
+        {title}
+      </Text>
+      <Text mb="90px" mt="7px" color="#bbb">
         {date}
-      </p>
-      <div css={{ marginBottom: '40px' }}>
+      </Text>
+      <Box mb="40px">
         <Adsense slot="1331884154" />
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      <hr
-        css={{
-          marginBottom: rhythm(1),
-        }}
+      </Box>
+      <Box
+        color="text"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+        css={{ lineHeight: '30px' }}
       />
-      <ul
+      <Box mb="30px" />
+      <Flex
+        flexWrap="wrap"
+        justifyContent="space-between"
+        mb="30px"
+        pt="30px"
+        fontSize="15px"
         css={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          listStyle: 'none',
-          padding: 0,
-          margin: 0,
-          marginBottom: 30,
-          fontSize: rhythm(0.5),
+          borderTop: '1px solid #eee',
         }}
       >
-        <li css={{ maxWidth: 280 }}>
-          {previous && (
+        {previous && (
+          <Text lineHeight="1.8" css={{ maxWidth: 280 }}>
             <Link to={previous.fields.slug} rel="prev">
-              ← {previous.frontmatter.title}
+              {previous.frontmatter.title}
             </Link>
-          )}
-        </li>
-        <li css={{ maxWidth: 280 }}>
-          {next && (
+          </Text>
+        )}
+        {next && (
+          <Text lineHeight="1.8" css={{ maxWidth: 280 }}>
             <Link to={next.fields.slug} rel="next">
-              {next.frontmatter.title} →
+              {next.frontmatter.title}
             </Link>
-          )}
-        </li>
-      </ul>
-      <div style={{ marginBottom: '40px' }}>
+          </Text>
+        )}
+      </Flex>
+      <Box mb="40px">
         <Adsense slot="5306007932" />
-      </div>
+      </Box>
       <Disqus.DiscussionEmbed
         shortname={disqusShortname}
         config={disqusConfig}

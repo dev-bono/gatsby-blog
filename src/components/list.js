@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
-import { rhythm, scale } from '../utils/typography';
+import { Box, Text, Flex } from 'rebass';
 
 export default function Posts({ data, location, isTagPage, pageContext }) {
   const siteTitle = get(data, 'site.siteMetadata.title');
@@ -30,32 +30,47 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
         />
       </Helmet>
       {isTagPage && (
-        <div css={{ margin: '20px auto 60px', textAlign: 'center' }}>
-          <h2 css={{ marginBottom: 0 }}>{pageContext.tag}</h2>
-          <span css={{ fontSize: 15, color: '#888' }}>({totalCount})</span>
-        </div>
+        <Flex
+          m="20px auto 60px"
+          flexDirection="column"
+          justify-content="center"
+          align-items="center"
+        >
+          <Text fontSize="25px" lineHeight="1.6" textAlign="center">
+            {pageContext.tag}
+          </Text>
+          <Text fontSize="15px" color="#888" textAlign="center">
+            ({totalCount})
+          </Text>
+        </Flex>
       )}
       {posts.map(({ node }) => {
         const title = get(node, 'frontmatter.title') || node.fields.slug;
         return (
-          <div css={{ marginBottom: rhythm(1.8) }} key={node.fields.slug}>
-            <h3
-              css={{
-                marginBottom: rhythm(1 / 4),
-                fontWeight: 300,
-                ...scale(0.3),
-              }}
-            >
+          <Box mb="50px" key={node.fields.slug}>
+            <Text mb="15px" fontSize="22px" lineHeight="1.7">
               <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
-                <span css={{ color: '#444' }}>{title}</span>
+                {title}
               </Link>
-            </h3>
-            <small>{node.frontmatter.date}</small>
-            <p
-              css={{ fontSize: 14, color: '#999' }}
+            </Text>
+            <Text
+              fontSize="15px"
+              lineHeight="1.8"
+              color="#999"
+              mb="6px"
               dangerouslySetInnerHTML={{ __html: node.excerpt }}
             />
-          </div>
+            <Text
+              fontSize="14px"
+              mb="5px"
+              color="#888"
+              width="100%"
+              textAlign="right"
+              css={{ opacity: 0.8 }}
+            >
+              {node.frontmatter.date}
+            </Text>
+          </Box>
         );
       })}
     </Layout>

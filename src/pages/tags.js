@@ -4,7 +4,7 @@ import kebabCase from 'lodash/kebabCase';
 import Helmet from 'react-helmet';
 import { navigate, graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { rhythm } from '../utils/typography';
+import { Box, Flex } from 'rebass';
 
 export default function TagsPage({ data, location }) {
   const { group } = data.allMarkdownRemark;
@@ -15,28 +15,24 @@ export default function TagsPage({ data, location }) {
   return (
     <Layout location={location}>
       <Helmet htmlAttributes={{ lang: 'ko' }} title={title} />
-      <div css={{ marginTop: rhythm(1.3) }}>
-        <ul
-          css={{
-            listStyle: 'none',
-            margin: 0,
-            display: 'flex',
-            flexWrap: 'wrap',
-          }}
-        >
+      <Box mt="25px">
+        <Flex flexWrap="wrap">
           {sortedGroup.map(tag => (
-            <li
+            <Box
+              mr="13px"
+              mb="25px"
+              fontSize="18px"
               key={tag.fieldValue}
-              css={{ marginRight: 13, height: rhythm(1.4) }}
+              css={{ height: '30px' }}
             >
-              <div
+              <Box
+                {...getTagCountStyle(tag.totalCount)}
+                p="10px 20px"
                 css={{
-                  ...getTagCountStyle(tag.totalCount),
-                  padding: '3px 13px',
                   borderRadius: 18,
                   cursor: 'pointer',
                   transition: '0.5s',
-                  ':hover': {
+                  '&:hover': {
                     backgroundColor: '#aaa',
                     color: '#eee',
                     fontWeight: 600,
@@ -46,11 +42,11 @@ export default function TagsPage({ data, location }) {
                 data-url={`/tag/${kebabCase(tag.fieldValue)}/`}
               >
                 {tag.fieldValue}
-              </div>
-            </li>
+              </Box>
+            </Box>
           ))}
-        </ul>
-      </div>
+        </Flex>
+      </Box>
     </Layout>
   );
 }
@@ -78,15 +74,14 @@ const compare = (a, b) => (a.totalCount < b.totalCount ? 1 : -1);
 const MIN_TAG_COUNT = 2;
 
 function getTagCountStyle(totalCount) {
-  const hoverStyle = {};
   if (totalCount > 15) {
-    return { backgroundColor: '#d1d1d1', color: '#333', fontWeight: 300 };
+    return { bg: '#d1d1d1', color: '#333', fontWeight: 300 };
   } else if (totalCount > 10) {
-    return { backgroundColor: '#dfdfdf', color: '#555', fontWeight: 300 };
+    return { bg: '#dfdfdf', color: '#555', fontWeight: 300 };
   } else if (totalCount > 5) {
-    return { backgroundColor: '#eaeaea', color: '#777', fontWeight: 300 };
+    return { bg: '#eaeaea', color: '#777', fontWeight: 300 };
   } else {
-    return { backgroundColor: '#f3f3f3', color: '#999' };
+    return { bg: '#f3f3f3', color: '#999' };
   }
 }
 

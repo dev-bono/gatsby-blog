@@ -1,7 +1,7 @@
 .contents a:not(.gatsby-resp-image-link) {
   color: #3a3a3a;
   text-decoration: none;
-  border-bottom: 3px solid #e0d6eb;
+  border-bottom: 3px solid #d7c3ee;
 }
 .contents a:active:not(.gatsby-resp-image-link),
 .contents a:hover:not(.gatsby-resp-image-link) {
@@ -18,15 +18,14 @@ pre[class*='language-'] {
 }
 
 :not(pre) > code[class*='language-'] {
-  border-radius: 0;
   background: #dfdfdf;
   color: rgb(34, 34, 34);
-  padding: 3px;
+  padding: 3px 5px;
   font-weight: 600;
 }
 
 blockquote {
-  margin-left: 0;
-  padding-left: 1.2rem;
+  margin: 20px 15px 20px 0;
+  padding-left: 35px;
   border-left: 5px solid #e5e5e5;
 }

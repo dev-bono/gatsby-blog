@@ -1,52 +1,46 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { rhythm, scale } from '../utils/typography';
 import Menu from './menu';
 import { DEFAULT_STYLE_LINK } from '../constants';
+import { Box, Flex } from 'rebass';
 
 export default function Header({ location }) {
   const { pathname } = location;
   return (
-    <div
+    <Flex
+      width="100%"
+      p="10px"
+      mb="10px"
+      alignItems="center"
       css={{
-        height: rhythm(1.7),
-        widht: '100%',
+        height: '50px',
         borderBottom: '1px solid #eee',
-        padding: 10,
       }}
     >
-      <div
+      <Box
+        flex="1 0 auto"
+        ml="20px"
+        color="#bbb"
+        fontSize="22px"
         css={{
-          display: 'flex',
-          width: '100%',
-          marginBottom: rhythm(1.5),
+          '@media (max-width: 600px)': {
+            marginLeft: 10,
+          },
         }}
       >
-        <span
-          css={{
-            ...scale(0.25),
-            flex: '1 0 auto',
-            color: '#bbb',
-            marginLeft: 20,
-            '@media (max-width: 600px)': {
-              marginLeft: 10,
-            },
-          }}
-        >
-          <Link css={DEFAULT_STYLE_LINK} to={'/'}>
-            bono's blog
-          </Link>
-        </span>
-        {MENU_DATA.map(item => (
-          <Menu
-            key={item.pathname}
-            pathname={pathname}
-            menuPathname={item.pathname}
-            menuName={item.title}
-          />
-        ))}
-      </div>
-    </div>
+        <Link css={DEFAULT_STYLE_LINK} to={'/'}>
+          bono's blog
+        </Link>
+      </Box>
+      {MENU_DATA.map(item => (
+        <Menu
+          key={item.pathname}
+          pathname={pathname}
+          menuPathname={item.pathname}
+          menuName={item.title}
+        />
+      ))}
+    </Flex>
   );
 }
 

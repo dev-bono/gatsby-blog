@@ -1,3 +1,6 @@
+.contents a {
+  transition: background 0.5s;
+}
 .contents a:not(.gatsby-resp-image-link) {
   color: #3a3a3a;
   text-decoration: none;

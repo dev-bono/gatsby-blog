@@ -3,13 +3,13 @@ import { Link } from 'gatsby';
 import Menu from './menu';
 import { DEFAULT_STYLE_LINK } from '../constants';
 import { Box, Flex, Text } from 'rebass';
-import useScreenSize from '../util/hooks/useScreenSize';
+import useScreenType from '../util/hooks/useScreenType';
 import { MENU_DATA } from './layout';
 import { COLORS } from './theme';
 import styled from 'styled-components';
 
 export default function Header({ location, showMenu, onClickMenu }) {
-  const { gte768 } = useScreenSize();
+  const { gte768 } = useScreenType();
   const { pathname } = location;
   return (
     <Flex

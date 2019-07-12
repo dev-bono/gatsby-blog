@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export default function useScreenSize() {
-  const [gte768, setGte768] = useState(false);
+export default function useScreenType() {
+  const [gte768, setGte768] = useState(getIsScreenBiggerThan768());
   useEffect(() => {
     function handleResize() {
-      setGte768(window.innerWidth >= 768);
+      setGte768(getIsScreenBiggerThan768);
     }
     window.addEventListener('resize', handleResize);
     handleResize();
@@ -13,4 +13,8 @@ export default function useScreenSize() {
     };
   }, []);
   return { gte768 };
+}
+
+function getIsScreenBiggerThan768() {
+  return window.innerWidth >= 768;
 }

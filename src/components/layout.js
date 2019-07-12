@@ -6,7 +6,7 @@ import '../common.css';
 import { Box, Flex } from 'rebass';
 import { ThemeProvider } from 'styled-components';
 import theme, { COLORS } from './theme';
-import useScreenSize from '../util/hooks/useScreenSize';
+import useScreenType from '../util/hooks/useScreenType';
 import Menu from './menu';
 import OutsideClick from './outsideClick';
 
@@ -14,7 +14,7 @@ export default function Template(props) {
   const { children, location } = props;
   const [showMenu, setShowMenu] = useState(false);
   const [inTransition, setInTranstiion] = useState(false);
-  const { gte768 } = useScreenSize();
+  const { gte768 } = useScreenType();
   return (
     <ThemeProvider theme={theme}>
       <Box>

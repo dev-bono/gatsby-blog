@@ -16,6 +16,8 @@ export default function Template(props) {
   const [showMenu, setShowMenu] = useState(false);
   const [inTransition, setInTranstiion] = useState(false);
   const { gte768 } = useScreenType();
+  const siteTitle = get(data, 'site.siteMetadata.title');
+  const siteDescription = get(data, 'site.siteMetadata.description');
   return (
     <ThemeProvider theme={theme}>
       <Helmet

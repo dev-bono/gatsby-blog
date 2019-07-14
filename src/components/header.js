@@ -6,7 +6,6 @@ import { Box, Flex, Text } from 'rebass';
 import useScreenType from '../util/hooks/useScreenType';
 import { MENU_DATA } from './layout';
 import { COLORS } from './theme';
-import styled from 'styled-components';
 
 export default function Header({ location, showMenu, onClickMenu }) {
   const { gte768 } = useScreenType();

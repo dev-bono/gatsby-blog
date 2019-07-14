@@ -9,6 +9,7 @@ import theme, { COLORS } from './theme';
 import useScreenType from '../util/hooks/useScreenType';
 import Menu from './menu';
 import OutsideClick from './outsideClick';
+import Helmet from 'react-helmet';
 
 export default function Template(props) {
   const { children, location } = props;
@@ -17,6 +18,22 @@ export default function Template(props) {
   const { gte768 } = useScreenType();
   return (
     <ThemeProvider theme={theme}>
+      <Helmet
+        htmlAttributes={{ lang: 'ko' }}
+        title={siteTitle}
+        meta={[
+          { name: 'description', content: siteDescription },
+          {
+            name: 'google-site-verification',
+            content: 'R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA',
+          },
+        ]}
+      >
+        <meta
+          name="naver-site-verification"
+          content="23eddf7267bb527337927baff11fc26157637f30"
+        />
+      </Helmet>
       <Box>
         <OutsideClick onClick={() => setShowMenu(false)}>
           <Header

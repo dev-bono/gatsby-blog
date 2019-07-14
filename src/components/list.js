@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import get from 'lodash/get';
-import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 import { Box, Text, Flex } from 'rebass';
 
@@ -13,22 +12,6 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
 
   return (
     <Layout location={location}>
-      <Helmet
-        htmlAttributes={{ lang: 'ko' }}
-        title={siteTitle}
-        meta={[
-          { name: 'description', content: siteDescription },
-          {
-            name: 'google-site-verification',
-            content: 'R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA',
-          },
-        ]}
-      >
-        <meta
-          name="naver-site-verification"
-          content="23eddf7267bb527337927baff11fc26157637f30"
-        />
-      </Helmet>
       {isTagPage && (
         <Flex
           m="20px auto 60px"

@@ -1,11 +1,11 @@
 ---
-title: '뉴스는 그만보자 <팩트풀니스(Factfullness)>'
+title: '뉴스는 그만보자 <팩트풀니스(Factfulness)>'
 date: 2019-07-14 17:45:30
 category: review
 tags:
   - review
   - 팩트풀니스
-  - factfullness
+  - factfulness
   - 뉴스
   - 유엔
   - 팩트

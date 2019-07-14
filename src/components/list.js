@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import get from 'lodash/get';
 import Layout from '../components/layout';
 import { Box, Text, Flex } from 'rebass';
+import get from 'lodash/get';
+import Helmet from 'react-helmet';
 
 export default function Posts({ data, location, isTagPage, pageContext }) {
-  const siteTitle = get(data, 'site.siteMetadata.title');
-  const siteDescription = get(data, 'site.siteMetadata.description');
   const posts = get(data, 'allMarkdownRemark.edges');
   const totalCount = get(data, 'allMarkdownRemark.totalCount');
+  const siteDescription = get(data, 'site.siteMetadata.description');
 
   return (
-    <Layout location={location}>
+    <Layout location={location} data={data}>
+      <Helmet meta={[{ name: 'description', content: siteDescription }]} />
       {isTagPage && (
         <Flex
           m="20px auto 60px"

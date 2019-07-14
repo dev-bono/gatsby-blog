@@ -13,7 +13,7 @@ export default function TagsPage({ data, location }) {
     .filter(tag => tag.totalCount >= MIN_TAG_COUNT)
     .sort(compare);
   return (
-    <Layout location={location}>
+    <Layout location={location} data={data}>
       <Helmet htmlAttributes={{ lang: 'ko' }} title={title} />
       <Box mt="25px">
         <Flex flexWrap="wrap">

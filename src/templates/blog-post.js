@@ -13,7 +13,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
   const post = data.markdownRemark;
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
-  const siteDescription = post.excerpt;
+  const postDescription = post.excerpt;
 
   if (!href) {
     return null;
@@ -25,10 +25,10 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
     title,
   };
   return (
-    <Layout location={location}>
+    <Layout location={location} data={data}>
       <Helmet
         htmlAttributes={{ lang: 'ko' }}
-        meta={[{ name: 'description', content: siteDescription }]}
+        meta={[{ name: 'description', content: postDescription }]}
         title={`${title} | ${siteTitle}`}
         script={[ADSENSE_SCRIPT_1]}
       />
@@ -87,9 +87,6 @@ const ADSENSE_SCRIPT_1 = {
   async: true,
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
 };
-// const ADSENSE_SCRIPT_2 = {
-//   innerHTML: `(adsbygoogle = window.adsbygoogle || []).push({});`,
-// };
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

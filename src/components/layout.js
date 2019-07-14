@@ -10,33 +10,27 @@ import useScreenType from '../util/hooks/useScreenType';
 import Menu from './menu';
 import OutsideClick from './outsideClick';
 import Helmet from 'react-helmet';
+import get from 'lodash/get';
 
 export default function Template(props) {
-  const { children, location } = props;
+  const { children, location, data } = props;
   const [showMenu, setShowMenu] = useState(false);
   const [inTransition, setInTranstiion] = useState(false);
   const { gte768 } = useScreenType();
   const siteTitle = get(data, 'site.siteMetadata.title');
-  const siteDescription = get(data, 'site.siteMetadata.description');
   return (
     <ThemeProvider theme={theme}>
-      <Helmet
-        htmlAttributes={{ lang: 'ko' }}
-        title={siteTitle}
-        meta={[
-          { name: 'description', content: siteDescription },
-          {
-            name: 'google-site-verification',
-            content: 'R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA',
-          },
-        ]}
-      >
-        <meta
-          name="naver-site-verification"
-          content="23eddf7267bb527337927baff11fc26157637f30"
-        />
-      </Helmet>
       <Box>
+        <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
+          <meta
+            name="google-site-verification"
+            content="R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA"
+          />
+          <meta
+            name="naver-site-verification"
+            content="23eddf7267bb527337927baff11fc26157637f30"
+          />
+        </Helmet>
         <OutsideClick onClick={() => setShowMenu(false)}>
           <Header
             {...props}

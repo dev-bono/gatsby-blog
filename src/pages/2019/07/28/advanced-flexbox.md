@@ -140,7 +140,7 @@ flexbox를 활용하면 이전 방식으로 만들기 어려웠던 다양한 레
 
 ### 반응형에 최적화된 컨텐츠 리스트
 
-<iframe src="https://codesandbox.io/embed/elegant-albattani-xq3pe?fontsize=14" title="flex-content-row" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/flex-content-row-qdedu?fontsize=14" title="flex-content-row" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 <p align="center">[반응형 확인을 위해, PC에서 새창을 열어 확인하자]</p>
 
 컨텐츠 서비스에서 많이 보이는 형태의 레이아웃이다. 컨텐츠 리스트나 컨텐츠의 에피소드 리스트에서 주로 쓰인다. 보통은 컨텐츠가 하나가 한줄을 차지하지만, media query를 사용해 800px이 넘어가면 두 컨텐츠가 한줄을 차지하도록 구성해보았다.

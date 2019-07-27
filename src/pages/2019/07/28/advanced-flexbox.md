@@ -1,5 +1,5 @@
 ---
-title: '[CSS] flexbox를 사용하며 배운것들 (완전 초급은 아님)'
+title: '[CSS] flexbox를 사용하며 배운것들 (완전 초급은 아님, 중급정도)'
 date: 2019-07-28 00:50:28
 category: css
 tags:

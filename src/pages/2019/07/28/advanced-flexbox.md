@@ -165,7 +165,7 @@ flexbox를 활용하면 이전 방식으로 만들기 어려웠던 다양한 레
 <iframe src="https://codesandbox.io/embed/flamboyant-franklin-phv46?fontsize=14" title="flamboyant-franklin-phv46" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 </div>
 
-[Pinterest](https://www.pinterest.co.kr/)같은 서비스에서 흔히 보이는 형태의 레이아웃이다. 가로로 꽉차지 않도록 `inline-flex`를 사용했다. 각 컨텐츠의 높이가 다른 경우 유용하다. 하지만, 실제 Pinterest 같은 경우에는 flex를 사용하지 않는다. 그 이유는 API 통신을 통해 동적으로 가져온 컨텐츠를 이미 배치된 컨텐츠 바로 아래에 붙여야 하는데, 영역의 끝이 들쭉날쭉하기 때문에 컨텐츠마다 개별적인 배치가 필요하다. 그래서 `display: absolute`를 이용한다. 하지만 간단한 레이아웃이라면 예제처럼 flexbox로 구현해도 문제없다. 
+[Pinterest](https://www.pinterest.co.kr/)같은 서비스에서 흔히 보이는 형태의 레이아웃이다. 가로로 꽉차지 않도록 `inline-flex`를 사용했다. 각 컨텐츠의 높이가 다른 경우 유용하다. 하지만, 실제 Pinterest 같은 경우에는 flex를 사용하지 않는다. 그 이유는 API 통신을 통해 동적으로 가져온 컨텐츠를 이미 배치된 컨텐츠 바로 아래에 붙여야 하는데, 영역의 끝이 들쭉날쭉하기 때문에 컨텐츠마다 개별적인 배치가 필요하다. 그래서 `position: absolute`를 이용한다. 하지만 간단한 레이아웃이라면 예제처럼 flexbox로 구현해도 문제없다. 
 
 
 ## 결론

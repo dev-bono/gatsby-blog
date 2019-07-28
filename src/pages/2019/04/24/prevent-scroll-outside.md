@@ -15,7 +15,9 @@ tags:
 
 react에서 modal 뷰 구현을 위해 react-modal 패키지를 사용한다. 근데 이 react-modal을 쓰다보면 한가지 문제에 부딪힌다. 바로 모달 외부의 dimmed 영역이 스크롤되는 문제다. 예제를 살펴보자 (모바일이라면 반드시 새창으로 열어서 확인하자). 
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/p514nlnnvx?fontsize=14" title="[prevent-scroll] 1. base-modal" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 외부 영역의 스크롤은 큰 문제가 아닐 수 있다. 하지만, 의도치 않은 동작이기 때문에 가능하면 스크롤을 막는게 좋다. `react-modal` githup 저장소의 [issue](https://github.com/reactjs/react-modal/issues)탭에서 `scroll`, `body scroll`, `prevent scroll` 등의 키워드로 검색(closed 포함)해보면 꽤 많은 사람들이 이 문제를 겪고 있음을 알게된다([대표적인 issue](https://github.com/reactjs/react-modal/issues/191)). 가장 많이 등장하는 해결책은 바로 아래 css 코드를 추가하는 것이다.
 
@@ -74,7 +76,9 @@ showModal === true일때 `event.preventDefault()`를 호출하고 EventListenerO
 
 이제 문제가 해결된 것처럼 보인다. 그런데, 만약 모달뷰 내부에 콘텐츠가 길어져서 스크롤이 필요한 경우라면 어떨까? 아래 코드를 테스트해보자 (모바일에서 새 창으로 열어서 테스트해야 정상적으로 확인가능하다.).
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/p29k96rq2m?fontsize=14" title="[prevent-scroll] 5. prevent-by-event-bug" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 모달의 콘텐츠가 길어지니 문제가 생겼다. 외부 스크롤은 잘 막히지만, 정작 필요한 내부 스크롤은 동작하지 않는다. 뭐가 문제일까?
 
@@ -156,7 +160,9 @@ function preventMomentumScroll(el) {
 
 반드시 모바일에서 새창으로 열어서 확인하자.
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/xlm05zzzyo?fontsize=14" title="[prevent-scroll] 7. final" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 스크롤의 가장 위와 가장 아래에서 발생하는 문제이기 때문에 해당 위치에서 별도의 처리를 한다. scroll이 가장 위일때는 1px만큼 더해주고, 가장 아래일때는 1px만큼 빼준다. 이때는 위치만 보정해줘야 한다. 버블링을 막지 않기 위해 `stopPropagation`을 호출하지 않고 window로 터치 이벤트를 버블링한다. 그리고 window의 터치 이벤트 핸들러에서 `preventDefault`을 호출해서 외부 스크롤을 막아준다. 여기서 끝이 아니다. 스크롤을 시도했는데 위치만 보정되고 실제로 스크롤이 동작하지 않는다면 이 또한 문제다. `onScroll` 이벤트 핸들러를 `modal-body`에 추가한다. scroll은 touchmove보다 늦게 호출된다. 그렇기 때문에 scroll이 호출될 시점에 이미 스크롤 위치가 보정되어 있다. 그러면 아마도 문제 없이 스크롤이 동작하게 된다. 추가로 최초 로딩(모달이 열렸을때)되었을때는 스크롤 위치가 가장 상단에 위치하므로 useEffect에서 스크롤 위치 보정 함수 `preventMomentumScroll`을 호출해준다.
 

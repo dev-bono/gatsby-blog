@@ -11,7 +11,6 @@ body,
 div,
 span,
 object,
-iframe,
 p,
 blockquote,
 pre,
@@ -84,8 +83,13 @@ section {
   display: block;
 }
 
-img {
+img,
+iframe {
   width: 100%;
+}
+
+iframe {
+  margin: 20px 0;
 }
 
 nav ul {

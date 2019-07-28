@@ -116,7 +116,9 @@ flexbox의 기초를 다룬 좋은 글이 많기 때문에 여기서 다시 다�
 
 그럼, flex와 inline-flex가 다르게 동작하는 몇가지 상황을 살펴보자. inline 속성만 잘 이해하고 있다면 이해하기 쉬울것이다.
 
-<iframe src="https://codesandbox.io/embed/inline-flex-wbo3r?fontsize=14" title="inline-flex" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<div class="frame-wrap">
+<iframe src="https://codesandbox.io/embed/inline-flex-wbo3r?fontsize=14&view=preview" title="inline-flex" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 <p align="center">[가급적 PC에서 확인하자]</p>
 
 
@@ -140,7 +142,9 @@ flexbox를 활용하면 이전 방식으로 만들기 어려웠던 다양한 레
 
 ### 반응형에 최적화된 컨텐츠 리스트
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/flex-content-row-qdedu?fontsize=14" title="flex-content-row" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 <p align="center">[반응형 확인을 위해, PC에서 새창을 열어 확인하자]</p>
 
 컨텐츠 서비스에서 많이 보이는 형태의 레이아웃이다. 컨텐츠 리스트나 컨텐츠의 에피소드 리스트에서 주로 쓰인다. 보통은 컨텐츠가 하나가 한줄을 차지하지만, media query를 사용해 800px이 넘어가면 두 컨텐츠가 한줄을 차지하도록 구성해보았다.
@@ -148,14 +152,18 @@ flexbox를 활용하면 이전 방식으로 만들기 어려웠던 다양한 레
 
 ### 넷플릭스처럼 가로로 콘텐츠가 나열된 레이아웃
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/flexbox-test-o8qxr?fontsize=14" title="netflix-flexbox" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 <p align="center">[hover가 동작해야하므로, PC에서 확인하자]</p>
 
 넷플릭스를 보면 가로로 길게 컨텐츠가 나열되어 있고, 각 컨텐츠에 마우스가 `hover`되면 컨텐츠가 확대된다. 이는 flex-grow의 비율로 어렵지않게 구현할수 있다. 
 
 ### 가로로 스크롤되는 vertical masonry 레이아웃
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/flamboyant-franklin-phv46?fontsize=14" title="flamboyant-franklin-phv46" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 [Pinterest](https://www.pinterest.co.kr/)같은 서비스에서 흔히 보이는 형태의 레이아웃이다. 가로로 꽉차지 않도록 `inline-flex`를 사용했다. 각 컨텐츠의 높이가 다른 경우 유용하다. 하지만, 실제 Pinterest 같은 경우에는 flex를 사용하지 않는다. 그 이유는 API 통신을 통해 동적으로 가져온 컨텐츠를 이미 배치된 컨텐츠 바로 아래에 붙여야 하는데, 영역의 끝이 들쭉날쭉하기 때문에 컨텐츠마다 개별적인 배치가 필요하다. 그래서 `display: absolute`를 이용한다. 하지만 간단한 레이아웃이라면 예제처럼 flexbox로 구현해도 문제없다. 
 

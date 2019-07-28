@@ -80,13 +80,17 @@ input 태그를 이용하는 방법의 핵심은 보이지 않는(display: none)
 
 ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다. 
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/expandable-list-by-pure-css-kw5b3?fontsize=14" title="expandable list by pure css " allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 테스트해보면 각각의 row가 잘 펼쳐지고 접힌다. 그런데, 한가지 아쉽다. 한 row를 펼쳤을때 다른 row가 접히는 구조면 더 나을것 같다. 실제로 그렇게 구현된 페이지들도 꽤 많다. CSS만으로 가능할까? checkbox 대신 `radio`를 사용하면 가능하다.
 
 위에서 작성한 list 코드에서 CSS는 변경할게 없다. HTML만 조금 수정해두면 된다. 우선 첫번째 li에 있는 input 태그에 `checked` 속성을 부여한다. 그러면 처음 렌더링 될때 열리게 될것이다. 그리고 각각의 input에 type을 checkbox에서 `radio`로 변경한다. 그리고 같은 radio 그룹으로 묶이기 위해 `동일한 name`을 부여한다. 그럼 끝이다. 
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/expandable-list-by-pure-css-fddyd?fontsize=14" title="expandable list by pure css" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 
 ### 2. details & summary
@@ -144,7 +148,9 @@ ul과 li를 사용하고, 약간의 스타일과 transition 적용해보았다.
 
 이번에는 위에서 작업했던것과 동일하게 list를 만들어보았다.
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/expandable-list-by-details-and-summary-gyn1n?fontsize=14" title="expandable list by details and summary" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 details에는 `open`이라는 속성이 존재하는데, 터치(클릭)을 하게되면 open이 참이 된다. 트랜지션을 발생시키기 위해 open 속성을 이용하여 아래처럼 CSS를 작성하였다. 트랜지션이 발생하긴 하지만 상세 설명 부분이 사라지는 타이밍과 맞지 않아 뭔가 어색한 느낌이다.
 

@@ -16,7 +16,9 @@ tags:
 
 우선 결과물부터 보자.
 
+<div class="frame-wrap">
 <iframe src="https://codesandbox.io/embed/css-roullete-znic6?fontsize=14" title="css-roulette" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+</div>
 
 아래 버튼을 누르면 룰렛이 돌아간다. 그리고 이미 정해진(?) 위치에 가서 멈춘다(개선해야한다). 실제 운영하는 서비스 정도의 퀄리티는 아니지만, 그럴듯하다. 아이콘이나 이미지 등이 추가되다면 훨씬 그럴듯한 형태의 룰렛이 만들어질것 같다.
 

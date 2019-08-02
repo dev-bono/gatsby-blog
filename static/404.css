@@ -1,0 +1,39 @@
+body {
+  font-family: Arial;
+  height: 500vw;
+  -webkit-overflow-scrolling: touch;
+}
+.container-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.container-404 > span {
+  padding: 1vw;
+  cursor: pointer;
+  font-size: 25vw;
+  font-weight: bold;
+  color: #333333;
+  cursor: default;
+}
+
+.container-404 > .home {
+  position: fixed;
+  right: 3vw;
+  bottom: 3vw;
+  margin: 0;
+  padding: 0;
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 13px;
+}

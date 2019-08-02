@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Header from './header';
-import '../reset.css';
+import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
-import '../common.css';
+import '../../static/common.css';
 import { Box, Flex } from 'rebass';
 import { ThemeProvider } from 'styled-components';
 import theme, { COLORS } from './theme';

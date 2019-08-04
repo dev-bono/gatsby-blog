@@ -30,7 +30,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         htmlAttributes={{ lang: 'ko' }}
         meta={[{ name: 'description', content: postDescription }]}
         title={`${title} | ${siteTitle}`}
-        script={[ADSENSE_SCRIPT_1]}
+        script={[ADSENSE_SCRIPT_1, CODEPEN_SCRIPT]}
       />
       <Text fontSize="24px" lineHeight="1.1">
         {title}
@@ -86,6 +86,10 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
 const ADSENSE_SCRIPT_1 = {
   async: true,
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+};
+const CODEPEN_SCRIPT = {
+  async: true,
+  src: 'https://static.codepen.io/assets/embed/ei.js',
 };
 
 export const pageQuery = graphql`

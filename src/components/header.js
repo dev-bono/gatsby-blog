@@ -37,6 +37,10 @@ export default function Header({ location, showMenu, onClickMenu }) {
           '@media (max-width: 600px)': {
             marginLeft: 10,
           },
+          transition: 'all 0.5s',
+          '&:hover': {
+            filter: 'blur(2px)',
+          },
         }}
       >
         <Link css={DEFAULT_STYLE_LINK} to={'/'}>

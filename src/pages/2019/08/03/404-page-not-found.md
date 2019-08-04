@@ -3,8 +3,8 @@ title: '[CSS] 404 페이지를 만들어봤다'
 date: 2019-08-04 23:18:12
 category: css
 tags:
+  - javascript
   - css
-  - 404
   - page not found
   - interactive design
   - 인터랙티브웹
@@ -15,14 +15,14 @@ tags:
 
 `404`페이이지를 만들었다. 404페이지가 뭔지 모르는 분은 없겠지만, 간단히 말하면 페이지를 찾지 못했을때 나타하는 에러 페이지다. 정상적이 상황에서 보이는 페이지가 아니기 때문에 대부분 서비스를 만들때 중요하게 생각하지 않는다. 하지만, 유명한 웹 서비스들은 404페이지 조차 그대로 두는 법이 없다. 캐릭터를 만들어 넣는다거나 애니메이션 효과를 주기도 한다. 더러는 간단한 게임을 만들기도 한다. 내 블로그에는 게임까지는 아니지만, 최근 [인프런](https://www.inflearn.com/)에서 [인터랙티브 웹 개발 제대로 시작하기](https://www.inflearn.com/course/interactive_web#) 수업을 들었는데, 여기서 배운 내용을 바탕으로 간단한 404페이지를 만들어보았다. 
 
-우선 어떤 페이지인지 아래에서 확인해보자. 같지만, [블로그에 적용된 404 페이지](https://blueshw.github.io/abcd)도 확인해보자.
+우선 어떤 페이지인지 아래에서 확인해보자. 같지만, [블로그에 적용된 404 페이지](https://blueshw.github.io/abcd)도 확인해보자
+(스크롤 이벤트로 폰트 사이즈 변경은 블로그 내에서는 잘 동작하지 않는다. codepen이나 블로그의 404페이지에서 확인하자).
 
-<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="blueshw" data-slug-hash="jgLOPY" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="3d Text using Text-Shadow">
+<p class="codepen" data-height="465" data-theme-id="0" data-default-tab="result" data-user="blueshw" data-slug-hash="jgLOPY" style="height: 465px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="3d Text using Text-Shadow">
   <span>See the Pen <a href="https://codepen.io/blueshw/pen/jgLOPY/">
   3d Text using Text-Shadow</a> by Hyunwoo Seo (<a href="https://codepen.io/blueshw">@blueshw</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 3D 효과(3D 속성은 사용하지 않았다)가 적용된 텍스트에 마우스나 스크롤로 효과를 주었다. 마우스를 이동하면 그에 따라 텍스트의 위치가 변한다. 또한 스크롤을 하면 폰트 사이즈가 변한다. 모바일의 경우 `mousemove` 이벤트는 무시되므로 `touchmove` 이벤트도 사용하였다. 테스트해보면 알겠지만, 모바일에서는 간혹 스크롤과 터치 이벤트가 의도대로 동작하지 않음을 알 수 있다. PC에서는 scroll이벤트와 mousemove 이벤트가 확실히 분리되어 있기 때문에 문제 없지만, 모바일에서는 두가지 모두 터치를 기반으로 동작하기 때문에 문제가 된다. 예를들어 스크롤이 완전히 멈추기 전에는 touch 이벤트가 발생하지 않고 계속해서 스크롤 이벤트만 동작한다. 큰 이슈는 아니라 생각해서 이를 위한 별도의 처리는 하지 않았다(사실, 귀찮아서...).
 

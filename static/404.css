@@ -2,6 +2,7 @@ body {
   font-family: Arial;
   height: 500vw;
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 .container-404 {
   display: flex;
@@ -18,9 +19,8 @@ body {
 }
 
 .container-404 > span {
-  padding: 1vw;
-  cursor: pointer;
-  font-size: 25vw;
+  padding: 1.5vh;
+  font-size: 25vh;
   font-weight: bold;
   color: #333333;
   cursor: default;

@@ -6,6 +6,7 @@ export default function NotFoundPage() {
     const TRANSFORM_RATIO = 5;
     let isXMinus = true;
     let maxScrollValue = 0;
+    let touched = false;
 
     const containerEl = document.querySelector('.container-404');
     const firstEl = document.querySelector('.container-404 .first');
@@ -14,7 +15,7 @@ export default function NotFoundPage() {
 
     function handleScroll() {
       const scrollRate = pageYOffset / maxScrollValue;
-      const fontSize = 25 - scrollRate * 15 + 'vw';
+      const fontSize = 25 - scrollRate * 15 + 'vh';
       firstEl.style.fontSize = fontSize;
       secondEl.style.fontSize = fontSize;
       thirdEl.style.fontSize = fontSize;
@@ -23,9 +24,10 @@ export default function NotFoundPage() {
       maxScrollValue = document.body.offsetHeight - innerHeight;
     }
     function handleMove(e) {
+      const { clientX, clientY } = e.type === 'touchmove' ? e.touches[0] : e;
       const { innerWidth, innerHeight } = window;
-      const posX = (innerWidth / 2 - e.clientX) / TRANSFORM_RATIO;
-      const posY = (innerHeight / 2 - e.clientY) / TRANSFORM_RATIO;
+      const posX = (innerWidth / 2 - clientX) / TRANSFORM_RATIO;
+      const posY = (innerHeight / 2 - clientY) / TRANSFORM_RATIO;
       setZIndex(posX);
       setTransform(posX, posY);
       setTextShadow(posX, posY);
@@ -72,10 +74,12 @@ export default function NotFoundPage() {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('touchmove', handleMove);
     };
   }, []);
   return (

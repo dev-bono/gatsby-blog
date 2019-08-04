@@ -40,6 +40,7 @@ tags:
 </div>
 
 <script>
+  const TRANSFORM_RATIO = 5; // 임의의 값, 이 값을 조절하면 텍스트 3D 효과의 정도를 조절할 수 있다.
   window.addEventListener("mousemove", handleMove);
   function handleMove(e) {
     // touchmove냐 mousemove냐에 따라 clientX, clientY 구하는 방법이 다름.

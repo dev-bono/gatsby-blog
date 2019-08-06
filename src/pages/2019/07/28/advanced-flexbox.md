@@ -1,5 +1,5 @@
 ---
-title: '[CSS] flexbox를 사용하며 배운것들 (완전 초급은 아님, 중급정도)'
+title: '[CSS] flexbox를 사용하며 배운것들 (중급)'
 date: 2019-07-28 00:50:28
 category: css
 tags:
@@ -128,7 +128,7 @@ flexbox의 기초를 다룬 좋은 글이 많기 때문에 여기서 다시 다�
 block 속성은 스크린 전체 너비를 차지하고, inline 속성은 자기 자신의 크기에 따라 너비가 결정된다. 그래서 flex일때는 수직으로 쌓이고, inline-flex일때는 수평으로 충분하 공간이 있으면 수평으로 쌓인다(스크린이 충분히 작으면 수직으로 쌓이는것처럼 보일수도 있다).
 
 ### item에 기본값 적용
-flex item에 아무것도 입력하지 않았을때는 `flex: 0 1 auto`이므로, item 자신의 너비를 가진다. shrink가 `0`이지만 basis가 `auto`라서 사실상 스크린 사이즈가 줄어도 item이 줄어들지 않는다(flex-grow와 flex-shrink는 basis를 제외한 여백의 늘어남과 줄어듬을 의미한다).
+flex item에 아무것도 입력하지 않았을때는 `flex: 0 1 auto`이므로, item 자신의 너비를 가진다. shrink가 `1`이지만 basis가 `auto`라서 사실상 스크린 사이즈가 줄어도 item이 줄어들지 않는다(flex-grow와 flex-shrink는 basis를 제외한 여백의 늘어남과 줄어듬을 의미한다).
 
 ### item에 "flex: 1" 적용
 `flex: 1`은 `flex: 1 0 0%`와 같다. 즉, basis가 0이고 확장하는 성격을 가진다. 그래서 flex에서는 각 item이 동일한 너비를 가진다. 그런데, inline-flex에서는 item들이 동일한 너비를 가지긴 하는데, 전체 사이즈가 좀 애매하다. 이유는 inline-flex 컨테이너의 사이즈가 각 item 너비의 합으로 결정되기 때문이다. 자세히 살펴보면 위의 `item에 기본값 적용`과 같은 너비를 가짐을 알 수 있다. 

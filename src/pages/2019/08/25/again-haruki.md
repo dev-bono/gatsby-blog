@@ -1,7 +1,7 @@
 ---
 title: '다시 하루키 <직업으로서의 소설가>'
 date: 2019-08-25 06:13:30
-category: essay
+category: review
 tags:
   - 무라카미 하루키
   - 직업으로서의 소설가

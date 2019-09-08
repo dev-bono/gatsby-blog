@@ -1,6 +1,6 @@
 ---
 title: '내 영어에는 좀 더 나은 output이 필요하다!! (feat. 파파고)'
-date: 2019-09-08 01:42:10
+date: 2019-09-08 017:54:10
 category: essay
 tags:
   - 영어

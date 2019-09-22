@@ -28,7 +28,12 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
     <Layout location={location} data={data}>
       <Helmet
         htmlAttributes={{ lang: 'ko' }}
-        meta={[{ name: 'description', content: postDescription }]}
+        meta={[
+          { name: 'description', content: postDescription },
+          { property: 'og:url', content: href },
+          { property: 'og:title', content: title },
+          { property: 'og:description', content: postDescription },
+        ]}
         title={`${title} | ${siteTitle}`}
         script={[ADSENSE_SCRIPT_1, CODEPEN_SCRIPT]}
       />

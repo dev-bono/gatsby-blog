@@ -173,6 +173,7 @@ select {
 }
 p {
   margin-bottom: 1.8rem;
+  word-break: break-all;
 }
 code.language-text {
   font-size: 14px !important;

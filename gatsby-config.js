@@ -66,5 +66,6 @@ module.exports = {
     },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-glamor`,
+    'gatsby-plugin-eslint',
   ],
 };

@@ -9,33 +9,31 @@ import { Box, Flex, Text } from 'rebass';
 
 export default function BlogPostTemplate({ data, pageContext, location }) {
   const { previous, next } = pageContext;
-  const { href } = location;
   const post = data.markdownRemark;
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
+  const siteUrl = get(data, 'site.siteMetadata.siteUrl');
+  const twitterUsername = get(data, 'site.siteMetadata.twitterUsername');
   const postDescription = post.excerpt;
 
-  if (!href) {
-    return null;
-  }
   const disqusShortname = 'bonogithub';
   const disqusConfig = {
-    url: href,
+    url: siteUrl,
     identifier: post.id,
     title,
   };
   return (
     <Layout location={location} data={data}>
       <Helmet
-        title={title}
         htmlAttributes={{ lang: 'ko' }}
         meta={[
           { name: 'description', content: postDescription },
-          { property: 'og:type', content: 'article' },
-          { property: 'og:url', content: href },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:url', content: siteUrl },
           { property: 'og:title', content: title },
           { property: 'og:description', content: postDescription },
-          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:creater', content: twitterUsername },
           { name: 'twitter:title', content: title },
           { name: 'twitter:description', content: postDescription },
         ]}
@@ -108,6 +106,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        twitterUsername
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

@@ -3,8 +3,9 @@
   "rules": {
     "react/prop-types": 0,
     "semi": 2,
-    "no-undef": 1 // TODO: 일부 파일에만 적용하는 법을 찾자.
+    "no-undef": 0 // TODO: 일부 파일에만 적용하는 법을 찾자.
   },
+  "plugins": ["react"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

@@ -6,7 +6,6 @@ export default function NotFoundPage() {
     const TRANSFORM_RATIO = 5;
     let isXMinus = true;
     let maxScrollValue = 0;
-    let touched = false;
 
     const containerEl = document.querySelector('.container-404');
     const firstEl = document.querySelector('.container-404 .first');
@@ -82,6 +81,10 @@ export default function NotFoundPage() {
       window.removeEventListener('touchmove', handleMove);
     };
   }, []);
+
+  if (typeof window === undefined) {
+    return null;
+  }
   return (
     <>
       <div className="container-404">

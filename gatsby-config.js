@@ -2,8 +2,9 @@ module.exports = {
   siteMetadata: {
     title: "bono's blog",
     author: 'bono',
-    description: 'about javascript, react, css',
+    description: '글을 씁니다.',
     siteUrl: 'https://blueshw.github.io',
+    twitterUsername: '@blueshw',
   },
   plugins: [
     {

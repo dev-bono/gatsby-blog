@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import { Box, Text, Flex } from 'rebass';
@@ -10,6 +10,10 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
   const posts = get(data, 'allMarkdownRemark.edges');
   const totalCount = get(data, 'allMarkdownRemark.totalCount');
   const siteDescription = get(data, 'site.siteMetadata.description');
+
+  useEffect(() => {
+    setShowCount(DEFAULT_SHOW_COUNT);
+  }, [posts]);
 
   const showPosts = useMemo(
     () => posts.filter((_, index) => index < showCount),

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import { Box, Text, Flex } from 'rebass';
@@ -6,9 +6,15 @@ import get from 'lodash/get';
 import Helmet from 'react-helmet';
 
 export default function Posts({ data, location, isTagPage, pageContext }) {
+  const [showCount, setShowCount] = useState(DEFAULT_SHOW_COUNT);
   const posts = get(data, 'allMarkdownRemark.edges');
   const totalCount = get(data, 'allMarkdownRemark.totalCount');
   const siteDescription = get(data, 'site.siteMetadata.description');
+
+  const showPosts = useMemo(
+    () => posts.filter((_, index) => index < showCount),
+    [showCount, posts]
+  );
 
   return (
     <Layout location={location} data={data}>
@@ -28,7 +34,7 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
           </Text>
         </Flex>
       )}
-      {posts.map(({ node }) => {
+      {showPosts.map(({ node }) => {
         const title = get(node, 'frontmatter.title') || node.fields.slug;
         return (
           <Box mb="50px" key={node.fields.slug}>
@@ -57,6 +63,19 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
           </Box>
         );
       })}
+      {showCount <= posts.length && (
+        <Flex mt="70px" width="100%" justifyContent="center">
+          <Text
+            fontSize="20px"
+            color="#888"
+            onClick={() => setShowCount(showCount + 25)}
+            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+          >
+            show more
+          </Text>
+        </Flex>
+      )}
     </Layout>
   );
 }
+const DEFAULT_SHOW_COUNT = 25;

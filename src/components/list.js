@@ -1,9 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/layout';
-import { Box, Text, Flex } from 'rebass';
+import { Box, Text, Flex, Button } from 'rebass';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
 
 export default function Posts({ data, location, isTagPage, pageContext }) {
   const [showCount, setShowCount] = useState(DEFAULT_SHOW_COUNT);
@@ -69,17 +70,32 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
       })}
       {showCount <= posts.length && (
         <Flex mt="70px" width="100%" justifyContent="center">
-          <Text
-            fontSize="20px"
-            color="#888"
+          <StyledShowMoreButton
+            fontSize="18px"
+            fontWeight="400"
+            color="#999"
+            p="5px 10px"
+            bg="transparent"
             onClick={() => setShowCount(showCount + 25)}
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
             show more
-          </Text>
+          </StyledShowMoreButton>
         </Flex>
       )}
     </Layout>
   );
 }
+const StyledShowMoreButton = styled(Button)`
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  cursor: pointer;
+  transition: all 0.7s;
+  outline: none;
+  &:hover {
+    background-color: #bbb;
+    color: #fff;
+    border: 1px solid transparent;
+  }
+`;
+
 const DEFAULT_SHOW_COUNT = 25;

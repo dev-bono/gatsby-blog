@@ -16,6 +16,28 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
     setShowCount(DEFAULT_SHOW_COUNT);
   }, [posts]);
 
+  useEffect(() => {
+    function isElementUnderBottom(elem, triggerDiff) {
+      const { top } = elem.getBoundingClientRect();
+      const { innerHeight } = window;
+      return top > innerHeight + (triggerDiff || 0);
+    }
+    function handleScroll() {
+      const elems = document.querySelectorAll('.up-on-scroll');
+      elems.forEach(elem => {
+        if (isElementUnderBottom(elem, 20)) {
+          elem.style.opacity = '0';
+          elem.style.transform = 'translateY(70px)';
+        } else {
+          elem.style.opacity = '1';
+          elem.style.transform = 'translateY(0px)';
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const showPosts = useMemo(
     () => posts.filter((_, index) => index < showCount),
     [showCount, posts]
@@ -42,7 +64,7 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
       {showPosts.map(({ node }) => {
         const title = get(node, 'frontmatter.title') || node.fields.slug;
         return (
-          <Box mb="50px" key={node.fields.slug}>
+          <StyledPost mb="50px" key={node.fields.slug} className="up-on-scroll">
             <Text mb="15px" fontSize="22px" lineHeight="1.7">
               <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
                 {title}
@@ -65,7 +87,7 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
             >
               {node.frontmatter.date}
             </Text>
-          </Box>
+          </StyledPost>
         );
       })}
       {showCount <= posts.length && (
@@ -97,5 +119,7 @@ const StyledShowMoreButton = styled(Button)`
     border: 1px solid transparent;
   }
 `;
-
+const StyledPost = styled(Box)`
+  transition: transform 0.7s, opacity 0.7s;
+`;
 const DEFAULT_SHOW_COUNT = 25;

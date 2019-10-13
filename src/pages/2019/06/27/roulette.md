@@ -1,7 +1,7 @@
 ---
-title: '[CSS] css로 roulette 만들기'
+title: '[interactive web] css로 roulette 만들기'
 date: 2019-06-27 01:20:33
-category: javascript
+category: interactive web
 tags:
   - css
   - roulette

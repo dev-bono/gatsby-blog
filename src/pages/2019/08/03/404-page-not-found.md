@@ -1,7 +1,7 @@
 ---
-title: '[CSS] 404 페이지를 만들어봤다'
+title: '[interactive web] 404 페이지를 만들어봤다'
 date: 2019-08-04 23:18:12
-category: css
+category: interactive web
 tags:
   - javascript
   - css

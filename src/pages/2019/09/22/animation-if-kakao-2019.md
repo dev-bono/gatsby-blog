@@ -1,7 +1,7 @@
 ---
-title: '2019 if kakao 홈페이지 메인 배너를 css로 만들어보자 (feat. svg)'
+title: '[interactive web] 2019 if kakao 홈페이지 메인 배너를 css로 만들어보자 (feat. svg)'
 date: 2019-09-22 18:32:20
-category: css
+category: interactive web
 tags:
   - if kakao
   - 카카오 컨퍼런스

@@ -20,6 +20,8 @@ at(@)-rules(@규칙)은 SCSS에서 가장 유용한 기능이다. CSS 코드의 
 
 ### @imports @use
 
+
+
 `@import`와 `@use` 둘다 외부에서 파일을 가져온다. 그리고 가져온 파일안에서 사용한 각종 변수와 @mixin, @function 등을 사용할 수 있다. 하지만 한가지 큰 차이점이 있다. 
 
 ### @mixin and @include
@@ -42,3 +44,45 @@ at(@)-rules(@규칙)은 SCSS에서 가장 유용한 기능이다. CSS 코드의 
 
 - [sass 공식 홈페이지 document](https://sass-lang.com/documentation)
 - [Introducing Sass Modules](https://css-tricks.com/introducing-sass-modules/)
+
+
+
+## use와 forward는 새로 추가된 feature 
+
+## namespace 문제
+
+import를 사용하면 해당 파일의 모든 변수를 가져올 수 있다. 하지만, 같은 이름을 쓰는 경우에는 문제가 있다. 특히나 써드파티 라이브러리를 같이 사용하는 경우라면 문제를 찾기가 더욱 어려워진다. 예를들어 다음과 같은 세 파일이 있을 때 main.scss 파일에서 사용하는 `$background_color`가 어디에서 가져온 값인지 알 수 없다. 물론 SCSS는 순차적으로 컴파일되기 때문에 동일한 이름의 변수가 있다면 나중에 선언된 값으로 결정되기 때문에 오류가 발생하는것은 아니다. 다만 사용하는 입장에서 내가 지금 사용하는 변수가 어디에서 가져온것인지 직관적으로 알수 없다는 뜻이다. 
+
+```scss
+// box.scss
+$background-color: red;
+
+.box {
+  background-color: $background-color;
+  width: 200px;
+  height: 200px;
+}
+```
+
+```scss
+// card.scss
+$background-color: blue;
+
+.card {
+  background-color: $background-color;
+  width: 200px;
+  height: 200px;
+}
+```
+
+```scss
+// main.scss
+@import box;
+@import card;
+
+.big-box {
+  background: $background-color; // background-color는 red일까? blue일까?
+}
+```
+
+`.big-box`의 이름만 보면 웬지 box의 bg(red)를 가져오고 싶어한것 같지만, 실제로는 `blue` 색상이 적용된다. `$background-color`라는 이름의 변수가 box.scss, card.scss 모두에 존재하고 card.scss가 나중에 import되었기 때문이다. 

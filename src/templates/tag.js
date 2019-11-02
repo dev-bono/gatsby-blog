@@ -5,7 +5,6 @@ import Posts from '../components/list';
 export default function Tag(props) {
   return <Posts {...props} isTagPage={true} />;
 }
-
 export const pageQuery = graphql`
   query($tag: String) {
     site {
@@ -22,7 +21,7 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
-          excerpt
+          excerpt(truncate: true)
           fields {
             slug
           }

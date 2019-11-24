@@ -92,6 +92,10 @@ iframe {
   margin: 20px 0;
 }
 
+.adsbygoogle iframe {
+  margin: 0;
+}
+
 nav ul {
   list-style: none;
 }
@@ -101,7 +105,7 @@ q {
   quotes: none;
 }
 
-blockquote > p > a {
+blockquote>p>a {
   display: inline-block;
 }
 
@@ -171,10 +175,12 @@ input,
 select {
   vertical-align: middle;
 }
+
 p {
   margin-bottom: 1.8rem;
   word-break: break-all;
 }
+
 code.language-text {
   font-size: 14px !important;
 }
@@ -187,6 +193,7 @@ table {
   border-spacing: 0px;
   border-collapse: collapse;
 }
+
 table tr {
   border-top: 1px solid #cccccc;
   background-color: white;
@@ -217,6 +224,7 @@ table tr th :first-child,
 table tr td :first-child {
   margin-top: 0;
 }
+
 table tr th:not(:first-child),
 table tr td:not(:first-child) {
   border-left: 1px solid #cccccc;

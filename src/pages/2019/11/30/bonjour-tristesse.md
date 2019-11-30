@@ -1,7 +1,7 @@
 ---
 title: '15년만에 다시 읽어보았다. <슬픔이여 안녕>'
 date: 2019-11-29 22:48:21
-category: essay
+category: review
 tags:
   - 슬픔이여 안녕
   - 프랑수와즈 사강

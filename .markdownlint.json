@@ -4,5 +4,6 @@
   "no-inline-html": false,
   "fenced-code-language": false,
   "no-duplicate-header": false,
-  "no-trailing-spaces": false
+  "no-trailing-spaces": false,
+  "no-hard-tabs": false
 }

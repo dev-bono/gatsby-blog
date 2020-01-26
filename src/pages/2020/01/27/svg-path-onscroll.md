@@ -15,7 +15,7 @@ tags:
 
 우선 결과물부터..
 
-<p class="codepen" data-height="480" data-theme-id="default" data-default-tab="js,result" data-user="blueshw" data-slug-hash="VwYqJxJ" style="height: 480px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="svg path change onScroll (1-9)">
+<p class="codepen" data-height="480" data-theme-id="default" data-default-tab="result" data-user="blueshw" data-slug-hash="VwYqJxJ" style="height: 480px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="svg path change onScroll (1-9)">
   <span>See the Pen <a href="https://codepen.io/blueshw/pen/VwYqJxJ">
   svg path change onScroll (1-9)</a> by Hyunwoo Seo (<a href="https://codepen.io/blueshw">@blueshw</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>

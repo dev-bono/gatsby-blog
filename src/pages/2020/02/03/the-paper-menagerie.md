@@ -1,7 +1,7 @@
 ---
 title: '단편소설의 매력, <종이 동물원> by 켄 리우 '
 date: 2020-02-03 00:26:50
-category: essay
+category: review
 tags:
   - 켄 리우
   - 종이 동물원

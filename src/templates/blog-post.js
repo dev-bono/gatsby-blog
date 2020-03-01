@@ -43,7 +43,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       <Text fontSize="24px" lineHeight="1.1">
         {title}
       </Text>
-      <Text mb="90px" mt="7px" color="#bbb">
+      <Text mb="30px" mt="7px" color="#bbb">
         {date}
       </Text>
       <Box mb="40px">

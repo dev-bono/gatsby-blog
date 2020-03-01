@@ -43,12 +43,12 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       <Text fontSize="24px" lineHeight="1.1">
         {title}
       </Text>
-      <Text mb="30px" mt="7px" color="#bbb">
+      <Text mb="70px" mt="7px" color="#bbb">
         {date}
       </Text>
-      <Box mb="40px">
+      {/* <Box mb="40px">
         <Adsense slot="1331884154" />
-      </Box>
+      </Box> */}
       <Box
         color="text"
         dangerouslySetInnerHTML={{ __html: post.html }}

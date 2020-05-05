@@ -46,7 +46,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       <Text mb="70px" mt="7px" color="#bbb">
         {date}
       </Text>
-      {/* 콘텐츠 내 자동 광고 */}
+      {/* 상단 광고 */}
       <Box mb="20px">
         <Adsense slot="1331884154" />
       </Box>

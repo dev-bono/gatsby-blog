@@ -46,9 +46,10 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       <Text mb="70px" mt="7px" color="#bbb">
         {date}
       </Text>
-      {/* <Box mb="40px">
-        <Adsense slot="1331884154" />
-      </Box> */}
+      {/* 콘텐츠 내 자동 광고 */}
+      <Box>
+        <Adsense slot="4144970123" format="fluid" isInArticle />
+      </Box>
       <Box
         color="text"
         dangerouslySetInnerHTML={{ __html: post.html }}
@@ -80,6 +81,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
           </Text>
         )}
       </Flex>
+      {/* 하단 광고 */}
       <Box mb="40px">
         <Adsense slot="5306007932" />
       </Box>

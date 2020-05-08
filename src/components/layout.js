@@ -3,20 +3,16 @@ import Header from './header';
 import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../../static/common.css';
-import { Box, Flex } from 'rebass';
+import { Box } from 'rebass';
 import { ThemeProvider } from 'styled-components';
-import theme, { COLORS } from './theme';
-import useScreenType from '../util/hooks/useScreenType';
-import Menu from './menu';
+import theme from './theme';
 import OutsideClick from './outsideClick';
 import Helmet from 'react-helmet';
 import get from 'lodash/get';
 
 export default function Template(props) {
-  const { children, location, data } = props;
+  const { children, data } = props;
   const [showMenu, setShowMenu] = useState(false);
-  const [inTransition, setInTranstiion] = useState(false);
-  const { gte768 } = useScreenType();
   const siteTitle = get(data, 'site.siteMetadata.title');
   return (
     <ThemeProvider theme={theme}>
@@ -35,54 +31,10 @@ export default function Template(props) {
           <Header
             {...props}
             showMenu={showMenu}
-            onClickMenu={() => {
-              setShowMenu(!showMenu);
-              setInTranstiion(true);
-            }}
+            onClickMenu={() => setShowMenu(!showMenu)}
           />
         </OutsideClick>
-        <Box mt="50px">
-          {!gte768 && (
-            <Box
-              width="100%"
-              bg="white"
-              onTransitionEnd={() => setInTranstiion(false)}
-              css={{
-                borderBottom:
-                  inTransition || showMenu
-                    ? `1px solid ${COLORS.lightGrey01}`
-                    : 'none',
-                position: 'fixed',
-                left: 0,
-                top: '50px',
-                zIndex: 100,
-                opacity: 0.9,
-                maxHeight: showMenu ? '400px' : '0px',
-                transition: 'max-height 0.5s ease',
-                overflow: 'hidden',
-              }}
-            >
-              <Box m="10px">
-                {MENU_DATA.map(item => (
-                  <Flex
-                    key={item.pathname}
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Menu
-                      pathname={location.pathname}
-                      menuPathname={item.pathname}
-                      menuName={item.title}
-                      isVertical={true}
-                    >
-                      {item.title}
-                    </Menu>
-                  </Flex>
-                ))}
-              </Box>
-            </Box>
-          )}
-        </Box>
+
         <Box
           className="contents"
           mx="auto"

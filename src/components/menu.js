@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { DEFAULT_STYLE_LINK } from '../constants';
-import { Text } from 'rebass';
+import { Box, Text } from 'rebass';
 import { COLORS } from './theme';
 
 export default function Menu({
@@ -24,14 +24,16 @@ export default function Menu({
         fontSize: '15px',
       };
   return (
-    <Link css={DEFAULT_STYLE_LINK} to={menuPathname}>
-      <Text
-        {...textProps}
-        fontWeight={selected ? 700 : 400}
-        color={selected ? COLORS.text : COLORS.grey01}
-      >
-        {menuName}
-      </Text>
-    </Link>
+    <Box as="li">
+      <Link css={DEFAULT_STYLE_LINK} to={menuPathname}>
+        <Text
+          {...textProps}
+          fontWeight={selected ? 700 : 400}
+          color={selected ? COLORS.text : COLORS.grey01}
+        >
+          {menuName}
+        </Text>
+      </Link>
+    </Box>
   );
 }

@@ -36,9 +36,10 @@ export default function Template(props) {
         </OutsideClick>
 
         <Box
+          as="main"
           className="contents"
           mx="auto"
-          p="45px 20px"
+          p="45px 15px"
           css={{
             maxWidth: '800px',
           }}

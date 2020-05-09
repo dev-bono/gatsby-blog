@@ -61,35 +61,42 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
           </Text>
         </Flex>
       )}
-      {showPosts.map(({ node }) => {
-        const title = get(node, 'frontmatter.title') || node.fields.slug;
-        return (
-          <StyledPost mb="50px" key={node.fields.slug} className="up-on-scroll">
-            <Text mb="15px" fontSize="22px" lineHeight="1.7">
-              <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
-                {title}
-              </Link>
-            </Text>
-            <Text
-              fontSize="15px"
-              lineHeight="1.8"
-              color="#999"
-              mb="6px"
-              dangerouslySetInnerHTML={{ __html: node.excerpt }}
-            />
-            <Text
-              fontSize="14px"
-              mb="5px"
-              color="#888"
-              width="100%"
-              textAlign="right"
-              css={{ opacity: 0.8 }}
+      <Box as="section">
+        {showPosts.map(({ node }) => {
+          const title = get(node, 'frontmatter.title') || node.fields.slug;
+          return (
+            <StyledPost
+              as="article"
+              mb="50px"
+              key={node.fields.slug}
+              className="up-on-scroll"
             >
-              {node.frontmatter.date}
-            </Text>
-          </StyledPost>
-        );
-      })}
+              <Text mb="15px" fontSize="22px" lineHeight="1.7">
+                <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
+                  {title}
+                </Link>
+              </Text>
+              <Text
+                fontSize="15px"
+                lineHeight="1.8"
+                color="#999"
+                mb="6px"
+                dangerouslySetInnerHTML={{ __html: node.excerpt }}
+              />
+              <Text
+                fontSize="14px"
+                mb="5px"
+                color="#888"
+                width="100%"
+                textAlign="right"
+                css={{ opacity: 0.8 }}
+              >
+                {node.frontmatter.date}
+              </Text>
+            </StyledPost>
+          );
+        })}
+      </Box>
       {showCount <= posts.length && (
         <Flex mt="70px" width="100%" justifyContent="center">
           <StyledShowMoreButton

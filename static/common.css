@@ -1,11 +1,13 @@
 .contents a {
   transition: background 0.5s;
 }
+
 .contents a:not(.gatsby-resp-image-link) {
   color: #3a3a3a;
   text-decoration: none;
   border-bottom: 3px solid #d7c3ee;
 }
+
 .contents a:active:not(.gatsby-resp-image-link),
 .contents a:hover:not(.gatsby-resp-image-link) {
   outline-width: 0;
@@ -18,14 +20,22 @@
   word-break: break-all;
 }
 
-:not(pre) > code[class*='language-'],
+:not(pre)>code[class*='language-'],
 pre[class*='language-'] {
   background: #2d2d2d;
   margin-top: 0.1rem;
   margin-bottom: 1.8rem;
 }
 
-:not(pre) > code[class*='language-'] {
+@media (max-width: 600px) {
+  pre[class*='language-'] {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    font-size: 0.875rem;
+  }
+}
+
+:not(pre)>code[class*='language-'] {
   background: #dfdfdf;
   color: rgb(34, 34, 34);
   padding: 3px 5px;
@@ -34,7 +44,7 @@ pre[class*='language-'] {
 
 blockquote {
   margin: 20px 15px 20px 0;
-  padding-left: 35px;
+  padding-left: 20px;
   border-left: 5px solid #e5e5e5;
 }
 

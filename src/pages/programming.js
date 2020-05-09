@@ -17,7 +17,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {
-        frontmatter: { category: { regex: "/^(?!review|essay)([a-z0-9]+)$/" } }
+        frontmatter: { category: { regex: "/^(?!review|essay)([a-z0-9]+)$/i" } }
       }
     ) {
       totalCount

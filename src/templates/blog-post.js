@@ -57,7 +57,6 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       />
       <Box mb="30px" />
       <Flex
-        flexWrap="wrap"
         justifyContent="space-between"
         mb="30px"
         pt="30px"
@@ -67,14 +66,19 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         }}
       >
         {previous && (
-          <Text lineHeight="1.8" css={{ maxWidth: 280 }}>
+          <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
             <Link to={previous.fields.slug} rel="prev">
               {previous.frontmatter.title}
             </Link>
           </Text>
         )}
         {next && (
-          <Text lineHeight="1.8" css={{ maxWidth: 280 }}>
+          <Text
+            lineHeight="1.8"
+            ml="5px"
+            textAlign="right"
+            css={{ maxWidth: 280 }}
+          >
             <Link to={next.fields.slug} rel="next">
               {next.frontmatter.title}
             </Link>

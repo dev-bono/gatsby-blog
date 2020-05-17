@@ -176,9 +176,9 @@ select {
   vertical-align: middle;
 }
 
-p {
+p,
+ul {
   margin-bottom: 1.8rem;
-  word-break: break-all;
 }
 
 code.language-text {

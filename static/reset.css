@@ -176,8 +176,7 @@ select {
   vertical-align: middle;
 }
 
-p,
-ul {
+p {
   margin-bottom: 1.8rem;
 }
 

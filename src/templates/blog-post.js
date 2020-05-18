@@ -49,7 +49,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         {date}
       </Text>
       {/* 상단 광고 */}
-      <Box mb="20px">
+      <Box mb="40px">
         <Adsense slot="1331884154" />
       </Box>
       <Box

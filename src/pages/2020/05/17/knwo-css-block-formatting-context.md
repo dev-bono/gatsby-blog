@@ -194,9 +194,7 @@ container가 BFC가 되면 어떨까?
 
 `BFC는 margin collapse를 방지`한다. 그래서 p와 div의 margin이 서로 상쇄되지 않는다. 
 
------------------------------------------------
-
-## 정리
+### display: flow-root
 
 overflow뿐만 아니라, display의 여러 요소와 position의 fixed, absolute 속성으로도 BFC가 만들어진다. 하지만, BFC라는 개념과 앞서 나열한 여러 속성 간의 관계가 직관적이지 않다. 그리고 각 요소의 성격에 따라 예상치 못한 문제가 발생할 수 있다. 그래서 대안으로 `display: flow-root`라는 속성이 등장했다. 아직 일부 브라우저에서만 동작하지만, 직관적이고 예상치 못한 문제를 예방할 수 있다. 예를 들어, overflow 속성을 사용하여 BFC를 생성한 경우와 flow-root를 사용한 경우에는 결과물이 달라질 수 있다. 
 

@@ -1,7 +1,7 @@
 {
-  "editor.formatOnSave": true,
   "prettier.jsxSingleQuote": true,
   "prettier.jsxBracketSameLine": true,
   "prettier.printWidth": 100,
-  "javascript.format.enable": false
+  "javascript.format.enable": false,
+  "editor.formatOnSave": true
 }

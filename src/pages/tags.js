@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import kebabCase from 'lodash/kebabCase';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { navigate, graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { Box, Flex } from 'rebass';

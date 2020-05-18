@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
@@ -14,8 +14,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
   const twitterUsername = get(data, 'site.siteMetadata.twitterUsername');
-  const postDescription = post.excerpt;
-
+  const { excerpt: postDescription, fields } = post;
   const disqusShortname = 'bonogithub';
   const disqusConfig = {
     url: siteUrl,
@@ -39,7 +38,10 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         ]}
         title={`${title} | ${siteTitle}`}
         script={[ADSENSE_SCRIPT_1, CODEPEN_SCRIPT]}
-      />
+      >
+        <link rel="canonical" href={fields?.slug} />
+      </Helmet>
+
       <Text fontSize="24px" lineHeight="1.1">
         {title}
       </Text>
@@ -122,6 +124,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+      }
+      fields {
+        slug
       }
     }
   }

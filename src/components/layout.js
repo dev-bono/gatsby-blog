@@ -7,7 +7,7 @@ import { Box } from 'rebass';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import OutsideClick from './outsideClick';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 
 export default function Template(props) {

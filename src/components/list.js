@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import { Box, Text, Flex, Button } from 'rebass';
 import get from 'lodash/get';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 export default function Posts({ data, location, isTagPage, pageContext }) {

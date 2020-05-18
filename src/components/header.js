@@ -49,7 +49,7 @@ export default function Header({ location, showMenu, onClickMenu }) {
         {gte768 && (
           <Box as="nav">
             <Flex as="ul">
-              {MENU_DATA.map(item => (
+              {MENU_DATA.map((item) => (
                 <Menu
                   key={item.pathname}
                   pathname={pathname}
@@ -130,7 +130,7 @@ export default function Header({ location, showMenu, onClickMenu }) {
           }}
         >
           <Box m="10px" as="ul">
-            {MENU_DATA.map(item => (
+            {MENU_DATA.map((item) => (
               <Flex
                 key={item.pathname}
                 justifyContent="center"

@@ -59,3 +59,7 @@ blockquote {
   -webkit-overflow-scrolling: touch;
   width: 100%;
 }
+
+#gatsby-noscript {
+  display: none;
+}

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
 import Adsense from '../components/adsense';
-import Disqus from 'disqus-react';
 import { Box, Flex, Text } from 'rebass';
 
 export default function BlogPostTemplate({ data, pageContext, location }) {
@@ -15,12 +14,19 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
   const twitterUsername = get(data, 'site.siteMetadata.twitterUsername');
   const { excerpt: postDescription, fields } = post;
-  const disqusShortname = 'bonogithub';
-  const disqusConfig = {
-    url: siteUrl,
-    identifier: post.id,
-    title,
+  const structuredData = {
+    '@context': 'http://schema.org',
+    '@type': 'Article',
+    name: title,
+    datePublished: date,
   };
+
+  useEffect(() => {
+    const body = document.body;
+    appendScript(body, ADSENSE_SCRIPT_1);
+    appendScript(body, CODEPEN_SCRIPT);
+  }, []);
+
   return (
     <Layout location={location} data={data}>
       <Helmet
@@ -37,9 +43,20 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
           { name: 'twitter:description', content: postDescription },
         ]}
         title={`${title} | ${siteTitle}`}
-        script={[ADSENSE_SCRIPT_1, CODEPEN_SCRIPT]}
       >
         <link rel="canonical" href={fields?.slug} />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+        <script
+          src="https://utteranc.es/client.js"
+          repo="blueshw / gatsby-blog"
+          issue-term="pathname"
+          theme="github-light"
+          // eslint-disable-next-line react/no-unknown-property
+          crossorigin="anonymous"
+          defer
+        ></script>
       </Helmet>
 
       <Text fontSize="24px" lineHeight="1.1">
@@ -91,20 +108,16 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       <Box mb="40px">
         <Adsense slot="5306007932" />
       </Box>
-      <Disqus.DiscussionEmbed
-        shortname={disqusShortname}
-        config={disqusConfig}
-      />
     </Layout>
   );
 }
 
 const ADSENSE_SCRIPT_1 = {
-  async: true,
+  defer: true,
   src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
 };
 const CODEPEN_SCRIPT = {
-  async: true,
+  defer: true,
   src: 'https://static.codepen.io/assets/embed/ei.js',
 };
 
@@ -123,7 +136,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
       }
       fields {
         slug
@@ -131,3 +144,11 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+function appendScript(elem, scriptObj) {
+  const { defer, src } = scriptObj;
+  const script = document.createElement('script');
+  script.defer = defer;
+  script.src = src;
+  elem.appendChild(script);
+}

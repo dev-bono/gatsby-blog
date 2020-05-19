@@ -48,15 +48,6 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
-        <script
-          src="https://utteranc.es/client.js"
-          repo="blueshw / gatsby-blog"
-          issue-term="pathname"
-          theme="github-light"
-          // eslint-disable-next-line react/no-unknown-property
-          crossorigin="anonymous"
-          defer
-        ></script>
       </Helmet>
 
       <Text fontSize="24px" lineHeight="1.1">
@@ -107,6 +98,17 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
       {/* 하단 광고 */}
       <Box mb="40px">
         <Adsense slot="5306007932" />
+      </Box>
+      <Box>
+        <script
+          src="https://utteranc.es/client.js"
+          repo="blueshw/gatsby-blog"
+          issue-term="pathname"
+          theme="github-light"
+          // eslint-disable-next-line react/no-unknown-property
+          crossorigin="anonymous"
+          async
+        />
       </Box>
     </Layout>
   );

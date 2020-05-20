@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './header';
 import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -14,9 +14,17 @@ export default function Template(props) {
   const { children, data } = props;
   const [showMenu, setShowMenu] = useState(false);
   const siteTitle = get(data, 'site.siteMetadata.title');
+
+  useEffect(() => {
+    const handleScroll = () => showMenu && setShowMenu(false);
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  });
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <Box style={{ overflowX: 'hidden' }}>
         <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
           <meta
             name="google-site-verification"

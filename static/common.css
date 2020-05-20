@@ -20,11 +20,16 @@
   margin-bottom: 1.8rem;
 }
 
+.contents ol {
+  margin-left: 20px;
+  margin-bottom: 1.8rem;
+}
+
 .contents ul li a {
   word-break: break-all;
 }
 
-:not(pre)>code[class*='language-'],
+:not(pre) > code[class*='language-'],
 pre[class*='language-'] {
   background: #2d2d2d;
   margin-top: 0.1rem;
@@ -41,7 +46,7 @@ pre[class*='language-'] {
   }
 }
 
-:not(pre)>code[class*='language-'] {
+:not(pre) > code[class*='language-'] {
   background: #dfdfdf;
   color: rgb(34, 34, 34);
   padding: 3px 5px;

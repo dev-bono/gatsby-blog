@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
@@ -8,7 +8,20 @@ import { Box, Flex, Text } from 'rebass';
 
 export default function BlogPostTemplate({ data, pageContext, location }) {
   const { previous, next } = pageContext;
+  const commentRef = useRef(null);
+
+  useEffect(() => {
+    const body = document.body;
+    appendScript(body, ADSENSE_SCRIPT_1);
+    appendScript(body, CODEPEN_SCRIPT);
+    const elem = commentRef.current;
+    elem && appendScript(elem, UTTERANCES_SCRIPT);
+  }, []);
+
   const post = data.markdownRemark;
+  if (!post) {
+    return null;
+  }
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
@@ -20,12 +33,6 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
     name: title,
     datePublished: date,
   };
-
-  useEffect(() => {
-    const body = document.body;
-    appendScript(body, ADSENSE_SCRIPT_1);
-    appendScript(body, CODEPEN_SCRIPT);
-  }, []);
 
   return (
     <Layout location={location} data={data}>
@@ -100,17 +107,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         <Box mb="40px">
           <Adsense slot="5306007932" />
         </Box>
-        <Box>
-          <script
-            src="https://utteranc.es/client.js"
-            repo="blueshw/gatsby-blog"
-            issue-term="pathname"
-            theme="github-light"
-            // eslint-disable-next-line react/no-unknown-property
-            crossorigin="anonymous"
-            async
-          />
-        </Box>
+        <Box ref={commentRef} />
       </Box>
     </Layout>
   );
@@ -124,6 +121,14 @@ const CODEPEN_SCRIPT = {
   defer: true,
   src: 'https://static.codepen.io/assets/embed/ei.js',
 };
+const UTTERANCES_SCRIPT = {
+  async: true,
+  src: 'https://utteranc.es/client.js',
+  repo: 'blueshw/gatsby-blog',
+  'issue-term': 'pathname',
+  theme: 'github-light',
+  crossorigin: 'anonymous',
+};
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -134,10 +139,7 @@ export const pageQuery = graphql`
         twitterUsername
       }
     }
-    markdownRemark(
-      frontmatter: { draft: { ne: true } }
-      fields: { slug: { eq: $slug } }
-    ) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       excerpt(truncate: true)
       html
@@ -152,10 +154,10 @@ export const pageQuery = graphql`
   }
 `;
 
-function appendScript(elem, scriptObj) {
-  const { defer, src } = scriptObj;
+function appendScript(elem, attrs) {
   const script = document.createElement('script');
-  script.defer = defer;
-  script.src = src;
+  Object.keys(attrs).map((key) => {
+    script.setAttribute(key, attrs[key]);
+  });
   elem.appendChild(script);
 }

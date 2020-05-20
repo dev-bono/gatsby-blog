@@ -15,10 +15,13 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
       filter: {
-        frontmatter: { category: { regex: "/^(?!review|essay)([a-z0-9]+)$/i" } }
+        frontmatter: {
+          category: { regex: "/^(?!review|essay)([a-z0-9]+)$/i" }
+          draft: { ne: true }
+        }
       }
+      sort: { fields: [frontmatter___date], order: DESC }
     ) {
       totalCount
       edges {

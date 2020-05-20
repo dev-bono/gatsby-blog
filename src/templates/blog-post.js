@@ -13,7 +13,7 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
   const twitterUsername = get(data, 'site.siteMetadata.twitterUsername');
-  const { excerpt: postDescription, fields } = post;
+  const { excerpt: postDescription } = post;
   const structuredData = {
     '@context': 'http://schema.org',
     '@type': 'Article',
@@ -44,71 +44,73 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
         ]}
         title={`${title} | ${siteTitle}`}
       >
-        <link rel="canonical" href={fields?.slug} />
+        {/* <link rel="canonical" href={fields?.slug} /> */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
-
-      <Text fontSize="24px" lineHeight="1.1">
-        {title}
-      </Text>
-      <Text mb="70px" mt="7px" color="#bbb">
-        {date}
-      </Text>
-      {/* 상단 광고 */}
-      <Box mb="40px">
-        <Adsense slot="1331884154" />
+      <Box as="header">
+        <Text fontSize="24px" lineHeight="1.1">
+          {title}
+        </Text>
+        <Text mb="70px" mt="7px" color="#bbb">
+          {date}
+        </Text>
+        {/* 상단 광고 */}
+        <Box mb="40px">
+          <Adsense slot="1331884154" />
+        </Box>
       </Box>
       <Box
         color="text"
         dangerouslySetInnerHTML={{ __html: post.html }}
         css={{ lineHeight: '30px' }}
       />
-      <Box mb="30px" />
-      <Flex
-        justifyContent="space-between"
-        mb="30px"
-        pt="30px"
-        fontSize="15px"
-        css={{
-          borderTop: '1px solid #eee',
-        }}
-      >
-        {previous && (
-          <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
-            <Link to={previous.fields.slug} rel="prev">
-              {previous.frontmatter.title}
-            </Link>
-          </Text>
-        )}
-        {next && (
-          <Text
-            lineHeight="1.8"
-            ml="5px"
-            textAlign="right"
-            css={{ maxWidth: 280 }}
-          >
-            <Link to={next.fields.slug} rel="next">
-              {next.frontmatter.title}
-            </Link>
-          </Text>
-        )}
-      </Flex>
-      {/* 하단 광고 */}
-      <Box mb="40px">
-        <Adsense slot="5306007932" />
-      </Box>
-      <Box>
-        <script
-          src="https://utteranc.es/client.js"
-          repo="blueshw/gatsby-blog"
-          issue-term="pathname"
-          theme="github-light"
-          // eslint-disable-next-line react/no-unknown-property
-          crossorigin="anonymous"
-          async
-        />
+      <Box as="footer" mt="30px">
+        <Flex
+          justifyContent="space-between"
+          mb="30px"
+          pt="30px"
+          fontSize="15px"
+          css={{
+            borderTop: '1px solid #eee',
+          }}
+        >
+          {previous && (
+            <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
+              <Link to={previous.fields.slug} rel="prev">
+                {previous.frontmatter.title}
+              </Link>
+            </Text>
+          )}
+          {next && (
+            <Text
+              lineHeight="1.8"
+              ml="5px"
+              textAlign="right"
+              css={{ maxWidth: 280 }}
+            >
+              <Link to={next.fields.slug} rel="next">
+                {next.frontmatter.title}
+              </Link>
+            </Text>
+          )}
+        </Flex>
+        {/* 하단 광고 */}
+        <Box mb="40px">
+          <Adsense slot="5306007932" />
+        </Box>
+        <Box>
+          <script
+            src="https://utteranc.es/client.js"
+            repo="blueshw/gatsby-blog"
+            issue-term="pathname"
+            theme="github-light"
+            // eslint-disable-next-line react/no-unknown-property
+            crossorigin="anonymous"
+            async
+          />
+        </Box>
       </Box>
     </Layout>
   );
@@ -132,7 +134,10 @@ export const pageQuery = graphql`
         twitterUsername
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    markdownRemark(
+      frontmatter: { draft: { ne: true } }
+      fields: { slug: { eq: $slug } }
+    ) {
       id
       excerpt(truncate: true)
       html
@@ -140,9 +145,9 @@ export const pageQuery = graphql`
         title
         date(formatString: "YYYY-MM-DD")
       }
-      fields {
-        slug
-      }
+      # fields {
+      #   slug
+      # }
     }
   }
 `;

@@ -15,8 +15,13 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          category: { eq: "interactive web" }
+          draft: { ne: true }
+        }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: "interactive web" } } }
     ) {
       totalCount
       edges {

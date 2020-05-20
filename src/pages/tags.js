@@ -10,14 +10,14 @@ export default function TagsPage({ data, location }) {
   const { group } = data.allMarkdownRemark;
   const { title } = data.site.siteMetadata;
   const sortedGroup = group
-    .filter(tag => tag.totalCount >= MIN_TAG_COUNT)
+    .filter((tag) => tag.totalCount >= MIN_TAG_COUNT)
     .sort(compare);
   return (
     <Layout location={location} data={data}>
       <Helmet htmlAttributes={{ lang: 'ko' }} title={title} />
       <Box mt="25px">
         <Flex flexWrap="wrap">
-          {sortedGroup.map(tag => (
+          {sortedGroup.map((tag) => (
             <Box
               mr="13px"
               mb="25px"
@@ -38,7 +38,7 @@ export default function TagsPage({ data, location }) {
                     fontWeight: 600,
                   },
                 }}
-                onClick={e => navigate(e.target.dataset.url)}
+                onClick={(e) => navigate(e.target.dataset.url)}
                 data-url={`/tag/${kebabCase(tag.fieldValue)}/`}
               >
                 {tag.fieldValue}
@@ -92,7 +92,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark {
+    allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

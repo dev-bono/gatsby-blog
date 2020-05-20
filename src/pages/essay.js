@@ -15,8 +15,10 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
+      filter: {
+        frontmatter: { category: { eq: "essay" }, draft: { ne: true } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: "essay" } } }
     ) {
       totalCount
       edges {

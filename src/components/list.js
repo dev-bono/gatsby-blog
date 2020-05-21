@@ -24,7 +24,7 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
     }
     function handleScroll() {
       const elems = document.querySelectorAll('.up-on-scroll');
-      elems.forEach(elem => {
+      elems.forEach((elem) => {
         if (isElementUnderBottom(elem, 20)) {
           elem.style.opacity = '0';
           elem.style.transform = 'translateY(70px)';
@@ -61,21 +61,21 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
           </Text>
         </Flex>
       )}
-      <Box as="section">
+      <Box as="ul" style={{ listStyle: 'none', marginLeft: 0 }}>
         {showPosts.map(({ node }) => {
           const title = get(node, 'frontmatter.title') || node.fields.slug;
           return (
             <StyledPost
-              as="article"
+              as="li"
               mb="50px"
               key={node.fields.slug}
               className="up-on-scroll"
             >
-              <Text mb="15px" fontSize="22px" lineHeight="1.7">
-                <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
+              <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
+                <Text as="span" mb="15px" fontSize="22px" lineHeight="1.7">
                   {title}
-                </Link>
-              </Text>
+                </Text>
+              </Link>
               <Text
                 fontSize="15px"
                 lineHeight="1.8"

@@ -1,7 +1,7 @@
 ---
 title: '[CSS 바로 알기] Block Formatting Context'
 date: 2020-05-17 23:58:00
-category: CSS
+category: know-frontend
 tags:
   - 웹
   - web

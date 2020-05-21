@@ -1,7 +1,7 @@
 ---
 title: 'hexo에서 gatsby로 블로그 이전하기 (feat. tistory)'
 date: 2018-10-07 01:09:30
-category: javascript
+category: gatsby
 tags:
   - blog
   - hexo

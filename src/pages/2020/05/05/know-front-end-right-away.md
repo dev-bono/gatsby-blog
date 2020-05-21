@@ -1,7 +1,7 @@
 ---
 title: 'Frontend 바로 알기'
 date: 2020-05-05 18:28:00
-category: web
+category: know-frontend
 tags:
   - 웹
   - web

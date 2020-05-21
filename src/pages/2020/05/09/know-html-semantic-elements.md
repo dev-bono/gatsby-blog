@@ -1,7 +1,7 @@
 ---
 title: '[HTML 바로 알기] Semantic Web을 위한 Semantic Elements'
 date: 2020-05-10 03:00:20
-category: HTML
+category: know-frontend
 tags:
   - 웹
   - web

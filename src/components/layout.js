@@ -61,7 +61,9 @@ export default function Template(props) {
 
 export const MENU_DATA = [
   { pathname: '/programming', title: '개발' },
+  { pathname: '/know-frontend', title: '프론트엔드 바로알기' },
   { pathname: '/interactive-web', title: '인터랙티브웹' },
+  { pathname: '/gatsby', title: '개츠비' },
   { pathname: '/essay', title: '에세이' },
   { pathname: '/tags', title: '태그' },
 ];

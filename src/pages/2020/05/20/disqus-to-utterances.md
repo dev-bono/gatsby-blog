@@ -1,7 +1,7 @@
 ---
 title: 'disqus를 버리자 (feat. utterances)'
 date: 2020-05-20 23:41:00
-category: blog
+category: gatsby
 tags:
   - disqus
   - utterances

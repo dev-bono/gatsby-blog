@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Posts from '../components/list';
 
-export default function Programming(props) {
+export default function Essay(props) {
   return <Posts {...props} />;
 }
 
@@ -16,12 +16,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       filter: {
-        frontmatter: {
-          category: {
-            regex: "/^(?!review|essay|gatsby|know-frontend)([a-z0-9]+)$/i"
-          }
-          draft: { ne: true }
-        }
+        frontmatter: { category: { eq: "know-frontend" }, draft: { ne: true } }
       }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {

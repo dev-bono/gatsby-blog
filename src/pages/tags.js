@@ -4,7 +4,7 @@ import kebabCase from 'lodash/kebabCase';
 import { Helmet } from 'react-helmet';
 import { navigate, graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { Box, Flex } from 'rebass';
+import { Box, Flex } from 'rebass/styled-components';
 
 export default function TagsPage({ data, location }) {
   const { group } = data.allMarkdownRemark;

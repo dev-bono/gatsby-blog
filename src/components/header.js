@@ -4,10 +4,14 @@ import Menu from './menu';
 import { DEFAULT_STYLE_LINK } from '../constants';
 import { Box, Flex, Text } from 'rebass';
 import useScreenType from '../util/hooks/useScreenType';
-import { MENU_DATA } from './layout';
 import { COLORS } from './theme';
 
-export default function Header({ location, showMenu, onClickMenu }) {
+export default function Header({
+  location,
+  showMenu,
+  showHeader,
+  onClickMenu,
+}) {
   const { gte768 } = useScreenType();
   const [inTransition, setInTranstiion] = useState(false);
   const { pathname } = location;
@@ -20,6 +24,9 @@ export default function Header({ location, showMenu, onClickMenu }) {
         alignItems="center"
         bg="white"
         css={{
+          transform: showHeader ? 'translateY(0px)' : 'translateY(-50px)',
+          transition: 'transform 0.5s ease',
+          transitionDelay: '0.2s',
           position: 'fixed',
           left: 0,
           top: 0,
@@ -111,7 +118,7 @@ export default function Header({ location, showMenu, onClickMenu }) {
       {!gte768 && (
         <Box
           width="100%"
-          bg="white"
+          bg="lightGrey02"
           as="nav"
           onTransitionEnd={() => setInTranstiion(false)}
           css={{
@@ -125,7 +132,7 @@ export default function Header({ location, showMenu, onClickMenu }) {
             zIndex: 100,
             opacity: 0.9,
             maxHeight: showMenu ? '400px' : '0px',
-            transition: 'max-height 0.5s ease',
+            transition: 'max-height 0.3s ease',
             overflow: 'hidden',
           }}
         >
@@ -152,3 +159,12 @@ export default function Header({ location, showMenu, onClickMenu }) {
     </>
   );
 }
+
+const MENU_DATA = [
+  { pathname: '/programming', title: 'programming' },
+  { pathname: '/know-frontend', title: 'frontend 바로알기' },
+  { pathname: '/interactive-web', title: 'interactive web' },
+  { pathname: '/gatsby', title: 'gatsby js' },
+  { pathname: '/essay', title: 'essay' },
+  { pathname: '/tags', title: 'tag' },
+];

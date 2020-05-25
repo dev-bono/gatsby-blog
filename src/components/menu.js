@@ -10,24 +10,26 @@ export default function Menu({
   menuName,
   isVertical = false,
 }) {
-  const selected = pathname === menuPathname;
-  const textProps = isVertical
+  console.log('pathname', pathname);
+  console.log('menuPathname', menuPathname);
+  const selected = pathname.indexOf(menuPathname) >= 0;
+  const boxProps = isVertical
     ? {
         my: '15px',
         width: '100vw',
-        textAlign: 'center',
-        fontSize: selected ? '23px' : '16px',
+        fontSize: selected ? '20px' : '16px',
+        style: { textAlign: 'center' },
       }
     : {
         mr: '15px',
         mt: '3px',
-        fontSize: '15px',
+        fontSize: '16px',
       };
   return (
-    <Box as="li">
+    <Box as="li" {...boxProps}>
       <Link css={DEFAULT_STYLE_LINK} to={menuPathname}>
         <Text
-          {...textProps}
+          as="span"
           fontWeight={selected ? 700 : 400}
           color={selected ? COLORS.text : COLORS.grey01}
         >

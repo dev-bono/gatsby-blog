@@ -13,15 +13,32 @@ import get from 'lodash/get';
 export default function Template(props) {
   const { children, data } = props;
   const [showMenu, setShowMenu] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
   const siteTitle = get(data, 'site.siteMetadata.title');
+  const [prevScrollY, setPrevScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => showMenu && setShowMenu(false);
+    const handleScroll = () => {
+      const curScrollY = window.pageYOffset;
+      console.log('prevScrollY < curScrollY', prevScrollY < curScrollY);
+      console.log('showHeader', showHeader);
+      console.log('');
+      if (prevScrollY < curScrollY && showHeader) {
+        setShowHeader(false);
+      } else if (
+        (prevScrollY === 0 || prevScrollY > curScrollY) &&
+        !showHeader
+      ) {
+        setShowHeader(true);
+      }
+      showMenu && setShowMenu(false);
+      setPrevScrollY(window.pageYOffset);
+    };
     document.addEventListener('scroll', handleScroll);
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, [prevScrollY]);
   return (
     <ThemeProvider theme={theme}>
       <Box style={{ overflowX: 'hidden' }}>
@@ -39,6 +56,7 @@ export default function Template(props) {
           <Header
             {...props}
             showMenu={showMenu}
+            showHeader={showHeader}
             onClickMenu={() => setShowMenu(!showMenu)}
           />
         </OutsideClick>
@@ -58,12 +76,3 @@ export default function Template(props) {
     </ThemeProvider>
   );
 }
-
-export const MENU_DATA = [
-  { pathname: '/programming', title: '개발' },
-  { pathname: '/know-frontend', title: '프론트엔드 바로알기' },
-  { pathname: '/interactive-web', title: '인터랙티브웹' },
-  { pathname: '/gatsby', title: '개츠비' },
-  { pathname: '/essay', title: '에세이' },
-  { pathname: '/tags', title: '태그' },
-];

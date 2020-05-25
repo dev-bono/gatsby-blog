@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Menu from './menu';
 import { DEFAULT_STYLE_LINK } from '../constants';
-import { Box, Flex, Text } from 'rebass/styled-components';
+import { Box, Flex, Text } from 'rebass';
 import useScreenType from '../util/hooks/useScreenType';
 import { COLORS } from './theme';
 
@@ -75,7 +75,7 @@ export default function Header({
               setInTranstiion(true);
               onClickMenu();
             }}
-            css={{ height: '28px', cursor: 'pointer' }}
+            css={{ height: '28px', cursor: 'pointer', overflow: 'hidden' }}
           >
             <Box
               width={showMenu ? '24px' : '20px'}

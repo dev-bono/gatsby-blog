@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { DEFAULT_STYLE_LINK } from '../constants';
-import { Box, Text } from 'rebass/styled-components';
+import { Box, Text } from 'rebass';
 import { COLORS } from './theme';
 
 export default function Menu({
@@ -10,6 +10,8 @@ export default function Menu({
   menuName,
   isVertical = false,
 }) {
+  console.log('pathname', pathname);
+  console.log('menuPathname', menuPathname);
   const selected = pathname.indexOf(menuPathname) >= 0;
   const boxProps = isVertical
     ? {

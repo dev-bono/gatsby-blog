@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box } from 'rebass/styled-components';
+import { Box } from 'rebass';
 
 export default function OutsideClick({ onClick, children }) {
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function OutsideClick({ onClick, children }) {
   }, []);
   return (
     <Box
-      onClick={(e) => {
+      onClick={e => {
         e.stopPropagation();
       }}
     >

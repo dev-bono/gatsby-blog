@@ -4,16 +4,9 @@ import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
 import Adsense from '../components/adsense';
-import TableOfContents from '../components/tableOfContents';
-import { Box, Flex, Text } from 'rebass/styled-components';
+import { Box, Flex, Text } from 'rebass';
 
-export default function BlogPostTemplate({
-  data,
-  pageContext,
-  location,
-  post = data.markdownRemark,
-  tocItems = data.markdownRemark.tableOfContents,
-}) {
+export default function BlogPostTemplate({ data, pageContext, location }) {
   const { previous, next } = pageContext;
   const commentRef = useRef(null);
 
@@ -25,10 +18,10 @@ export default function BlogPostTemplate({
     elem && appendScript(elem, UTTERANCES_SCRIPT);
   }, []);
 
+  const post = data.markdownRemark;
   if (!post) {
     return null;
   }
-  const isTOCVisible = tocItems?.length > 0;
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
@@ -75,26 +68,11 @@ export default function BlogPostTemplate({
           <Adsense slot="1331884154" />
         </Box>
       </Box>
-      <Flex alignItems="flex-start">
-        {isTOCVisible && (
-          <Box
-            sx={{
-              order: 2,
-              bg: 'red',
-              position: `sticky`,
-              top: '100px',
-              '@media screen and (min-width: 1200px)': {},
-            }}
-          >
-            <TableOfContents items={tocItems} />
-          </Box>
-        )}
-        <Box
-          color="text"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          css={{ lineHeight: '30px', position: 'static' }}
-        />
-      </Flex>
+      <Box
+        color="text"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+        css={{ lineHeight: '30px' }}
+      />
       <Box as="footer" mt="30px">
         <Flex
           justifyContent="space-between"
@@ -169,7 +147,9 @@ export const pageQuery = graphql`
         title
         date(formatString: "YYYY-MM-DD")
       }
-      tableOfContents
+      # fields {
+      #   slug
+      # }
     }
   }
 `;

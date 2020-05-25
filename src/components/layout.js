@@ -3,7 +3,7 @@ import Header from './header';
 import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../../static/common.css';
-import { Box } from 'rebass/styled-components';
+import { Box } from 'rebass';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import OutsideClick from './outsideClick';
@@ -20,6 +20,9 @@ export default function Template(props) {
   useEffect(() => {
     const handleScroll = () => {
       const curScrollY = window.pageYOffset;
+      console.log('prevScrollY < curScrollY', prevScrollY < curScrollY);
+      console.log('showHeader', showHeader);
+      console.log('');
       if (prevScrollY < curScrollY && showHeader) {
         setShowHeader(false);
       } else if (

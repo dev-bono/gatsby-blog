@@ -27,7 +27,7 @@ tags:
 아래는 `react + styled-components + rebass` 세 가지 조합으로 작성한 JS코드(React의 JSX로 표현)다. 얼핏 보면, HTML같지만 Box, Text, Card 등 HTML 태그와는 전혀 다른 요소를 사용한다. 
 
 ~~~js
-import { Box, Text, Card } from 'rebass/styled-components'
+import { Box, Text, Card } from 'rebass'
 
 function App() {
   return (

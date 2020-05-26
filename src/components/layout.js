@@ -20,13 +20,10 @@ export default function Template(props) {
   useEffect(() => {
     const handleScroll = () => {
       const curScrollY = window.pageYOffset;
-      console.log('prevScrollY < curScrollY', prevScrollY < curScrollY);
-      console.log('showHeader', showHeader);
-      console.log('');
-      if (prevScrollY < curScrollY && showHeader) {
+      if (curScrollY > 80 && prevScrollY < curScrollY && showHeader) {
         setShowHeader(false);
       } else if (
-        (prevScrollY === 0 || prevScrollY > curScrollY) &&
+        (curScrollY <= 80 || prevScrollY > curScrollY) &&
         !showHeader
       ) {
         setShowHeader(true);

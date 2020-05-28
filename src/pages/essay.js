@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Posts from '../components/list';
-import { Flex, Text } from 'rebass';
+import { Flex, Text } from 'rebass/styled-components';
 
 export default function Essay(props) {
   return (

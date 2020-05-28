@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "bono's blog",
+    title: 'bono blog',
     author: 'bono',
-    description: '글을 씁니다.',
+    description: '프론트엔드 엔지니어. 글을 씁니다.',
     siteUrl: 'https://blueshw.github.io',
     twitterUsername: '@blueshw',
   },
@@ -25,8 +25,16 @@ module.exports = {
             },
           },
           'gatsby-remark-prismjs',
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `100`,
+              className: `anchor-header`,
+              maintainCase: false,
+              removeAccents: true,
+              elements: [`h2`, 'h3', `h4`],
+            },
+          },
         ],
       },
     },

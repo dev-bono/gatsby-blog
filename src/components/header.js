@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Menu from './menu';
 import { DEFAULT_STYLE_LINK } from '../constants';
-import { Box, Flex, Text } from 'rebass';
+import { Box, Flex, Text } from 'rebass/styled-components';
 import useScreenType from '../util/hooks/useScreenType';
 import { COLORS } from './theme';
 

@@ -3,7 +3,7 @@ import Header from './header';
 import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../../static/common.css';
-import { Box } from 'rebass';
+import { Box } from 'rebass/styled-components';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import OutsideClick from './outsideClick';
@@ -38,7 +38,13 @@ export default function Template(props) {
   }, [prevScrollY]);
   return (
     <ThemeProvider theme={theme}>
-      <Box style={{ overflowX: 'hidden' }}>
+      <Box
+        sx={{
+          '@media screen and (max-width: 768px)': {
+            overflowX: 'hidden',
+          },
+        }}
+      >
         <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
           <meta
             name="google-site-verification"
@@ -63,8 +69,12 @@ export default function Template(props) {
           className="contents"
           mx="auto"
           p="45px 15px"
-          css={{
-            maxWidth: '800px',
+          sx={{
+            maxWidth: '720px',
+            // '@media screen and (min-width: 1200px)': {
+            //   maxWidth: '100%',
+            //   padding: '0 20px',
+            // },
           }}
         >
           {children}

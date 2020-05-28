@@ -4,9 +4,16 @@ import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/layout';
 import Adsense from '../components/adsense';
-import { Box, Flex, Text } from 'rebass';
+import TableOfContents from '../components/tableOfContents';
+import { Box, Flex, Text } from 'rebass/styled-components';
 
-export default function BlogPostTemplate({ data, pageContext, location }) {
+export default function BlogPostTemplate({
+  data,
+  pageContext,
+  location,
+  post = data.markdownRemark,
+  tocItems = data.markdownRemark.tableOfContents,
+}) {
   const { previous, next } = pageContext;
   const commentRef = useRef(null);
 
@@ -18,10 +25,10 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
     elem && appendScript(elem, UTTERANCES_SCRIPT);
   }, []);
 
-  const post = data.markdownRemark;
   if (!post) {
     return null;
   }
+  const isTOCVisible = tocItems?.length > 0;
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
@@ -56,58 +63,90 @@ export default function BlogPostTemplate({ data, pageContext, location }) {
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
-      <Box as="header">
-        <Text fontSize="24px" lineHeight="1.1">
-          {title}
-        </Text>
-        <Text mb="70px" mt="7px" color="#bbb">
-          {date}
-        </Text>
-        {/* 상단 광고 */}
-        <Box mb="40px">
-          <Adsense slot="1331884154" />
-        </Box>
-      </Box>
-      <Box
-        color="text"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-        css={{ lineHeight: '30px' }}
-      />
-      <Box as="footer" mt="30px">
-        <Flex
-          justifyContent="space-between"
-          mb="30px"
-          pt="30px"
-          fontSize="15px"
-          css={{
-            borderTop: '1px solid #eee',
-          }}
-        >
-          {previous && (
-            <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
-              <Link to={previous.fields.slug} rel="prev">
-                {previous.frontmatter.title}
-              </Link>
-            </Text>
-          )}
-          {next && (
-            <Text
-              lineHeight="1.8"
-              ml="5px"
-              textAlign="right"
-              css={{ maxWidth: 280 }}
+      <Box sx={{ position: 'relative' }}>
+        {isTOCVisible && (
+          <Flex
+            alignItems="flex-start"
+            sx={{
+              position: 'absolute',
+              top: 0,
+              height: '100%',
+              right: 'calc((100vw - 720px) / 2 * (-1))',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'none',
+                '@media screen and (min-width: 1200px)': {
+                  order: 2,
+                  position: `sticky`,
+                  top: '50px',
+                  display: 'block',
+                  width: 'calc((100vw - 720px) / 2 - 60px)',
+                  maxWidth: '360px',
+                  marginRight: '20px',
+                  overflow: 'auto',
+                  wordBreak: 'break-word',
+                },
+              }}
             >
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title}
-              </Link>
-            </Text>
-          )}
-        </Flex>
-        {/* 하단 광고 */}
-        <Box mb="40px">
-          <Adsense slot="5306007932" />
+              <TableOfContents items={tocItems} />
+            </Box>
+          </Flex>
+        )}
+        <Box as="header">
+          <Text fontSize="24px" lineHeight="1.1">
+            {title}
+          </Text>
+          <Text mb="70px" mt="7px" color="#bbb">
+            {date}
+          </Text>
+          {/* 상단 광고 */}
+          <Box mb="40px">
+            <Adsense slot="1331884154" />
+          </Box>
         </Box>
-        <Box ref={commentRef} />
+        <Box
+          color="text"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+          css={{ lineHeight: '30px', position: 'static' }}
+        />
+        <Box as="footer" mt="30px">
+          <Flex
+            justifyContent="space-between"
+            mb="30px"
+            pt="30px"
+            fontSize="15px"
+            css={{
+              borderTop: '1px solid #eee',
+            }}
+          >
+            {previous && (
+              <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
+                <Link to={previous.fields.slug} rel="prev">
+                  {previous.frontmatter.title}
+                </Link>
+              </Text>
+            )}
+            {next && (
+              <Text
+                lineHeight="1.8"
+                ml="5px"
+                textAlign="right"
+                css={{ maxWidth: 280 }}
+              >
+                <Link to={next.fields.slug} rel="next">
+                  {next.frontmatter.title}
+                </Link>
+              </Text>
+            )}
+          </Flex>
+          {/* 하단 광고 */}
+          <Box mb="40px">
+            <Adsense slot="5306007932" />
+          </Box>
+          <Box ref={commentRef} />
+        </Box>
       </Box>
     </Layout>
   );
@@ -143,6 +182,7 @@ export const pageQuery = graphql`
       id
       excerpt(truncate: true)
       html
+      tableOfContents
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")

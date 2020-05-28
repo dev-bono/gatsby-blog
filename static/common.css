@@ -7,12 +7,28 @@
   text-decoration: none;
   border-bottom: 3px solid #d7c3ee;
 }
+.contents nav.table-of-contents a {
+  color: #888;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.contents nav.table-of-contents ul li p {
+  margin-bottom: 0;
+}
 
 .contents a:active:not(.gatsby-resp-image-link),
 .contents a:hover:not(.gatsby-resp-image-link) {
   outline-width: 0;
   text-shadow: none;
   background-color: #e0d6eb;
+}
+
+.contents a.anchor-header {
+  border: none;
+}
+.contents a.anchor-header:hover {
+  background: none;
 }
 
 .contents ul {

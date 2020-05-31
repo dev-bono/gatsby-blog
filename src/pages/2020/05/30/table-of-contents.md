@@ -1,6 +1,6 @@
 ---
 title: '자동으로 생성되는 목차(TOC: Table of Contents) 만들기'
-date: 2020-05-30 23:41:00
+date: 2020-05-31 23:10:00
 category: gatsby
 tags:
   - gatsby

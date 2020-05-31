@@ -10,8 +10,6 @@ export default function Menu({
   menuName,
   isVertical = false,
 }) {
-  console.log('pathname', pathname);
-  console.log('menuPathname', menuPathname);
   const selected = pathname.indexOf(menuPathname) >= 0;
   const boxProps = isVertical
     ? {

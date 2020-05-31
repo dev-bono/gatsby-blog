@@ -65,6 +65,7 @@
     "publish": "gh-pages -d public -b master -r 'https://github.com/blueshw/blueshw.github.io.git'",
     "deploy": "npm run build && npm run publish",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
-    "lint": "eslint './**/*.js'"
+    "lint": "eslint './**/*.js'",
+    "make_post": "./script/init_post.sh $1"
   }
 }

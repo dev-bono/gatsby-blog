@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
@@ -16,13 +16,39 @@ export default function BlogPostTemplate({
 }) {
   const { previous, next } = pageContext;
   const commentRef = useRef(null);
-
+  const [currentHeaderUrl, setCurrentHeaderUrl] = useState(undefined);
   useEffect(() => {
     const body = document.body;
     appendScript(body, ADSENSE_SCRIPT_1);
     appendScript(body, CODEPEN_SCRIPT);
     const elem = commentRef.current;
     elem && appendScript(elem, UTTERANCES_SCRIPT);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let aboveHeaderUrl;
+      const currentOffsetY = window.pageYOffset;
+      const headerElements = document.querySelectorAll('.anchor-header');
+      for (const elem of headerElements) {
+        const { top } = elem.getBoundingClientRect();
+        const elemTop = top + currentOffsetY;
+        const isLast = elem === headerElements[headerElements.length - 1];
+        if (currentOffsetY < elemTop - HEADER_OFFSET_Y) {
+          aboveHeaderUrl &&
+            setCurrentHeaderUrl(aboveHeaderUrl.split(location.origin)[1]);
+          !aboveHeaderUrl && setCurrentHeaderUrl(undefined);
+          break;
+        } else {
+          isLast && setCurrentHeaderUrl(elem.href.split(location.origin)[1]);
+          !isLast && (aboveHeaderUrl = elem.href);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   if (!post) {
@@ -65,8 +91,7 @@ export default function BlogPostTemplate({
       </Helmet>
       <Box sx={{ position: 'relative' }}>
         {isTOCVisible && (
-          <Flex
-            alignItems="flex-start"
+          <Box
             sx={{
               position: 'absolute',
               top: 0,
@@ -74,25 +99,11 @@ export default function BlogPostTemplate({
               right: 'calc((100vw - 720px) / 2 * (-1))',
             }}
           >
-            <Box
-              sx={{
-                display: 'none',
-                '@media screen and (min-width: 1200px)': {
-                  order: 2,
-                  position: `sticky`,
-                  top: '50px',
-                  display: 'block',
-                  width: 'calc((100vw - 720px) / 2 - 60px)',
-                  maxWidth: '360px',
-                  marginRight: '20px',
-                  overflow: 'auto',
-                  wordBreak: 'break-word',
-                },
-              }}
-            >
-              <TableOfContents items={tocItems} />
-            </Box>
-          </Flex>
+            <TableOfContents
+              items={tocItems}
+              currentHeaderUrl={currentHeaderUrl}
+            />
+          </Box>
         )}
         <Box as="header">
           <Text fontSize="24px" lineHeight="1.1">
@@ -201,3 +212,5 @@ function appendScript(elem, attrs) {
   });
   elem.appendChild(script);
 }
+
+const HEADER_OFFSET_Y = 100;

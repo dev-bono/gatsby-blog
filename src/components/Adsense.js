@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 
 export default function Adsense({ slot, format = 'auto' }) {
   useEffect(() => {
-    if (window.adsbygoogle) {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    }
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
   return (
     <ins

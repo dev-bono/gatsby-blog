@@ -112,10 +112,6 @@ export default function BlogPostTemplate({
           <Text mb="70px" mt="7px" color="#bbb">
             {date}
           </Text>
-          {/* 상단 광고 */}
-          <Box mb="40px">
-            <Adsense slot="1331884154" />
-          </Box>
         </Box>
         <Box
           color="text"

@@ -43,9 +43,12 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
     [showCount, posts]
   );
 
+  const meta = [{ name: 'description', content: siteDescription }];
+  isTagPage && meta.push({ name: 'robots', content: 'noindex' });
+
   return (
     <Layout location={location} data={data}>
-      <Helmet meta={[{ name: 'description', content: siteDescription }]} />
+      <Helmet meta={meta} />
       {isTagPage && (
         <Flex
           m="20px auto 60px"

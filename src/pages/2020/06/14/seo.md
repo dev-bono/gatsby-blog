@@ -1,5 +1,5 @@
 ---
-title: '[HTML 바로 알기] 검색엔진 최적화 (SEO: Search Engine Optimization)를 위한 9가지 방법'
+title: '[Frontend 바로 알기] 검색엔진 최적화 (SEO: Search Engine Optimization)를 위한 9가지 방법'
 date: 2020-06-14 22:53:20 
 category: know-frontend
 tags: 
@@ -39,7 +39,7 @@ tags:
 ￼
 ![share on slack](./1.png)
 <p align="center" style="font-style: italic; margin-top: -20px; margin-bottom: 40px;">
-  &#60; 업무용 메신저 slack에 공유했을 때 미리 보기 &#62;
+  &#60; 업무용 메신저, slack에 공유했을 때 미리 보기 &#62;
 </p>
 
 메신저(또는 SNS)에 URL을 입력하면 title과 description 정보를 미리 보여준다. 메신저와 SNS마다 사용하는 메타태그가 다르기 때문에 목적에 맞도록 메타태그를 추가하자([참고](https://github.com/joshbuchea/HEAD)).
@@ -60,7 +60,7 @@ facebook open graph 예시
 > 1. 검색엔진에 정확한 정보를 제공 할 수 있다. `div`와 `span`으로만 이뤄진 DOM은 중요한 부분과 그렇지 않은 부분을 구분하기 어렵다.
 > 2. `웹 접근성` 측면에서 중요하다. 일반적인 방법으로 웹에 접근 할 수 없는 사람은 스크린 리더와 같은 기기를 사용해야 한다. 이들에게 조금이라도 편의를 제공하기 위해서는 의미로 구분할 수 있는 DOM으로 페이지를 구성해야 한다.
 
-즉, 이렇게 만들기보다는,
+즉,
 
 ```HTML
 <div>
@@ -76,7 +76,7 @@ facebook open graph 예시
 </div>
 ```
 
-이렇게 만들어야 한다.
+이렇게 만들기보다는,
 
 ```HTML
 <main>
@@ -91,6 +91,8 @@ facebook open graph 예시
   <footer>댓글 영역</footer>
 </main>
 ```
+
+이렇게 만들어야 한다.
 
 ## robots.txt, sitemap.xml
 
@@ -175,7 +177,13 @@ Google Play 검색 결과를 보면, 하단에 평점과 평점 입력 수, 가�
 
 같은 페이지가 위처럼 여러 가지 URL을 가질 때, 검색엔진은 그중 하나를 표준으로 지정한다. 그리고 나머지는 표준 URL의 복사본으로 간주한다. 하나의 URL이 표준으로 지정되면, 결과 화면에는 표준으로 지정된 URL이 노출된다. 운이 좋아 원하는 URL이 표준으로 지정될 수 있다. 만약 그렇지 않으면, 엉뚱한 URL이 검색 결과에 노출될 수 있다. 
 
-> `https://blueshw.github.io/aaaa/bbbb/cccc/` 보다는`https://blueshw.github.io/2020/05/09/know-html-semantic-elements/` 가 낫지 않을까?
+> `https://blueshw.github.io/aaaa/bbbb/cccc/` 
+
+보다는
+
+> `https://blueshw.github.io/2020/05/09/know-html-semantic-elements/` 
+
+가 낫지 않을까?
 
 HTML Header 영역에 canonical URL을 넣으면 표준 URL을 지정할 수 있다. 
 
@@ -205,14 +213,14 @@ URL에 어떤 의미를 부여한다 해서 SEO 점수가 높아지는 것은 �
 
 ## 페이지 로딩 속도
 
-페이지 로딩 속도는 SEO 점수에 큰 영향을 준다. 로딩 속도가 직접적으로 점수에 영향을 주는지는 잘 모르겠지만, 로딩속도가 늦은 웹페이지는 SEO 점수가 점점 낮아질 수밖에 없다. 로딩이 오래 걸리는 페이지는 유저의 이탈률이 높아진다. 이탈률이 높은 웹페이지는 유저에게 점점 외면받을 것이고, 자연스럽게 SEO 점수가 낮아져 검색 결과 순위가 낮아질 것이다.
+페이지 로딩 속도는 SEO 점수에 큰 영향을 준다. 로딩 속도가 직접적으로 점수에 영향을 주는지는 잘 모르겠지만, 로딩이 늦은 웹페이지는 SEO 점수가 점점 낮아질 수밖에 없다. 왜냐하면, 로딩이 오래 걸리는 페이지는 유저 이탈률이 높기 때문이다. 이탈률이 높은 웹페이지는 유저에게 점점 외면는다. 그래서, SEO 점수가 낮아져서 검색 결과 순위가 낮아질 것이다.
 
 전체 페이지의 로딩 속도는 `Google Search Console` 페이지에서 확인할 수 있다.
 
 
 ![google search console](./3.png)
 <p align="center" style="font-style: italic; margin-top: -20px; margin-bottom: 40px;">
-  &#60; 왜 모바일 페이지 속도가 갑자기 느려졌을까? &#62;
+  &#60; 왜 모바일 페이지가 갑자기 느려졌을까? &#62;
 </p>￼
 
 각 페이지의 로딩속도에 대한 상세 정보를 알고 싶다면, [PageSpeed Insight](https://developers.google.com/speed/pagespeed/insights/?hl=ko)에서 확인하자.
@@ -233,7 +241,7 @@ URL에 어떤 의미를 부여한다 해서 SEO 점수가 높아지는 것은 �
 > - `캐싱`을 적절히 활용하자.
 > - `webP` 등의 이미지 압축을 활용하자.
 
-[disqus를 버리자](https://blueshw.github.io/2020/05/20/disqus-to-utterances/) 포스팅에서 언급했지만, disqus나 광고처럼 많은 리소스가 필요한 플러그인을 사용하면, 페이지 로딩 속도가 느려진다. 광고가 꼭 필요하다면, 너무 많은 광고를 노출(이미지가 많아 로딩이 느려질 수 있다) 하지 말자. 그리고, disqus 같은 무거운 플러그인은 가급적이면 제거하도록 하자.
+[disqus를 버리자](https://blueshw.github.io/2020/05/20/disqus-to-utterances/) 포스팅에서 언급했지만, disqus나 광고처럼 많은 리소스가 필요한 플러그인을 사용하면, 페이지 로딩이 느려진다. 광고가 꼭 필요하다면, 너무 많은 광고를 노출(이미지가 많아 로딩이 느려질 수 있다) 하지 말자. 그리고, disqus 같은 무거운 플러그인은 가급적이면 제거하도록 하자.
 
 ## 서버사이드 렌더링(SSR)
 

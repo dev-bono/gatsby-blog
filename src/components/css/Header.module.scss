@@ -29,11 +29,13 @@
     font-size: 22px;
     cursor: pointer;
     @media (max-width: 600px) {
-      margin-left: 10;
+      margin-left: 10px;
     }
   }
   nav > ul {
     display: flex;
+    margin: 0;
+    padding: 0;
   }
   .menuIconWrapper {
     padding: 5px;

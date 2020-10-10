@@ -58,10 +58,7 @@ export default function Template(props) {
             onClickMenu={() => setShowMenu(!showMenu)}
           />
         </OutsideClick>
-        <main className={cn(s.contentWrapper, 'contents')}>
-          {/* className="contents" */}
-          {children}
-        </main>
+        <main className={cn(s.contentWrapper, 'contents')}>{children}</main>
       </div>
     </ThemeProvider>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { DEFAULT_STYLE_LINK } from '../constants';
+import { DEFAULT_STYLE_LINK } from '../common/constants';
 import { Box, Text } from 'rebass/styled-components';
-import { COLORS } from './theme';
+import { COLORS } from '../common/theme';
 
 export default function Menu({
   pathname,

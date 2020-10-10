@@ -1,0 +1,21 @@
+div,
+header {
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .showGte768 {
+    display: block;
+  }
+  .showLt768 {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .showGte768 {
+    display: none;
+  }
+  .showLt768 {
+    display: block;
+  }
+}

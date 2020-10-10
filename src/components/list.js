@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'gatsby';
-import Layout from '../components/layout';
+import Layout from './Layout';
 import { Box, Text, Flex, Button } from 'rebass/styled-components';
 import get from 'lodash/get';
 import { Helmet } from 'react-helmet';

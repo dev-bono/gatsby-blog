@@ -68,5 +68,11 @@ module.exports = {
     },
     `gatsby-plugin-sitemap`,
     'gatsby-plugin-eslint',
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        implementation: require('sass'),
+      },
+    },
   ],
 };

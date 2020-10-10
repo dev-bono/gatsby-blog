@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Header from './header';
+import Header from './Header';
 import '../../static/reset.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../../static/common.css';
+import '../common/css/common.scss';
 import { Box } from 'rebass/styled-components';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme';
-import OutsideClick from './outsideClick';
+import theme from '../common/theme';
+import OutsideClick from './OutsideClick';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 

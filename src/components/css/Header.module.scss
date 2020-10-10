@@ -1,0 +1,108 @@
+@use '../../common/css/color.scss';
+
+.header {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  background-color: white;
+  transition: transform 0.5s ease;
+  transition-delay: 0.2s;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 50px;
+  border-bottom: 1px solid color.getColor('lightGrey01');
+  z-index: 200;
+  &.showHeader {
+    transform: translateY(0px);
+  }
+  &.hideHeader {
+    transform: translateY(-50px);
+  }
+  .headerTitle {
+    flex: 0 0 auto;
+    margin-right: auto;
+    margin-left: 20px;
+    margin-top: 3px;
+    color: color.getColor('grey01');
+    font-size: 22px;
+    cursor: pointer;
+    @media (max-width: 600px) {
+      margin-left: 10;
+    }
+  }
+  nav > ul {
+    display: flex;
+  }
+  .menuIconWrapper {
+    padding: 5px;
+    width: 30px;
+    height: 28px;
+    cursor: pointer;
+    overflow: hidden;
+    > div {
+      width: 20px;
+      padding-top: 2px;
+      background-color: color.getColor('grey01');
+      &:nth-child(1) {
+        margin-bottom: 6px;
+        transition: all 0.4s;
+        transform-origin: 100% 0;
+        transform: rotateZ(0);
+      }
+      &:nth-child(2) {
+        margin-bottom: 6px;
+        transition: transform 0.5s;
+        transform: scale(1);
+        transform-origin: 100% 50%;
+      }
+      &:nth-child(3) {
+        transition: all 0.4s;
+        transform: rotateZ(0);
+        transform-origin: 100% 100%;
+      }
+    }
+    &.isInTransition {
+      > div {
+        &:nth-child(1) {
+          width: 24px;
+          transform: rotateZ(-45deg);
+        }
+        &:nth-child(2) {
+          transform: scale(0);
+        }
+        &:nth-child(3) {
+          width: 24px;
+          transform: rotateZ(45deg);
+        }
+      }
+    }
+  }
+}
+.mobileMenuWrapper {
+  width: 100%;
+  background-color: color.getColor('lightGrey02');
+  position: fixed;
+  left: 0;
+  top: 50px;
+  z-index: 100;
+  opacity: 0.9;
+  max-height: 0px;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+  &.showMenu {
+    max-height: 400px;
+  }
+  &.showBorder {
+    border-bottom: 1px solid color.getColor('lightGrey01');
+  }
+  > ul {
+    margin: 10px;
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

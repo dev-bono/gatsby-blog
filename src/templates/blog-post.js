@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
-import Layout from '../components/layout';
-import Adsense from '../components/adsense';
-import TableOfContents from '../components/tableOfContents';
+import Layout from '../components/Layout';
+import Adsense from '../components/Adsense';
+import TableOfContents from '../components/TableOfContents';
 import { Box, Flex, Text } from 'rebass/styled-components';
 
 export default function BlogPostTemplate({

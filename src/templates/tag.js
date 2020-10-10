@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Posts from '../components/list';
+import Posts from '../components/List';
 
 export default function Tag(props) {
   return <Posts {...props} isTagPage={true} />;

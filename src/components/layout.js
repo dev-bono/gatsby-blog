@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
-import '../../static/reset.css';
+import '../common/css/reset.scss';
 import 'prismjs/themes/prism-tomorrow.css';
-import '../../static/common.css';
 import '../common/css/common.scss';
-import { Box } from 'rebass/styled-components';
 import { ThemeProvider } from 'styled-components';
 import theme from '../common/theme';
 import OutsideClick from './OutsideClick';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
+import s from './css/Layout.module.scss';
+import cn from 'classnames';
 
 export default function Template(props) {
   const { children, data } = props;
@@ -39,13 +39,7 @@ export default function Template(props) {
   }, [prevScrollY]);
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          '@media screen and (max-width: 768px)': {
-            overflowX: 'hidden',
-          },
-        }}
-      >
+      <div clsaaName={s.container}>
         <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
           <meta
             name="google-site-verification"
@@ -64,23 +58,11 @@ export default function Template(props) {
             onClickMenu={() => setShowMenu(!showMenu)}
           />
         </OutsideClick>
-
-        <Box
-          as="main"
-          className="contents"
-          mx="auto"
-          p="45px 15px"
-          sx={{
-            maxWidth: '720px',
-            // '@media screen and (min-width: 1200px)': {
-            //   maxWidth: '100%',
-            //   padding: '0 20px',
-            // },
-          }}
-        >
+        <main className={cn(s.contentWrapper, 'contents')}>
+          {/* className="contents" */}
           {children}
-        </Box>
-      </Box>
+        </main>
+      </div>
     </ThemeProvider>
   );
 }

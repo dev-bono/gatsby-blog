@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../../static/404.css';
+import '../common/css/404.scss';
 
 export default function NotFoundPage() {
   useEffect(() => {

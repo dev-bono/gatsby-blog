@@ -1,0 +1,12 @@
+.container {
+  @media screen and (max-width: 768px) {
+    overflow-x: hidden;
+  }
+}
+
+.contentWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 45px 15px;
+  max-width: 720px;
+}

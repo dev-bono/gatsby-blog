@@ -3,8 +3,6 @@ import Header from './Header';
 import '../common/css/reset.scss';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../common/css/common.scss';
-import { ThemeProvider } from 'styled-components';
-import theme from '../common/theme';
 import OutsideClick from './OutsideClick';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
@@ -38,28 +36,26 @@ export default function Template(props) {
     };
   }, [prevScrollY]);
   return (
-    <ThemeProvider theme={theme}>
-      <div clsaaName={s.container}>
-        <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
-          <meta
-            name="google-site-verification"
-            content="R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA"
-          />
-          <meta
-            name="naver-site-verification"
-            content="23eddf7267bb527337927baff11fc26157637f30"
-          />
-        </Helmet>
-        <OutsideClick onClick={() => setShowMenu(false)}>
-          <Header
-            {...props}
-            showMenu={showMenu}
-            showHeader={showHeader}
-            onClickMenu={() => setShowMenu(!showMenu)}
-          />
-        </OutsideClick>
-        <main className={cn(s.contentWrapper, 'contents')}>{children}</main>
-      </div>
-    </ThemeProvider>
+    <div className={s.container}>
+      <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
+        <meta
+          name="google-site-verification"
+          content="R3ZeY1PmaJUY9j_cgNABjesJFgHWVCJpb4TsdfXntMA"
+        />
+        <meta
+          name="naver-site-verification"
+          content="23eddf7267bb527337927baff11fc26157637f30"
+        />
+      </Helmet>
+      <OutsideClick onClick={() => setShowMenu(false)}>
+        <Header
+          {...props}
+          showMenu={showMenu}
+          showHeader={showHeader}
+          onClickMenu={() => setShowMenu(!showMenu)}
+        />
+      </OutsideClick>
+      <main className={cn(s.contentWrapper, 'contents')}>{children}</main>
+    </div>
   );
 }

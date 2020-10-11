@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import get from 'lodash/get';
 import Layout from '../components/Layout';
-import Adsense from '../components/Adsense';
-import TableOfContents from '../components/TableOfContents';
-import { Box, Flex, Text } from 'rebass/styled-components';
+import Post from '../components/Post';
 
 export default function BlogPostTemplate({
   data,
@@ -89,72 +87,17 @@ export default function BlogPostTemplate({
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
-      <Box sx={{ position: 'relative' }}>
-        {isTOCVisible && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              height: '100%',
-              right: 'calc((100vw - 720px) / 2 * (-1))',
-            }}
-          >
-            <TableOfContents
-              items={tocItems}
-              currentHeaderUrl={currentHeaderUrl}
-            />
-          </Box>
-        )}
-        <Box as="header">
-          <Text fontSize="24px" lineHeight="1.1">
-            {title}
-          </Text>
-          <Text mb="70px" mt="7px" color="#bbb">
-            {date}
-          </Text>
-        </Box>
-        <Box
-          color="text"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          css={{ lineHeight: '30px', position: 'static' }}
-        />
-        <Box as="footer" mt="30px">
-          <Flex
-            justifyContent="space-between"
-            mb="30px"
-            pt="30px"
-            fontSize="15px"
-            css={{
-              borderTop: '1px solid #eee',
-            }}
-          >
-            {previous && (
-              <Text lineHeight="1.8" mr="5px" css={{ maxWidth: 280 }}>
-                <Link to={previous.fields.slug} rel="prev">
-                  {previous.frontmatter.title}
-                </Link>
-              </Text>
-            )}
-            {next && (
-              <Text
-                lineHeight="1.8"
-                ml="5px"
-                textAlign="right"
-                css={{ maxWidth: 280 }}
-              >
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title}
-                </Link>
-              </Text>
-            )}
-          </Flex>
-          {/* 하단 광고 */}
-          <Box mb="40px">
-            <Adsense slot="5306007932" />
-          </Box>
-          <Box ref={commentRef} />
-        </Box>
-      </Box>
+      <Post
+        isTOCVisible={isTOCVisible}
+        tocItems={tocItems}
+        currentHeaderUrl={currentHeaderUrl}
+        title={title}
+        date={date}
+        post={post}
+        previous={previous}
+        next={next}
+        commentRef={commentRef}
+      />
     </Layout>
   );
 }

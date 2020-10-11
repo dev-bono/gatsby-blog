@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { DEFAULT_STYLE_LINK } from '../common/constants';
-import { Box, Text } from 'rebass/styled-components';
-import { COLORS } from '../common/theme';
+import s from './css/Menu.module.scss';
+import cn from 'classnames';
 
 export default function Menu({
   pathname,
@@ -11,29 +11,18 @@ export default function Menu({
   isVertical = false,
 }) {
   const selected = pathname.indexOf(menuPathname) >= 0;
-  const boxProps = isVertical
-    ? {
-        my: '15px',
-        width: '100vw',
-        fontSize: selected ? '20px' : '16px',
-        style: { textAlign: 'center' },
-      }
-    : {
-        mr: '15px',
-        mt: '3px',
-        fontSize: '16px',
-      };
   return (
-    <Box as="li" {...boxProps}>
-      <Link css={DEFAULT_STYLE_LINK} to={menuPathname}>
-        <Text
-          as="span"
-          fontWeight={selected ? 700 : 400}
-          color={selected ? COLORS.text : COLORS.grey01}
-        >
+    <li
+      className={cn(
+        isVertical ? s.verticalContainer : s.container,
+        isVertical && selected ? s.selected : ''
+      )}
+    >
+      <Link style={DEFAULT_STYLE_LINK} to={menuPathname}>
+        <span className={cn(s.menuName, selected ? s.selectedMenu : '')}>
           {menuName}
-        </Text>
+        </span>
       </Link>
-    </Box>
+    </li>
   );
 }

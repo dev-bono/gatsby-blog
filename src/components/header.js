@@ -19,7 +19,7 @@ export default function Header({
         className={cn(s.header, showHeader ? s.showHeader : s.hideHeader)}
       >
         <div className={s.headerTitle}>
-          <Link css={DEFAULT_STYLE_LINK} to={'/'}>
+          <Link style={DEFAULT_STYLE_LINK} to={'/'}>
             {"bono's blog"}
           </Link>
         </div>

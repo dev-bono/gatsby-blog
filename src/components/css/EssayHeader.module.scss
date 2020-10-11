@@ -1,0 +1,21 @@
+@use '../../common/css/color.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 100px 20px 0px;
+  justify-content: center;
+  align-items: center;
+  color: color.getColor('grey02');
+  font-size: 13px;
+  .text1 {
+    margin-bottom: 5px;
+  }
+  .text2 {
+    > a {
+      border-bottom: 3px solid #d7c3ee;
+      color: color.getColor('grey02');
+      text-decoration: none;
+    }
+  }
+}

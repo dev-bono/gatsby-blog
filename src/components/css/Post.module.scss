@@ -1,0 +1,51 @@
+@use '../../common/css/color.scss';
+
+.container {
+  position: relative;
+  .tocWrapper {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: calc((100vw - 720px) / 2 * (-1));
+  }
+  .title {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+  .date {
+    margin-bottom: 70px;
+    margin-top: 7px;
+    color: #bbb;
+  }
+  .postWrapper {
+    color: color.getColor('text');
+    line-height: 30px;
+    position: static;
+  }
+  .footer {
+    margin-top: 30px;
+    .otherPosts {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-top: 30px;
+      font-size: 15px;
+      border-top: 1px solid color.getColor('lightGrey04');
+      .other {
+        line-height: 1.8;
+        margin-right: 5px;
+        max-width: 280;
+      }
+      .previous {
+        margin-right: 5px;
+      }
+      .next {
+        margin-left: 5px;
+        text-align: right;
+      }
+    }
+    .adsenseWrapper {
+      margin-bottom: 40px;
+    }
+  }
+}

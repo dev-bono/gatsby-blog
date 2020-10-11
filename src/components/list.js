@@ -59,7 +59,7 @@ export default function Posts({ data, location, isTagPage, pageContext }) {
           const title = get(node, 'frontmatter.title') || node.fields.slug;
           return (
             <li className="up-on-scroll" key={node.fields.slug}>
-              <Link css={{ boxShadow: 'none' }} to={node.fields.slug}>
+              <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
                 <span className={s.title}>{title}</span>
               </Link>
               <div

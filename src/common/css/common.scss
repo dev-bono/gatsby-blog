@@ -34,7 +34,7 @@ header {
   color: #888;
   text-decoration: none;
   border-bottom: none;
-  transition: 'all 0.3s';
+  transition: all 0.3s;
 }
 
 .contents nav.table-of-contents a > u {
@@ -71,7 +71,7 @@ header {
   margin-bottom: 1.8rem;
 }
 
-.contents ul li a {
+.contents > ul li a {
   word-break: break-all;
 }
 

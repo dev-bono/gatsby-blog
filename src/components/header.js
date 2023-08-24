@@ -85,6 +85,6 @@ const MENU_DATA = [
   { pathname: '/know-frontend', title: 'frontend 바로알기' },
   { pathname: '/interactive-web', title: 'interactive web' },
   { pathname: '/gatsby', title: 'gatsby js' },
-  { pathname: '/essay', title: 'essay' },
+  // { pathname: '/essay', title: 'essay' },
   { pathname: '/tags', title: 'tag' },
 ];

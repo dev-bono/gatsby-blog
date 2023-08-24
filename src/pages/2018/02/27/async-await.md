@@ -55,7 +55,7 @@ first = 20
 
 이 코드가 동기식으로 처리된다면 result 가 30 이겠지만, 실제로 console 에 찍히는 값은 40 입니다. 어디가 잘못 되었을까요?
 
-자바스크립트는 각각의 `task`를 큐에 적재해두고 순서대로 처리합니다. 이 때 어떤 코드가 새로운 태스크로 적재되지에 대한 이해가 부족하면 위와 같은 실수를 저지를 수 있습니다. 최초의 task 는 스크립트 파일 자체입니다. 이 첫번째 task 내에 `setTimeout은 별도의 task를 생성`하고 첫번째 task 가 종료되길 기다립니다. 첫번째 task 인 스크립트의 실행이 끝나면 비로소 setTimeout 의 함수를 실행할 준비를 합니다. 즉 first 의 값은 초기에 10 이였지만 첫번째 스크립트가 종료되면 20 이 되기때문에 결과적으로 result 는 40 이 됩니다. task 에 대한 이해가 부족하다면 지난번에 번역했던 [Tasks, microtasks, queues and schedules](https://blueshw.github.io/2018/01/28/tasks-microtasks-queues-and-schedules/)[(원본)](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)를 참고하세요.
+자바스크립트는 각각의 `task`를 큐에 적재해두고 순서대로 처리합니다. 이 때 어떤 코드가 새로운 태스크로 적재되지에 대한 이해가 부족하면 위와 같은 실수를 저지를 수 있습니다. 최초의 task 는 스크립트 파일 자체입니다. 이 첫번째 task 내에 `setTimeout은 별도의 task를 생성`하고 첫번째 task 가 종료되길 기다립니다. 첫번째 task 인 스크립트의 실행이 끝나면 비로소 setTimeout 의 함수를 실행할 준비를 합니다. 즉 first 의 값은 초기에 10 이였지만 첫번째 스크립트가 종료되면 20 이 되기때문에 결과적으로 result 는 40 이 됩니다. task 에 대한 이해가 부족하다면 지난번에 번역했던 [Tasks, microtasks, queues and schedules](https://dev-bono.github.io/2018/01/28/tasks-microtasks-queues-and-schedules/)[(원본)](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)를 참고하세요.
 
 그럼 이 코드를 동기식으로 처리하려면 어떻게 해야할까요?
 

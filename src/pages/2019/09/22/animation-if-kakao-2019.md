@@ -82,7 +82,7 @@ path 태그를 좀더 살펴보자. 우선 stroke에 너비와 색상을 준다.
 </p>
 
 
-지난번에 [룰렛 만들기](https://blueshw.github.io/2019/06/27/roulette/)를 하면서 사용했던 `clip`은 `deprecated`된 CSS 요소다. 아직까지 사용하는데 문제는 없지만, 두가지 단점이 있다. clip을 쓰기 위해서는 반드시 `position: absolute`를 넣어줘야 하고, 직사각형 형태밖에 사용하지 못한다. 그래서 활용도가 떨어진다. 룰렛 만들기 포스팅을 보면 알겠지만, 피자 조각 모양의 도형을 만들기 위해 `border-radius: 50%`를 적용한 두 직사각형을 rotate한 다음 겹치는 부분의 색을 칠한다. 이 과정을 6번 반복하고 각 조각의 rotate를 다르게 설정한다. 살짝 복잡하다. 그런데, `clip-path`를 사용하면 훨씬 쉽게 만들수 있다. clip-path를 사용할때 path를 직접 만들어줄 수도 있다(SVG와 원리는 거의 같다). 하지만, [CSS clip-path maker](https://bennettfeely.com/clippy/) 사이트를 이용하면 필요한 clip-path를 손쉽게 만들 수 있다. 
+지난번에 [룰렛 만들기](https://dev-bono.github.io/2019/06/27/roulette/)를 하면서 사용했던 `clip`은 `deprecated`된 CSS 요소다. 아직까지 사용하는데 문제는 없지만, 두가지 단점이 있다. clip을 쓰기 위해서는 반드시 `position: absolute`를 넣어줘야 하고, 직사각형 형태밖에 사용하지 못한다. 그래서 활용도가 떨어진다. 룰렛 만들기 포스팅을 보면 알겠지만, 피자 조각 모양의 도형을 만들기 위해 `border-radius: 50%`를 적용한 두 직사각형을 rotate한 다음 겹치는 부분의 색을 칠한다. 이 과정을 6번 반복하고 각 조각의 rotate를 다르게 설정한다. 살짝 복잡하다. 그런데, `clip-path`를 사용하면 훨씬 쉽게 만들수 있다. clip-path를 사용할때 path를 직접 만들어줄 수도 있다(SVG와 원리는 거의 같다). 하지만, [CSS clip-path maker](https://bennettfeely.com/clippy/) 사이트를 이용하면 필요한 clip-path를 손쉽게 만들 수 있다. 
 
 눈이 깜빡이는 애니메이션을 만들기 위해서 clip-path 속성의 `ellipse` 메서드를 이용하였다. 코드를 살펴보자. css는 clip-path를 사용한 부분만 살펴보자. 나머지 css는 길어질것 같으니 [codepen](https://codepen.io/blueshw/pen/OJLaNMM)에서 직접 확인하자.
 

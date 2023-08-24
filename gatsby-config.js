@@ -3,8 +3,7 @@ module.exports = {
     title: 'bono blog',
     author: 'bono',
     description: '프론트엔드 엔지니어. 글을 씁니다.',
-    siteUrl: 'https://blueshw.github.io',
-    twitterUsername: '@blueshw',
+    siteUrl: 'https://dev-bono.github.io',
   },
   plugins: [
     {

@@ -15,7 +15,7 @@ tags:
 
 `404`페이이지를 만들었다. 404페이지가 뭔지 모르는 분은 없겠지만, 간단히 말하면 페이지를 찾지 못했을때 나타하는 에러 페이지다. 정상적이 상황에서 보이는 페이지가 아니기 때문에 대부분 서비스를 만들때 중요하게 생각하지 않는다. 하지만, 유명한 웹 서비스들은 404페이지 조차 그대로 두는 법이 없다. 캐릭터를 만들어 넣는다거나 애니메이션 효과를 주기도 한다. 더러는 간단한 게임을 만들기도 한다. 내 블로그에는 게임까지는 아니지만, 최근 [인프런](https://www.inflearn.com/)에서 [인터랙티브 웹 개발 제대로 시작하기](https://www.inflearn.com/course/interactive_web#) 수업을 들었는데, 여기서 배운 내용을 바탕으로 간단한 404페이지를 만들어보았다. 
 
-우선 어떤 페이지인지 아래에서 확인해보자. 같지만, [블로그에 적용된 404 페이지](https://blueshw.github.io/abcd)도 확인해보자
+우선 어떤 페이지인지 아래에서 확인해보자. 같지만, [블로그에 적용된 404 페이지](https://dev-bono.github.io/abcd)도 확인해보자
 (ios에서는 codepen이 제대로 동작하지 않는다. 아마도 iframe이슈... 블로그의 404페이지에서 확인하자).
 
 <p class="codepen" data-height="465" data-theme-id="0" data-default-tab="result" data-user="blueshw" data-slug-hash="jgLOPY" style="height: 465px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="3d Text using Text-Shadow">

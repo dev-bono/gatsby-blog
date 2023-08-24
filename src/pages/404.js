@@ -91,7 +91,7 @@ export default function NotFoundPage() {
         <span className="first">4</span>
         <span className="second">0</span>
         <span className="third">4</span>
-        <a href="https://blueshw.github.io" className="home">
+        <a href="https://dev-bono.github.io" className="home">
           # 블로그 홈으로
         </a>
       </div>

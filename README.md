@@ -1,2 +1,2 @@
 # bono's blog
-[blueshw.github.io](https://blueshw.github.io)
+[dev-bono.github.io](https://dev-bono.github.io)

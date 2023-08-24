@@ -12,7 +12,7 @@ tags:
  - nextjs
 ---
 
-[지난번 포스팅(CSS-in-JS에서 CSS-in-CSS로 바꿔야 하는 이유)](https://blueshw.github.io/2020/09/14/why-css-in-css/)에는 CSS-in-JS에서 CSS-in-CSS 방식으로 변경해야 하는 이유에 대해 설명했다. 요약해보면, 다음과 같다. 
+[지난번 포스팅(CSS-in-JS에서 CSS-in-CSS로 바꿔야 하는 이유)](https://dev-bono.github.io/2020/09/14/why-css-in-css/)에는 CSS-in-JS에서 CSS-in-CSS 방식으로 변경해야 하는 이유에 대해 설명했다. 요약해보면, 다음과 같다. 
 
 > 성능에 초점을 맞춘다면 `CSS-in-CSS`, 개발 생산성에 초점을 맞춘다면 `CSS-in-JS`를 사용하는 편이 낫다. 어떤 방식이 더 낫다고 단정할 수는 없으며, 서비스의 용도와 목적에 따라 적절한 선택이 필요하다.
 

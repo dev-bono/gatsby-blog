@@ -56,7 +56,6 @@ export default function BlogPostTemplate({
   const { title, date } = post.frontmatter;
   const siteTitle = get(data, 'site.siteMetadata.title');
   const siteUrl = get(data, 'site.siteMetadata.siteUrl');
-  const twitterUsername = get(data, 'site.siteMetadata.twitterUsername');
   const { excerpt: postDescription } = post;
   const structuredData = {
     '@context': 'http://schema.org',
@@ -74,11 +73,7 @@ export default function BlogPostTemplate({
           { property: 'og:type', content: 'website' },
           { property: 'og:url', content: siteUrl },
           { property: 'og:title', content: title },
-          { property: 'og:description', content: postDescription },
-          { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:creater', content: twitterUsername },
-          { name: 'twitter:title', content: title },
-          { name: 'twitter:description', content: postDescription },
+          { property: 'og:description', content: postDescription }
         ]}
         title={`${title} | ${siteTitle}`}
       >
@@ -125,7 +120,6 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
-        twitterUsername
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

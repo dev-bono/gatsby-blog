@@ -55,7 +55,7 @@ facebook open graph 예시
 
 ## 시맨틱 요소 (Semantic Elements)
 
-[이전 포스팅](https://blueshw.github.io/2020/05/09/know-html-semantic-elements/#seo%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84-%EC%B5%9C%EC%A0%81%ED%99%94)에서 시맨틱 요소의 중요성에 대해 충분히 언급했다. 시맨틱 요소는 두 가지 측면에서 중요하다.
+[이전 포스팅](https://dev-bono.github.io/2020/05/09/know-html-semantic-elements/#seo%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84-%EC%B5%9C%EC%A0%81%ED%99%94)에서 시맨틱 요소의 중요성에 대해 충분히 언급했다. 시맨틱 요소는 두 가지 측면에서 중요하다.
 
 > 1. 검색엔진에 정확한 정보를 제공 할 수 있다. `div`와 `span`으로만 이뤄진 DOM은 중요한 부분과 그렇지 않은 부분을 구분하기 어렵다.
 > 2. `웹 접근성` 측면에서 중요하다. 일반적인 방법으로 웹에 접근 할 수 없는 사람은 스크린 리더와 같은 기기를 사용해야 한다. 이들에게 조금이라도 편의를 제공하기 위해서는 의미로 구분할 수 있는 DOM으로 페이지를 구성해야 한다.
@@ -169,25 +169,25 @@ Google Play 검색 결과를 보면, 하단에 평점과 평점 입력 수, 가�
  
 다음과 같이 어떤 이유로 동일한 페이지가 여러 URL을 가질 수 있다.
 
-> - http://blueshw.github.io/a
-> - https://blueshw.github.io/a
-> - https://blueshw.github.io/a.html
-> - https://blueshw.github.io/a/print
-> - https://blueshw.github.io/b
+> - http://dev-bono.github.io/a
+> - https://dev-bono.github.io/a
+> - https://dev-bono.github.io/a.html
+> - https://dev-bono.github.io/a/print
+> - https://dev-bono.github.io/b
 
 같은 페이지가 위처럼 여러 가지 URL을 가질 때, 검색엔진은 그중 하나를 표준으로 지정한다. 그리고 나머지는 표준 URL의 복사본으로 간주한다. 하나의 URL이 표준으로 지정되면, 결과 화면에는 표준으로 지정된 URL이 노출된다. 운이 좋아 원하는 URL이 표준으로 지정될 수 있다. 만약 그렇지 않으면, 엉뚱한 URL이 검색 결과에 노출될 수 있다. 
 
-> `https://blueshw.github.io/aaaa/bbbb/cccc/` 
+> `https://dev-bono.github.io/aaaa/bbbb/cccc/` 
 
 보다는
 
-> `https://blueshw.github.io/2020/05/09/know-html-semantic-elements/` 
+> `https://dev-bono.github.io/2020/05/09/know-html-semantic-elements/` 
 
 가 낫지 않을까?
 
 HTML Header 영역에 canonical URL을 넣으면 표준 URL을 지정할 수 있다. 
 
-> <link rel="canonical" href="https://blueshw.github.io/a" />
+> <link rel="canonical" href="https://dev-bono.github.io/a" />
 
 위의 link 태그가 추가되면, 검색엔진은 위 URL을 표준으로 인식한다. 그리고 검색 결과에 해당 URL을 노출할 것이다. 표준 URL을 지정하는 방법은 `rel=“canonical”`이 가장 일반적이지만, `sitemap.xml`에 표준 페이지 정보를 지정할 수도 있다.  
 
@@ -195,11 +195,11 @@ HTML Header 영역에 canonical URL을 넣으면 표준 URL을 지정할 수 있
 
 페이지 URL을 정하는 건 만드는 사람 마음이다. 개발이 편하도록 만들 수 있고, 관리하기 편한 방법으로 만들 수도 있다. 하지만, 검색해서 링크를 클릭하는 유저 입장을 생각하면 URL도 어떤 `의미`를 가지는 것이 좋다. 
 
-> https://blueshw.github.io/xRdxj23h/ghdS3ds
+> https://dev-bono.github.io/xRdxj23h/ghdS3ds
 
 보다는,
 
-> https://blueshw.github.io/2020/05/30/table-of-contents/
+> https://dev-bono.github.io/2020/05/30/table-of-contents/
 
 처럼 의미가 분명한 URL이 좋다. 
 
@@ -241,7 +241,7 @@ URL에 어떤 의미를 부여한다 해서 SEO 점수가 높아지는 것은 �
 > - `캐싱`을 적절히 활용하자.
 > - `webP` 등의 이미지 압축을 활용하자.
 
-[disqus를 버리자](https://blueshw.github.io/2020/05/20/disqus-to-utterances/) 포스팅에서 언급했지만, disqus나 광고처럼 많은 리소스가 필요한 플러그인을 사용하면, 페이지 로딩이 느려진다. 광고가 꼭 필요하다면, 너무 많은 광고를 노출(이미지가 많아 로딩이 느려질 수 있다) 하지 말자. 그리고, disqus 같은 무거운 플러그인은 가급적이면 제거하도록 하자.
+[disqus를 버리자](https://dev-bono.github.io/2020/05/20/disqus-to-utterances/) 포스팅에서 언급했지만, disqus나 광고처럼 많은 리소스가 필요한 플러그인을 사용하면, 페이지 로딩이 느려진다. 광고가 꼭 필요하다면, 너무 많은 광고를 노출(이미지가 많아 로딩이 느려질 수 있다) 하지 말자. 그리고, disqus 같은 무거운 플러그인은 가급적이면 제거하도록 하자.
 
 ## 서버사이드 렌더링(SSR)
 

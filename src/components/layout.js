@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 import s from './css/Layout.module.scss';
 import cn from 'classnames';
+import TagManager from 'react-gtm-module';
 
 export default function Template(props) {
   const { children, data } = props;
@@ -35,6 +36,14 @@ export default function Template(props) {
       document.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollY]);
+
+  useEffect(() => {
+    const tagManagerArgs = {
+      gtmId: 'GTM-N2Z8LLKT'
+    };
+    TagManager.initialize(tagManagerArgs);
+  }, []);
+
   return (
     <div className={s.container}>
       <Helmet htmlAttributes={{ lang: 'ko' }} title={siteTitle}>
@@ -46,6 +55,7 @@ export default function Template(props) {
           name="naver-site-verification"
           content="23eddf7267bb527337927baff11fc26157637f30"
         />
+        
       </Helmet>
       <OutsideClick onClick={() => setShowMenu(false)}>
         <Header

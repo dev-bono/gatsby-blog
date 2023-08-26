@@ -1,5 +1,5 @@
 ---
-title: '프론트엔드(frontend) 마스터를 위한 디자인 패턴 적용 가이드와 예제'
+title: '프론트엔드(frontend) 마스터를 위한 디자인 패턴 적용 가이드'
 date: 2023-08-26 14:45:00
 category: javascript
 tags: 
